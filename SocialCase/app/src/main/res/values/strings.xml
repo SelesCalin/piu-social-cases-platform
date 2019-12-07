@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SocialCase</string>
+    <string name="username_string">Username</string>
+    <string name="password_string">Password</string>
+    <string name="login_string">Login</string>
+    <string name="profile_string">Profile</string>
+    <string name="tests_string">Tests</string>
+    <string name="program_string">Program</string>
+    <string name="history_string">History</string>
+    <string name="ask_for_help_string">Ask for help</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

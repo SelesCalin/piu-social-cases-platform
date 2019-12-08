@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.authentication.AuthenticationResult;
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_activity);
 
         loginService = new LoginService();
 
@@ -40,7 +41,19 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.login_password_edit_text);
         loginButton = findViewById(R.id.login_login_button);
 
+        TextView textView=findViewById(R.id.signUp_text);
+        textView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                goToSignUp(v);
+            }
+        });
         setLoginButtonActionListener();
+    }
+
+    private void goToSignUp(View v) {
+        Intent intent= new Intent(getApplicationContext(),SignUpActivity.class);
+        startActivityForResult(intent,0);
     }
 
     private void setLoginButtonActionListener(){

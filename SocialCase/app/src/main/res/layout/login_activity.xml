@@ -42,7 +42,10 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_username_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/login_username_edit_text"
             android:layout_width="match_parent"
@@ -51,7 +54,12 @@
             android:inputType="textPersonName"
             android:padding="15dp"
             android:layout_marginBottom="15dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_password_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/login_password_edit_text"
             android:layout_width="match_parent"
@@ -61,6 +69,7 @@
             android:padding="15dp"
             android:layout_marginBottom="15dp"/>
 
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:layout_width="match_parent"

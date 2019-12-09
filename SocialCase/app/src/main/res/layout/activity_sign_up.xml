@@ -26,6 +26,11 @@
             android:textColor="#21B6A8"
             android:textAlignment="center"
             />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
@@ -36,6 +41,13 @@
             android:inputType="textPersonName"
             android:padding="15dp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
@@ -44,7 +56,12 @@
             android:inputType="textEmailAddress"
             android:layout_marginBottom="15dp"
             android:padding="15dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
@@ -53,7 +70,12 @@
             android:inputType="textPassword"
             android:layout_marginBottom="15dp"
             android:padding="15dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/confpassword"
             android:layout_width="match_parent"
@@ -63,6 +85,13 @@
             android:layout_marginBottom="15dp"
             android:padding="15dp" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,7 +100,12 @@
             android:padding="15dp"
             android:layout_marginBottom="15dp"
             />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/address_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
@@ -81,6 +115,12 @@
             android:padding="15dp"
             android:layout_marginBottom="15dp"/>
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phone_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/phone"
             android:layout_width="match_parent"
@@ -90,18 +130,26 @@
             android:digits="0123456789+"
             android:padding="15dp"
             android:layout_marginBottom="15dp"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/birthday_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/Birthday"
+            android:id="@+id/birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="false"
             android:padding="15dp"
             android:hint="Date of Birth"
             android:layout_marginBottom="15dp"/>
 
 
-        <Button
+        </com.google.android.material.textfield.TextInputLayout>
+
+       <!-- <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -109,9 +157,10 @@
             android:text="Preferences"
             android:textAlignment="textStart"
             android:textColor="#21B6A8"
-            android:textSize="15sp" />
+            android:textSize="15sp" />-->
 
         <Button
+            android:id="@+id/butonSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

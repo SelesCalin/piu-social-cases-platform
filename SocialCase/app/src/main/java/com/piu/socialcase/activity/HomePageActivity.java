@@ -1,19 +1,15 @@
 package com.piu.socialcase.activity;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.piu.socialcase.R;
-import com.piu.socialcase.fragment.EmptyFragment;
 import com.piu.socialcase.fragment.homepage.AskForHelpFragment;
 import com.piu.socialcase.fragment.homepage.HistoryFragment;
 import com.piu.socialcase.fragment.homepage.ProfileFragment;

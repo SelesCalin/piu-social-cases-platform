@@ -139,9 +139,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if(!b) {
                     if(floatingPasswordLabel.getEditText().getText().length()>0 && floatingPasswordLabel.getEditText().getText().length()<4) {
                         floatingPasswordLabel.setError("Password must have at least 4 characters");
-                        floatingPasswordLabel.setErrorEnabled(true);
                     }else {
-                        floatingPasswordLabel.setErrorEnabled(false);
+                        floatingPasswordLabel.setError(null);
                     }
                     checkFieldsForEmptyValues();
                 }
@@ -155,10 +154,10 @@ public class SignUpActivity extends AppCompatActivity {
                 if(!b) {
                     if(floatingEmailLabel.getEditText().getText().length()>0 && !Patterns.EMAIL_ADDRESS.matcher(floatingEmailLabel.getEditText().getText()).matches()) {
                         floatingEmailLabel.setError("Email is not valid");
-                        floatingEmailLabel.setErrorEnabled(true);
+
 
                     }else {
-                        floatingEmailLabel.setErrorEnabled(false);
+                        floatingEmailLabel.setError(null);
                     }
                     checkFieldsForEmptyValues();
                 }
@@ -173,10 +172,8 @@ public class SignUpActivity extends AppCompatActivity {
                 if(!b) {
                     if(floatinNameLabel.getEditText().getText().length()>0 && floatinNameLabel.getEditText().getText().length()<4) {
                         floatinNameLabel.setError("Name must contain at least 4 characters");
-                        floatinNameLabel.setErrorEnabled(true);
-
                     }else {
-                        floatingEmailLabel.setErrorEnabled(false);
+                        floatinNameLabel.setError(null);
                     }
                     checkFieldsForEmptyValues();
                 }
@@ -192,10 +189,9 @@ public class SignUpActivity extends AppCompatActivity {
                 if(!b) {
                     if(floatingPhoneLabel.getEditText().getText().length()>0 && !Patterns.PHONE.matcher(floatingPhoneLabel.getEditText().getText()).matches()) {
                         floatingPhoneLabel.setError("Invalid Phone number");
-                        floatingPhoneLabel.setErrorEnabled(true);
 
                     }else {
-                        floatingPhoneLabel.setErrorEnabled(false);
+                        floatingPhoneLabel.setError(null);
                     }
                     checkFieldsForEmptyValues();
                 }
@@ -207,7 +203,7 @@ public class SignUpActivity extends AppCompatActivity {
     void checkFieldsForEmptyValues(){
 
         boolean usernameCorrect=TextUtils.isEmpty(floatingUsernameLabel.getError()) && floatingUsernameLabel.getEditText().getText().length()>0;
-
+        boolean emailCorrect=TextUtils.isEmpty(floatingEmailLabel.getError()) && floatingEmailLabel.g
 
         if(usernameCorrect) {
             butonSubmit.setEnabled(true);

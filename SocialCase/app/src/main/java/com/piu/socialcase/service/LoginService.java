@@ -48,7 +48,6 @@ public class LoginService {
             return authenticationResult;
         }
 
-        volunteer.setPassword("");
         authenticationResult.setResult(volunteer);
         return authenticationResult;
     }

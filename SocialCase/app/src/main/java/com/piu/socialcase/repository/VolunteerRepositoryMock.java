@@ -15,10 +15,11 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
     }
 
     public Volunteer findVolunteerByUsername(final String username){
-        for(Volunteer volunteer: volunteers)
-            if(volunteer.getUsername().equals(username))
+        for(Volunteer volunteer: volunteers) {
+            System.out.println(volunteer.getUsername());
+            if (volunteer.getUsername().equals(username))
                 return volunteer;
-
+        }
         return null;
     }
 

@@ -10,4 +10,9 @@ import java.util.List;
 public interface VolunteerRepository {
 
     Volunteer findVolunteerByUsername(String username);
+
+    void addVolunteer(Volunteer volunteer);
+
+    Volunteer findVolunteerByEmail(String email);
+
 }

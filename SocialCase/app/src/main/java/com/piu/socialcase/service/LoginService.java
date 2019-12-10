@@ -13,12 +13,17 @@ public class LoginService {
 
     private VolunteerRepository volunteerRepository;
 
-    public LoginService(VolunteerRepository volunteerRepository) {
-        this.volunteerRepository = volunteerRepository;
+    private static LoginService instance=null;
+
+    private LoginService(){
+        this.volunteerRepository = new VolunteerRepositoryMock();
     }
 
-    public LoginService(){
-        this.volunteerRepository = new VolunteerRepositoryMock();
+    public static LoginService LoginService(){
+        if(instance==null) {
+            instance = new LoginService();
+        }
+        return instance;
     }
 
     public AuthenticationResult login(String username, String password){
@@ -46,5 +51,21 @@ public class LoginService {
         volunteer.setPassword("");
         authenticationResult.setResult(volunteer);
         return authenticationResult;
+    }
+
+    public Integer signUp(String username,String password, String confirmPass, String email, String phone, String address,String dateOfBirth){
+        if(volunteerRepository.findVolunteerByUsername(username)!=null)
+            return -1;
+
+        if(volunteerRepository.findVolunteerByEmail(email)!=null)
+            return -2;
+
+        if(!password.equals(confirmPass))
+            return -3;
+
+        Volunteer volunteer= new Volunteer(username,password,email,phone,dateOfBirth,address,null);
+        volunteerRepository.addVolunteer(volunteer);
+
+        return 1;
     }
 }

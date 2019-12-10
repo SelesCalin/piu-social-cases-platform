@@ -8,6 +8,8 @@ public class Volunteer implements Serializable {
     private String password;
     private String email;
     private String phoneNumber;
+    private String birthDate;
+    private String address;
     private String organisation;
 
     public Volunteer(){}
@@ -22,6 +24,16 @@ public class Volunteer implements Serializable {
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.organisation = organisation;
+    }
+
+    public Volunteer(String username, String password, String email, String phoneNumber, String birthDate, String address, String organisation) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.address = address;
         this.organisation = organisation;
     }
 
@@ -63,5 +75,21 @@ public class Volunteer implements Serializable {
 
     public void setOrganisation(String organisation) {
         this.organisation = organisation;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

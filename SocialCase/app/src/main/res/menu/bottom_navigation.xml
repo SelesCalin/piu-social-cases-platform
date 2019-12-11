@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_page_button"
+        android:icon="@drawable/home_icon"
+        android:title="Home"/>
+    <item
+        android:id="@+id/test_page_button"
+        android:icon="@drawable/test_icon"
+        android:title="Teste"/>
+    <item
+        android:id="@+id/program_zi_page_button"
+        android:icon="@drawable/program_icon"
+        android:title="Program"/>
+    <item
+        android:id="@+id/istoric_page_button"
+        android:icon="@drawable/istoric_icon"
+        android:title="Istoric"/>
+    <item
+        android:id="@+id/more_help_button"
+        android:icon="@drawable/more_help_icon"
+        android:title="Need help"/>
+</menu>

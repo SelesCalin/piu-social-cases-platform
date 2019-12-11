@@ -7,25 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.piu.socialcase.R;
+import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.Session;
 
 public class ProgramFragment extends Fragment {
 
+    private Volunteer volunteer=null;
     public ProgramFragment() {
         // Required empty public constructor
     }
 
-    public static ProgramFragment newInstance() {
-        ProgramFragment fragment = new ProgramFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        volunteer= Session.getInstance().getLoggedInUser();
+
     }
 
     @Override

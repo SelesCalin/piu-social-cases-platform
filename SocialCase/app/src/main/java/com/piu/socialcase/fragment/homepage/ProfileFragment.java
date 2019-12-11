@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.Session;
 
 public class ProfileFragment extends Fragment {
 
@@ -24,22 +25,16 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
+
     }
 
-    public static ProfileFragment newInstance(Volunteer volunteer) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(VOLUNTEER_PARAM, volunteer);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            volunteer = (Volunteer) getArguments().getSerializable(VOLUNTEER_PARAM);
-        }
+        volunteer= Session.getInstance().getLoggedInUser();
+
     }
 
     @Override

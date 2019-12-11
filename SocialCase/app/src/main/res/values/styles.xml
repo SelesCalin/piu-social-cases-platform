@@ -8,4 +8,31 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="dialogThemeError" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorError</item>
+        <item name="colorSecondary">@color/colorError</item>
+        <item name="colorOnSurface">@color/colorError</item>
+        <item name="editTextColor">@color/colorError</item>
+        <item name="colorSurface">@color/colorError</item>
+    </style>
+
+
+    <style name="dialogThemeSuccess" parent="Theme.MaterialComponents.Light.Dialog.Alert.Bridge">
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorError</item>
+        <item name="colorSecondary">@color/colorError</item>
+        <item name="colorOnSecondary">@color/colorError</item>
+        <item name="colorSurface">@color/colorWhite</item>
+        <item name="colorOnSurface">@color/colorWhite</item>
+        <item name="editTextColor">@color/colorAccent</item>
+        <item name="colorOnPrimary">@color/colorAccent</item>
+
+    </style>
+
+
 </resources>

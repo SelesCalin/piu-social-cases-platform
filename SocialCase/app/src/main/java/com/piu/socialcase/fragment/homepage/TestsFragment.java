@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.piu.socialcase.R;
+import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.Session;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,21 +20,19 @@ import com.piu.socialcase.R;
  */
 public class TestsFragment extends Fragment {
 
+
+    private Volunteer volunteer=null;
+
     public TestsFragment() {
         // Required empty public constructor
     }
-    public static TestsFragment newInstance() {
-        TestsFragment fragment = new TestsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        volunteer= Session.getInstance().getLoggedInUser();
+
     }
 
     @Override

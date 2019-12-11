@@ -8,24 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.piu.socialcase.R;
+import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.Session;
 
 public class HistoryFragment extends Fragment {
 
+    private Volunteer volunteer=null;
+
     public HistoryFragment() {
         // Required empty public constructor
-    }
-    public static HistoryFragment newInstance() {
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+        volunteer= Session.getInstance().getLoggedInUser();
     }
 
     @Override

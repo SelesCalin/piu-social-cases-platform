@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.piu.socialcase.R;
 import com.piu.socialcase.service.LoginService;
@@ -88,15 +89,33 @@ public class SignUpActivity extends AppCompatActivity {
                 floatingConfirmPasswordLabel.getEditText().getText().toString(),floatingEmailLabel.getEditText().getText().toString(),
                 floatingPhoneLabel.getEditText().getText().toString(),floatingAddressLabel.getEditText().getText().toString(),
                 floatingBirthdayLabel.getEditText().getText().toString());
-        System.out.println(signUpResult);
+        switch (signUpResult){
+            case -1:
+                new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle("Error").setMessage("Username already exists!").setPositiveButton("Ok",null).show();
+                floatingUsernameLabel.setError("Please choose another username");
+                break;
+            case -2:
+                new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle("Error").setMessage("Email already registred!").setPositiveButton("Ok",null).show();
+                floatingEmailLabel.setError("Please choose another email");
+                break;
+            case -3:
+                new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle("Error").setMessage("Passwords do not match!").setPositiveButton("Ok",null).show();
+                floatingConfirmPasswordLabel.setError("Passwords do not match!");
+                break;
+            case 1:
+                new MaterialAlertDialogBuilder(this,R.style.dialogThemeSuccess).setTitle("Success").setMessage("User created successfully!").setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        goToSignIn(getCurrentFocus());
+                    }
+                }).show();
+                break;
+
+        }
 
 
     }
 
-
-    private void signUpUnsuccessfullDialog(String error){
-
-    }
 
 
     public void goToSignIn(View view) {

@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.piu.socialcase.R;
 import com.piu.socialcase.authentication.AuthenticationResult;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.service.LoginService;
+import com.piu.socialcase.service.Session;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -81,21 +83,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToHomePage(Volunteer volunteer) {
         Intent intent = new Intent(this, HomePageActivity.class);
-        intent.putExtra(HomePageActivity.VOLUNTEER_EXTRA, volunteer);
+        Session session=Session.getInstance();
+        session.setLoggedInUser(volunteer);
         startActivity(intent);
     }
 
     private void loginUnsuccessfulDialogBox(){
-        AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
-        alertDialog.setTitle(AUTHENTICATION_FAILED_TITLE);
-        alertDialog.setMessage(AUTHENTICATION_FAILED_MESSAGE);
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        alertDialog.show();
+        new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle(AUTHENTICATION_FAILED_TITLE).setMessage(AUTHENTICATION_FAILED_MESSAGE).setPositiveButton("Ok",null).show();
+
     }
 
 }

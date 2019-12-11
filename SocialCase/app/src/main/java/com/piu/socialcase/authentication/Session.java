@@ -1,4 +1,4 @@
-package com.piu.socialcase.service;
+package com.piu.socialcase.authentication;
 
 import com.piu.socialcase.model.Volunteer;
 

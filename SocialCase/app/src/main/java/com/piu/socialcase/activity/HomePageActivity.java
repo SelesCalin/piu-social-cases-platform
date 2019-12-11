@@ -1,16 +1,11 @@
 package com.piu.socialcase.activity;
 
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.piu.socialcase.R;
@@ -20,7 +15,7 @@ import com.piu.socialcase.fragment.homepage.ProfileFragment;
 import com.piu.socialcase.fragment.homepage.ProgramFragment;
 import com.piu.socialcase.fragment.homepage.TestsFragment;
 import com.piu.socialcase.model.Volunteer;
-import com.piu.socialcase.service.Session;
+import com.piu.socialcase.authentication.Session;
 
 public class HomePageActivity extends AppCompatActivity {
 

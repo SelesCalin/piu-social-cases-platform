@@ -1,6 +1,8 @@
 package com.piu.socialcase.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Volunteer implements Serializable {
 
@@ -11,6 +13,7 @@ public class Volunteer implements Serializable {
     private String birthDate;
     private String address;
     private String organisation;
+    private String[] preferences;
 
     public Volunteer(){}
 
@@ -27,7 +30,7 @@ public class Volunteer implements Serializable {
         this.organisation = organisation;
     }
 
-    public Volunteer(String username, String password, String email, String phoneNumber, String birthDate, String address, String organisation) {
+    public Volunteer(String username, String password, String email, String phoneNumber, String birthDate, String address, String organisation, String[] preferences) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -35,6 +38,7 @@ public class Volunteer implements Serializable {
         this.birthDate = birthDate;
         this.address = address;
         this.organisation = organisation;
+        this.preferences=preferences;
     }
 
     public String getUsername() {
@@ -91,5 +95,13 @@ public class Volunteer implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String[] getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String[] preferences) {
+        this.preferences = preferences;
     }
 }

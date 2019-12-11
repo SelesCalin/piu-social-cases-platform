@@ -1,8 +1,7 @@
 package com.piu.socialcase.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,7 @@ import com.piu.socialcase.R;
 import com.piu.socialcase.authentication.AuthenticationResult;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.service.LoginService;
-import com.piu.socialcase.service.Session;
+import com.piu.socialcase.authentication.Session;
 
 public class LoginActivity extends AppCompatActivity {
 

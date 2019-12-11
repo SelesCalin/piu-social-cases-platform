@@ -34,5 +34,10 @@
 
     </style>
 
+    <style name="dialogPreferinte" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+    <item name="colorPrimary">@color/colorAccent</item>
+
+    </style>
+
 
 </resources>

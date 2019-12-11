@@ -11,4 +11,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="preferinte">
+        <item>Raspunde la solicitare de ajutor imediat</item>
+        <item>Acompaniere la plimbare</item>
+        <item>Ajutor pentru mentinerea igienei personale</item>
+        <item>Ajutor pentru luarea medicamentatiei</item>
+        <item>Ajutor pentru cumparaturi</item>
+    </string-array>
 </resources>

@@ -2,6 +2,7 @@ package com.piu.socialcase.activity;
 
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,9 @@ import com.piu.socialcase.service.LoginService;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -44,12 +47,15 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputLayout floatingPhoneLabel;
     TextInputLayout floatingBirthdayLabel;
     LoginService loginService;
+    String[] items;
+    boolean[] arrayChecked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        items=getResources().getStringArray(R.array.preferinte);
+        arrayChecked= new boolean[items.length];
         birthdayText= (EditText) findViewById(R.id.birthday);
         floatingUsernameLabel =(TextInputLayout) findViewById(R.id.username_text_input_layout);
         floatingPasswordLabel =(TextInputLayout) findViewById(R.id.password_text_input_layout);
@@ -82,13 +88,62 @@ public class SignUpActivity extends AppCompatActivity {
                 onSignUp();
             }
         });
+
+        Button butonPreferinte= findViewById(R.id.butonPreferinte);
+        butonPreferinte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPreferencesDialog();
+            }
+        });
+    }
+
+    public void showPreferencesDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.dialogPreferinte);
+
+        builder.setTitle("Selectati toate activitatile pe care le puteti face");
+        final boolean[] arrayCheckedDialog= arrayChecked;
+        builder.setMultiChoiceItems(items, arrayCheckedDialog, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                arrayCheckedDialog[i]=b;
+            }
+        });
+
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                arrayChecked=arrayCheckedDialog;
+                dialogInterface.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
     }
 
     private void onSignUp() {
+        List<String> arrayList=new ArrayList<String>();
+        for(int i=0;i< items.length;i++) {
+            if (arrayChecked[i])
+                arrayList.add(items[i]);
+        }
+        String[] preferinte = new String[arrayList.size()];
+         preferinte=arrayList.toArray(preferinte);
+
         Integer signUpResult=loginService.signUp(floatingUsernameLabel.getEditText().getText().toString(),floatingPasswordLabel.getEditText().getText().toString(),
                 floatingConfirmPasswordLabel.getEditText().getText().toString(),floatingEmailLabel.getEditText().getText().toString(),
                 floatingPhoneLabel.getEditText().getText().toString(),floatingAddressLabel.getEditText().getText().toString(),
-                floatingBirthdayLabel.getEditText().getText().toString());
+                floatingBirthdayLabel.getEditText().getText().toString(),preferinte);
         switch (signUpResult){
             case -1:
                 new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle("Error").setMessage("Username already exists!").setPositiveButton("Ok",null).show();

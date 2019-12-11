@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.model.Volunteer;
-import com.piu.socialcase.service.Session;
+import com.piu.socialcase.authentication.Session;
+
+import java.util.Arrays;
 
 public class ProfileFragment extends Fragment {
 
@@ -58,7 +60,7 @@ public class ProfileFragment extends Fragment {
 
     private void setVolunteerInfo() {
         iconTextView.setText(getNameInitials(volunteer.getUsername()));
-        nameTextView.setText(volunteer.getUsername());
+        nameTextView.setText(Arrays.toString(volunteer.getPreferences()));
         emailTextView.setText(volunteer.getEmail());
         phoneTextView.setText(volunteer.getPhoneNumber());
         organisationTextView.setText(volunteer.getOrganisation());

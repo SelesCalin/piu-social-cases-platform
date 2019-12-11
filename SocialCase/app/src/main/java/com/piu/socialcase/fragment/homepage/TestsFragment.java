@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.model.Volunteer;
-import com.piu.socialcase.service.Session;
+import com.piu.socialcase.authentication.Session;
 
 /**
  * A simple {@link Fragment} subclass.

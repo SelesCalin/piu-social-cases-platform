@@ -5,6 +5,8 @@ import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.repository.VolunteerRepository;
 import com.piu.socialcase.repository.VolunteerRepositoryMock;
 
+import java.util.ArrayList;
+
 public class LoginService {
 
     private static final String USER_NOT_FOUND_ERROR = "User not found or wrong password";
@@ -52,7 +54,7 @@ public class LoginService {
         return authenticationResult;
     }
 
-    public Integer signUp(String username,String password, String confirmPass, String email, String phone, String address,String dateOfBirth){
+    public Integer signUp(String username,String password, String confirmPass, String email, String phone, String address,String dateOfBirth,String[] preferences){
         if(volunteerRepository.findVolunteerByUsername(username)!=null)
             return -1;
 
@@ -61,8 +63,7 @@ public class LoginService {
 
         if(!password.equals(confirmPass))
             return -3;
-
-        Volunteer volunteer= new Volunteer(username,password,email,phone,dateOfBirth,address,null);
+        Volunteer volunteer= new Volunteer(username,password,email,phone,dateOfBirth,address,null,preferences);
         volunteerRepository.addVolunteer(volunteer);
 
         return 1;

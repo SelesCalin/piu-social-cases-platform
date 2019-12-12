@@ -49,13 +49,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
-        iconTextView = view.findViewById(R.id.volunteer_info_volunteer_icon);
-        nameTextView = view.findViewById(R.id.volunteer_info_name);
-        emailTextView = view.findViewById(R.id.volunteer_info_email);
-        phoneTextView = view.findViewById(R.id.volunteer_info_phone);
-        organisationTextView = view.findViewById(R.id.volunteer_info_organisation);
 
-        setVolunteerInfo();
+
+      //  setVolunteerInfo();
     }
 
     private void setVolunteerInfo() {

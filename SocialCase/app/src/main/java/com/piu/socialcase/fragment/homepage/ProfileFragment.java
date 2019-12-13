@@ -49,17 +49,16 @@ public class ProfileFragment extends Fragment {
     }
 
     private void initializeViews(View view) {
+        nameTextView=view.findViewById(R.id.profile_name_text);
+        emailTextView=view.findViewById(R.id.profile_email_text);
 
 
-      //  setVolunteerInfo();
+       setVolunteerInfo();
     }
 
     private void setVolunteerInfo() {
-        iconTextView.setText(getNameInitials(volunteer.getUsername()));
-        nameTextView.setText(Arrays.toString(volunteer.getPreferences()));
         emailTextView.setText(volunteer.getEmail());
-        phoneTextView.setText(volunteer.getPhoneNumber());
-        organisationTextView.setText(volunteer.getOrganisation());
+        nameTextView.setText(volunteer.getUsername());
     }
 
 

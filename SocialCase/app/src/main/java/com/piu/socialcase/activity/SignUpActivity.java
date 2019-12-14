@@ -165,19 +165,14 @@ public class SignUpActivity extends AppCompatActivity {
                     }
                 }).show();
                 break;
-
         }
 
-
     }
-
-
 
     public void goToSignIn(View view) {
         Intent intent= new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(intent);
         finish();
-
     }
 
     private void setCalendarListener(){
@@ -218,10 +213,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void setupFloatingLabelError(){
-
-
-
-
         floatingUsernameLabel.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
             @Override
@@ -236,8 +227,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         floatingPasswordLabel.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener(){
 
@@ -286,8 +275,6 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         floatingPhoneLabel.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener(){
 

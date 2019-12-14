@@ -9,8 +9,10 @@ import java.util.List;
 public class VolunteerRepositoryMock implements  VolunteerRepository {
 
     private List<Volunteer> volunteers;
+    private DataRepositoryMock dataRepository;
 
     public VolunteerRepositoryMock(){
+        dataRepository = new DataRepositoryMock();
         volunteers = generateVolunteers();
     }
 
@@ -25,8 +27,10 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
 
     private List<Volunteer> generateVolunteers(){
         ArrayList<Volunteer> list = new ArrayList<>();
-        Volunteer v1 = new Volunteer("Calin Calin-Florin", "calin", "calin@gmail.com", "0712345678", "ONG");
+        Volunteer v1 = new Volunteer("Calin Calin-Florin", "calin", "calin@gmail.com", "0712345678",
+                "ONG");
         Volunteer v2 = new Volunteer("user", "user", "user@user.com", "07456789123", "ONG2");
+        v2.setAvailable(dataRepository.getAvailableTime());
         list.add(v1);list.add(v2);
         return list;
     }

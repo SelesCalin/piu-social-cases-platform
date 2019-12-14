@@ -1,15 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.homepage.AskForHelpFragment">
+    tools:context=".fragment.homepage.AskForHelpFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Ask for help FRAGMENT"
-        android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="start"
+            android:orientation="vertical">
 
-</FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ask_for_help"
+                android:textAlignment="center"
+                android:textColor="#21B6A8"
+                android:textSize="30sp"
+                android:textStyle="italic"
+                android:layout_marginBottom="20dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_text_input_layout_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/username_ask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/username"
+                    android:inputType="none"
+                    android:autofillHints="@string/username" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/help_for_text_input_layout_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/help_for_ask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/social_case"
+                    android:inputType="textPersonName"
+                    android:autofillHints="@string/social_case" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/location_text_input_layout_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/location_ask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/location"
+                    android:inputType="text"
+                    android:autofillHints="@string/location" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/description_text_input_layout_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/description_ask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/description"
+                    android:inputType="textMultiLine"
+                    android:autofillHints="@string/description" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/number_ask"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:text="@string/number_of_persons"
+                    android:textSize="17sp"/>
+
+                <NumberPicker
+                    android:id="@+id/numberOfPersons_ask"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/emergency_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/emergency"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_marginBottom="5dp"/>
+
+            <Button
+                android:id="@+id/butonSend_ask"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/sign_in_up_button"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:text="@string/send"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_marginBottom="30dp" />
+
+    </LinearLayout>
+
+</ScrollView>

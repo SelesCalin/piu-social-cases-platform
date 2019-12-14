@@ -2,6 +2,7 @@ package com.piu.socialcase.service;
 
 import com.piu.socialcase.authentication.AuthenticationResult;
 import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.repository.DataRepositoryMock;
 import com.piu.socialcase.repository.VolunteerRepository;
 import com.piu.socialcase.repository.VolunteerRepositoryMock;
 
@@ -14,11 +15,13 @@ public class LoginService {
     private static final String PASSWORD_TOO_SHORT_ERROR = "Password too short";
 
     private VolunteerRepository volunteerRepository;
+    private DataRepositoryMock dataRepository;
 
     private static LoginService instance=null;
 
     private LoginService(){
         this.volunteerRepository = new VolunteerRepositoryMock();
+        this.dataRepository = new DataRepositoryMock();
     }
 
     public static LoginService LoginService(){
@@ -64,6 +67,7 @@ public class LoginService {
         if(!password.equals(confirmPass))
             return -3;
         Volunteer volunteer= new Volunteer(username,password,email,phone,dateOfBirth,address,null,preferences);
+        volunteer.setAvailable(dataRepository.getAvailableTime());
         volunteerRepository.addVolunteer(volunteer);
 
         return 1;

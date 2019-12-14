@@ -11,6 +11,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Username</string>
+    <string name="social_case">Social case</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="number_of_persons">Number of persons</string>
+    <string name="emergency">Emergency</string>
+    <string name="send">SEND</string>
+    <string name="ask_for_help">Ask for help!</string>
+    <string name="save">SAVE</string>
+    <string name="my_schedule">My schedule</string>
+    <string name="date">Date</string>
 
     <string-array name="preferinte">
         <item>Raspunde la solicitare de ajutor imediat</item>

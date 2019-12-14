@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUnsuccessfulDialogBox(){
         new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle(AUTHENTICATION_FAILED_TITLE).setMessage(AUTHENTICATION_FAILED_MESSAGE).setPositiveButton("Ok",null).show();
-
     }
 
 }

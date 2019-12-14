@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="Become one of us!"
             android:textAlignment="center"
-            android:textColor="#21B6A8"
+            android:textColor="@color/color_21B6A8"
             android:textSize="30dp"
             android:textStyle="italic" />
 

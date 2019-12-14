@@ -2,7 +2,9 @@ package com.piu.socialcase.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Volunteer implements Serializable {
 
@@ -14,6 +16,7 @@ public class Volunteer implements Serializable {
     private String address;
     private String organisation;
     private String[] preferences;
+    private Map<String,Boolean> available = new HashMap<>();
 
     public Volunteer(){}
 
@@ -103,5 +106,23 @@ public class Volunteer implements Serializable {
 
     public void setPreferences(String[] preferences) {
         this.preferences = preferences;
+    }
+
+    public Map<String, Boolean> getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Map<String, Boolean> available) {
+        this.available = available;
+    }
+
+    public void setOneAvailable(String key, Boolean value) {
+        this.available.put(key,value);
+    }
+
+    public boolean getOneAvailable(String key) {
+        if(this.available.get(key)!=null)
+            return this.available.get(key);
+        return false;
     }
 }

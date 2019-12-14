@@ -19,6 +19,9 @@
     <string name="emergency">Emergency</string>
     <string name="send">SEND</string>
     <string name="ask_for_help">Ask for help!</string>
+    <string name="save">SAVE</string>
+    <string name="my_schedule">My schedule</string>
+    <string name="date">Date</string>
 
     <string-array name="preferinte">
         <item>Raspunde la solicitare de ajutor imediat</item>

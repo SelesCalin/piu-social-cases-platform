@@ -15,13 +15,13 @@ public class Test {
 
     private List<Question> questions;
 
-    private LocalTime time;
+    private Integer time;
 
     private LocalDateTime deadline;
 
     private LocalDateTime dayTaken;
 
-    public Test(int testNo, Boolean taken, List<Question> questions, LocalTime time, LocalDateTime deadline, LocalDateTime dayTaken) {
+    public Test(int testNo, Boolean taken, List<Question> questions, Integer time, LocalDateTime deadline, LocalDateTime dayTaken) {
         this.testNo = testNo;
         this.taken = taken;
         this.questions = questions;
@@ -54,11 +54,11 @@ public class Test {
         this.questions = questions;
     }
 
-    public LocalTime getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 

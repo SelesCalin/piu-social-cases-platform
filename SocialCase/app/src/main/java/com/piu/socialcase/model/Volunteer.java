@@ -10,6 +10,7 @@ public class Volunteer implements Serializable {
 
     private String username;
     private String password;
+    private String fullName;
     private String email;
     private String phoneNumber;
     private String birthDate;
@@ -29,11 +30,15 @@ public class Volunteer implements Serializable {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.fullName="Auto";
+        this.address="auto";
+        this.preferences=new String[1];
+        this.birthDate="10/10/10";
         this.phoneNumber = phoneNumber;
         this.organisation = organisation;
     }
 
-    public Volunteer(String username, String password, String email, String phoneNumber, String birthDate, String address, String organisation, String[] preferences) {
+    public Volunteer(String username, String password, String email, String phoneNumber,String fullName, String birthDate, String address, String organisation, String[] preferences) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -42,6 +47,7 @@ public class Volunteer implements Serializable {
         this.address = address;
         this.organisation = organisation;
         this.preferences=preferences;
+        this.fullName=fullName;
     }
 
     public String getUsername() {
@@ -118,6 +124,14 @@ public class Volunteer implements Serializable {
 
     public void setOneAvailable(String key, Boolean value) {
         this.available.put(key,value);
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public boolean getOneAvailable(String key) {

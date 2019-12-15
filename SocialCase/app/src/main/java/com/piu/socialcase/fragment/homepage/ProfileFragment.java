@@ -12,18 +12,18 @@ import com.piu.socialcase.R;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
 
-import java.util.Arrays;
-
 public class ProfileFragment extends Fragment {
 
     public static final String VOLUNTEER_PARAM = "volunteer";
 
     private Volunteer volunteer;
-    private TextView iconTextView;
     private TextView nameTextView;
     private TextView emailTextView;
     private TextView phoneTextView;
+    private TextView birthDayTextView;
     private TextView organisationTextView;
+    private TextView fullNameTextView;
+    private TextView addressTextView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -51,7 +51,11 @@ public class ProfileFragment extends Fragment {
     private void initializeViews(View view) {
         nameTextView=view.findViewById(R.id.profile_name_text);
         emailTextView=view.findViewById(R.id.profile_email_text);
-
+        fullNameTextView=view.findViewById(R.id.full_name_text);
+        phoneTextView=view.findViewById(R.id.phone_profile_text);
+        addressTextView=view.findViewById(R.id.address_profile_text);
+        birthDayTextView=view.findViewById(R.id.birthday_profile_text);
+        organisationTextView=view.findViewById(R.id.profile_organization_text);
 
        setVolunteerInfo();
     }
@@ -59,6 +63,17 @@ public class ProfileFragment extends Fragment {
     private void setVolunteerInfo() {
         emailTextView.setText(volunteer.getEmail());
         nameTextView.setText(volunteer.getUsername());
+        fullNameTextView.setText(volunteer.getFullName());
+        phoneTextView.setText(volunteer.getPhoneNumber());
+        addressTextView.setText(volunteer.getAddress());
+        birthDayTextView.setText(volunteer.getBirthDate());
+        String organization=volunteer.getOrganisation();
+        if (organization == null) {
+            organisationTextView.setText("Not yet assigned");
+        } else {
+            organisationTextView.setText(organization);
+        }
+
     }
 
 

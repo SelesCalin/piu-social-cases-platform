@@ -21,7 +21,7 @@ public class SingleAdapter extends RecyclerView.Adapter<SingleAdapter.AnswersHol
     private ArrayList<Answer> answers;
 
 
-    private int checkedPosition=0;
+    private int checkedPosition=-1;
 
     public SingleAdapter(Context context, ArrayList<Answer> answers){
         this.context=context;

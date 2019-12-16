@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.adapters.QuizAdapter;
+import com.piu.socialcase.adapters.holders.QuestionHolder;
 import com.piu.socialcase.model.Test;
 
 import java.util.Timer;
@@ -81,6 +82,23 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }.start();
         }
+    });
+
+
+    submitButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int result =0;
+
+
+            for(int i=0; i<recyclerView.getAdapter().getItemCount();i++) {
+                recyclerView.smoothScrollToPosition(i);
+                result += ((QuestionHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(i))).getAnswear();
+            }
+
+            System.out.println(result);
+        }
+
     });
     }
 }

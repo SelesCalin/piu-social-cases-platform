@@ -39,4 +39,16 @@ public class QuestionHolder extends RecyclerView.ViewHolder {
         answears.setLayoutManager(new LinearLayoutManager(context));
 
     }
+
+    public int getAnswear(){
+        Answer answer = singleAdapter.getSelected();
+        if(answer==null) {
+            return 0;
+        }
+        if(answer.getCorrect())
+            return 1;
+        else
+            return 0;
+
+    }
 }

@@ -30,10 +30,10 @@ public class TestsRepositoryMock implements TestsRepository {
 
         raspunsuri.add(new Answer("Da",false));raspunsuri.add(new Answer("Nu",true));raspunsuri.add(new Answer("Nu stiu '\' Nu raspund", false));
         this.questions.add(new Question("Esti o persoana conflictuala?", raspunsuri));
-        raspunsuri.clear();
-        raspunsuri.add(new Answer("Da",true));raspunsuri.add(new Answer("Nu",false));raspunsuri.add(new Answer("Nu stiu '\' Nu raspund", false));
-        this.questions.add(new Question("Iti place sa iti ajuti aproapele?",raspunsuri));
-        this.questions.add(new Question("Ai mai facut voluntariat?",raspunsuri));
+        List<Answer> raspunsuri1= new ArrayList<>();
+        raspunsuri1.add(new Answer("Da",true));raspunsuri1.add(new Answer("Nu",false));raspunsuri1.add(new Answer("Nu stiu '\' Nu raspund", false));
+        this.questions.add(new Question("Iti place sa iti ajuti aproapele?",raspunsuri1));
+        this.questions.add(new Question("Ai mai facut voluntariat?",raspunsuri1));
 
     }
 

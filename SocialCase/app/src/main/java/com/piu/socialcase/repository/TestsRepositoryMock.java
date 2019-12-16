@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.piu.socialcase.model.Answer;
 import com.piu.socialcase.model.Question;
 import com.piu.socialcase.model.Test;
 
@@ -25,11 +26,12 @@ public class TestsRepositoryMock implements TestsRepository {
 
     private void generateMockQuestions() {
         this.questions=new ArrayList<>();
-        HashMap<String,Boolean> raspunsuri=new HashMap<>();
-        raspunsuri.put("Da",false);raspunsuri.put("Nu",true);raspunsuri.put("Nu stiu '\' Nu raspund", false);
+        List<Answer> raspunsuri=new ArrayList<>();
+
+        raspunsuri.add(new Answer("Da",false));raspunsuri.add(new Answer("Nu",true));raspunsuri.add(new Answer("Nu stiu '\' Nu raspund", false));
         this.questions.add(new Question("Esti o persoana conflictuala?", raspunsuri));
         raspunsuri.clear();
-        raspunsuri.put("Da",true);raspunsuri.put("Nu",false);raspunsuri.put("Nu stiu '\' Nu raspund", false);
+        raspunsuri.add(new Answer("Da",true));raspunsuri.add(new Answer("Nu",false));raspunsuri.add(new Answer("Nu stiu '\' Nu raspund", false));
         this.questions.add(new Question("Iti place sa iti ajuti aproapele?",raspunsuri));
         this.questions.add(new Question("Ai mai facut voluntariat?",raspunsuri));
 
@@ -39,17 +41,33 @@ public class TestsRepositoryMock implements TestsRepository {
     private void generateMockTests() {
 
         this.tests=new ArrayList<>();
-        tests.add(new Test(1,false,this.questions,10, LocalDateTime.now().plusDays(5),null));
+        tests.add(new Test(1,false,this.questions,10, LocalDateTime.now().plusDays(5),null,0));
+        tests.add(new Test(2,false,this.questions,10, LocalDateTime.now().plusDays(5),null,0));
+        tests.add(new Test(3,false,this.questions,10, LocalDateTime.now().plusDays(5),null,0));
+        tests.add(new Test(4,true,this.questions,10, LocalDateTime.now().plusDays(5),LocalDateTime.now(),2));
 
     }
 
     @Override
     public List<Test> getAllAvailableTests() {
-        return null;
+        List<Test> tests=new ArrayList<>();
+        for(Test test: this.tests) {
+            if (!test.getTaken())
+                tests.add(test);
+        }
+
+        return tests;
+
     }
 
     @Override
     public List<Test> getAllTakenTests() {
-        return null;
+        List<Test> tests=new ArrayList<>();
+        for(Test test: this.tests) {
+            if (test.getTaken())
+                tests.add(test);
+        }
+
+        return tests;
     }
 }

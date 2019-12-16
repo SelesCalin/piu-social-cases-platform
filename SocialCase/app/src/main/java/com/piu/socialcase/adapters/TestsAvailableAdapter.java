@@ -19,7 +19,7 @@ public class TestsAvailableAdapter extends RecyclerView.Adapter<TestAvailableHol
     private Context context;
 
 
-    private TestsAvailableAdapter(Context context,List<Test> tests){
+    public TestsAvailableAdapter(Context context,List<Test> tests){
         this.context=context;
         this.tests=tests;
     }
@@ -33,7 +33,7 @@ public class TestsAvailableAdapter extends RecyclerView.Adapter<TestAvailableHol
 
     @Override
     public void onBindViewHolder(@NonNull TestAvailableHolder holder, int position) {
-        holder.bindViewHolder(tests.get(position));
+        holder.bindViewHolder(tests.get(position),context);
 
     }
 

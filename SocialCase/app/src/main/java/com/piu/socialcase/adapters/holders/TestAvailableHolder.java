@@ -1,4 +1,6 @@
 package com.piu.socialcase.adapters.holders;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -6,7 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.piu.socialcase.R;
+import com.piu.socialcase.activity.QuizActivity;
 import com.piu.socialcase.model.Test;
+
+import java.io.Serializable;
 
 
 public class TestAvailableHolder extends RecyclerView.ViewHolder {
@@ -27,10 +32,22 @@ public class TestAvailableHolder extends RecyclerView.ViewHolder {
         takeTest=itemView.findViewById(R.id.butonTakeTest);
     }
 
-    public void bindViewHolder(final Test test) {
+    public void bindViewHolder(final Test test, final Context context) {
 
         testNumber.setText(new StringBuilder().append("Test ").append(test.getTestNo()).toString());
         questionNumber.setText(new StringBuilder().append(test.getQuestions().size()).append(" questions"));
-        timeForTest.setText(test.getTime().toString());
+        timeForTest.setText(new StringBuilder().append(test.getTime().toString()).append(" minutes"));
+        takeTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(view.getContext(), QuizActivity.class);
+                intent.putExtra("test",(Serializable) test);
+                context.startActivity(intent);
+            }
+        });
+
+
     }
+
+
 }

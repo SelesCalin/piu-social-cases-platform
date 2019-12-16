@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
         android:text="10 questions"
         android:layout_marginBottom="8dp"/>
 
@@ -48,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_gravity="right"
         android:gravity="right"
+
         android:layout_alignParentEnd="true"
         android:layout_height="wrap_content"
         android:text="10 minutes"
@@ -69,6 +72,12 @@
         android:textSize="13sp"
         android:layout_gravity="center"
         android:textStyle="italic"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#cccccc" />
+
 
 
 </LinearLayout>

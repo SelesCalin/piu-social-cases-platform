@@ -1,12 +1,13 @@
 package com.piu.socialcase.model;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Timer;
 
-public class Test {
+public class Test implements Serializable {
 
 
     private int testNo;
@@ -21,13 +22,16 @@ public class Test {
 
     private LocalDateTime dayTaken;
 
-    public Test(int testNo, Boolean taken, List<Question> questions, Integer time, LocalDateTime deadline, LocalDateTime dayTaken) {
+    private Integer correctAnswers;
+
+    public Test(int testNo, Boolean taken, List<Question> questions, Integer time, LocalDateTime deadline, LocalDateTime dayTaken, Integer correctAnswers) {
         this.testNo = testNo;
         this.taken = taken;
         this.questions = questions;
         this.time = time;
         this.deadline = deadline;
         this.dayTaken = dayTaken;
+        this.correctAnswers=correctAnswers;
     }
 
     public int getTestNo() {
@@ -76,5 +80,13 @@ public class Test {
 
     public void setDayTaken(LocalDateTime dayTaken) {
         this.dayTaken = dayTaken;
+    }
+
+    public Integer getCorrectAnswers() {
+        return correctAnswers;
+    }
+
+    public void setCorrectAnswers(Integer correctAnswers) {
+        this.correctAnswers = correctAnswers;
     }
 }

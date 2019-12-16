@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+
+<nav  class="navbar navbar-expand-lg" style="background-color: #bdc3c7;">
+  <a  class="navbar-brand" style="color: #1f618d;" href="/home/ong">Home ONG</a>
+  <button  class="navbar-toggler"  type="button"  data-toggle="collapse"  data-target="#navbarSupportedContent"  aria-controls="navbarSupportedContent"  aria-expanded="false"  aria-label="Toggle navigation">
+<!--    <span  class="navbar-toggler-icon"></span>-->
+    <i class="fa fa-bars" style="color: #1f618d"></i>
+  </button>
+  <div  class="collapse navbar-collapse"  id="navbarSupportedContent">
+    <ul  class="">
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/home/ong">Home <span  class="sr-only">(current)</span></a>
+      </li>
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/voluntari">Voluntari</a>
+      </li>
+      <li>
+        <a class="nav-link"  href="/cazuri" (click)="showDiv(1)">Cazuri sociale
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropd-content" *ngIf="divId == 1" style="background-color: #bdc3c7">
+          <a href="/cazuri" style="color: white;">Inregistrate</a>
+          <a href="/cazuri" (click) = "setShow();" style="color: white;" >In asteptare</a>
+        </div>
+      </li>
+
+
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/login/ong">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container back-container" style="max-width: 1600px; max-height: 700px;">
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-sm-12">
+      <img src="assets/volunteer-agencyimg.jpg" style="margin: auto">
+    </div>
+
+    <div class="col-md-6 col-lg-6 ">
+      <p style="padding-top: 15%; padding-left: 7%;">Stimularea sociala si interactiunea cu alte persoane are un rol mult mai important decat crezi in viata seniorilor, pentru ca ei sa fie fericiti si activi.
+        Pastrarea mobilitatii si renuntarea la sedentarism, supravegherea sigurantei si stimularea cognitiva duc la imbunatatirea generala a sanatatii fizice si mentale.
+      </p>
+      <p style="padding-left: 15%; padding-right: 5%">Echipa noastra a dezvoltat mai multe tipuri de activitati destinate seniorilor din program, cu participarea unui Insotitor calificat.
+        Scopul programului nostru este de a oferi ingrijire personalizata tie sau celor dragi tie, de a indeparta singuratatea si de a oferi un mediu social cst mai activ posibil.
+      </p>
+      <p style="padding-right: 5%; padding-left: 15%;" >  Ne dorim ca si tu, alaturi de cei care au apelat deja la serviciile noastre pentru parintii lor sau chiar pentru ei insisi, sa ne consideri principalul tau
+        furnizor de servicii de ingrijire la domiciliu.
+      </p>
+    </div>
+  </div>
+</div>

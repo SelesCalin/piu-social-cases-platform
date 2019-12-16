@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+
+<nav  class="navbar navbar-expand-lg" style="background-color: #bdc3c7;">
+  <a  class="navbar-brand" style="color: #1f618d;" href="/login/ong">Home ONG</a>
+  <button  class="navbar-toggler"  type="button"  data-toggle="collapse"  data-target="#navbarSupportedContent"  aria-controls="navbarSupportedContent"  aria-expanded="false"  aria-label="Toggle navigation">
+    <span  class="navbar-toggler-icon"></span>
+  </button>
+  <div  class="collapse navbar-collapse"  id="navbarSupportedContent">
+    <ul  class="navbar-nav mr-auto">
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/login/ong">Login <span  class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <div class="row main-content text-center">
+    <div class="col-md-4 company__info">
+      <img src="assets/ong.JPG" style="height: 400px; width: 450px;">
+    </div>
+    <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+      <div class="container-fluid">
+        <div class="row" style="display: block;">
+          <h2>Autentificare</h2>
+        </div>
+        <div class="row" style="display: block;">
+          <form control="" class="form-group" #login="ngForm" novalidate>
+            <div class="row" style="display: block;">
+              <input type="text" name="emailinput" id="email" class="form__input" [(ngModel)]="email"  [ngModelOptions]="{standalone: false}"
+                     #emailinput="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email *" required="">
+            </div>
+              <div class="row" style="display: block; width: 60%; " *ngIf="emailinput.errors &&( emailinput.dirty || emailinput.touched)" >
+                <div style="color: darkred; font-weight: 500;" *ngIf="emailinput.errors.pattern" >** Email invalid!</div>
+              </div>
+            <div class="row" style="display: block;">
+               <span class="fa fa-lock" style="color: #4d4d4d; margin-right: 5px;"></span>
+              <input name="password" id="password" class="form__input" [(ngModel)]="password" [ngModelOptions]="{standalone: false}" type="password"
+                     #pass="ngModel" pattern="^[a-z0-9._%+-]{5,}$" placeholder="Parola *" required="">
+            </div>
+            <div class="row" style="display: block; width: 108%; margin-bottom: 5%; " *ngIf="pass.errors &&( pass.dirty || pass.touched)">
+              <div style="color: darkred; font-weight: 500;"  *ngIf="pass.errors.pattern" >** Camp invalid! Parola trebuie sa contina cel putin 5 caractere!</div>
+            </div>
+            <div class="row" style="display: block;">
+              <input type="checkbox" name="remember_me" id="remember_me" class="" style="margin-right: 10px;">
+              <label for="remember_me">Nu ma deconecta</label>
+            </div>
+            <div class="row" style="display: block;">
+              <input type="submit" value="Conecteaza-te" class="btn" [disabled]="!login.valid" (click)="ongLogin($event)">
+            </div>
+          </form>
+        </div>
+        <!--        <div class="row">-->
+        <!--          <p>Don't have an account? <a href="#">Register Here</a></p>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>

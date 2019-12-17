@@ -141,7 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
          preferinte=arrayList.toArray(preferinte);
 
         Integer signUpResult=loginService.signUp(floatingUsernameLabel.getEditText().getText().toString(),floatingPasswordLabel.getEditText().getText().toString(),
-                floatingConfirmPasswordLabel.getEditText().getText().toString(),floatingEmailLabel.getEditText().getText().toString(),
+                floatingConfirmPasswordLabel.getEditText().getText().toString(),floatinNameLabel.getEditText().getText().toString(), floatingEmailLabel.getEditText().getText().toString(),
                 floatingPhoneLabel.getEditText().getText().toString(),floatingAddressLabel.getEditText().getText().toString(),
                 floatingBirthdayLabel.getEditText().getText().toString(),preferinte);
         switch (signUpResult){

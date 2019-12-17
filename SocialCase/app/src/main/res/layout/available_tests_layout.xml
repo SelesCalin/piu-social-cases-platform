@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_event_note_black"
+            android:layout_marginLeft="10dp"
+/>
+
+        <TextView
+            android:id="@+id/test_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textColor="#222222"
+            android:textSize="16dp"
+            android:text="test"
+            android:layout_marginBottom="8dp"/>
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <TextView
+        android:id="@+id/questions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:text="10 questions"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/timeForTest"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
+
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"
+        android:text="10 minutes"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/butonTakeTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sign_in_up_button"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="Take Test"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="13sp"
+        android:layout_gravity="center"
+        android:textStyle="italic"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#cccccc" />
+
+
+
+</LinearLayout>

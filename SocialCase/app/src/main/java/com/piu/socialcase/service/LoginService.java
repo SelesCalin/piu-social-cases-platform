@@ -57,7 +57,7 @@ public class LoginService {
         return authenticationResult;
     }
 
-    public Integer signUp(String username,String password, String confirmPass, String email, String phone, String address,String dateOfBirth,String[] preferences){
+    public Integer signUp(String username,String password, String confirmPass,String fullName, String email, String phone, String address,String dateOfBirth,String[] preferences){
         if(volunteerRepository.findVolunteerByUsername(username)!=null)
             return -1;
 
@@ -66,7 +66,7 @@ public class LoginService {
 
         if(!password.equals(confirmPass))
             return -3;
-        Volunteer volunteer= new Volunteer(username,password,email,phone,dateOfBirth,address,null,preferences);
+        Volunteer volunteer= new Volunteer(username,password,email,phone,fullName,dateOfBirth,address,null,preferences);
         volunteer.setAvailable(dataRepository.getAvailableTime());
         volunteerRepository.addVolunteer(volunteer);
 

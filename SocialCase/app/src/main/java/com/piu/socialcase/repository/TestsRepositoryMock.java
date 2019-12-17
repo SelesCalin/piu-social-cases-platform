@@ -70,4 +70,16 @@ public class TestsRepositoryMock implements TestsRepository {
 
         return tests;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void setTestTaken(Test test,int correctAnswers) {
+        for (Test t: tests) {
+            if (t.getTestNo() == test.getTestNo()) {
+                t.setTaken(true);
+                t.setDayTaken(LocalDateTime.now());
+                t.setCorrectAnswers(correctAnswers);
+            }
+        }
+    }
 }

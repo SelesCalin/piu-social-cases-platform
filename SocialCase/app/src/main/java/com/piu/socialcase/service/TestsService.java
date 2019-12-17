@@ -37,4 +37,8 @@ public class TestsService {
     public List<Test> getAllTakenTests(){
         return testsRepository.getAllTakenTests();
     }
+
+    public void setTestTaken(Test test,int correctAnswers){
+        testsRepository.setTestTaken(test,correctAnswers);
+    }
 }

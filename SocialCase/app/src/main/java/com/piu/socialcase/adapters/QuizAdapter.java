@@ -11,17 +11,20 @@ import com.piu.socialcase.R;
 import com.piu.socialcase.adapters.holders.QuestionHolder;
 import com.piu.socialcase.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     private List<Question> questionList;
     private Context context;
+    private List<QuestionHolder> questionHolders;
 
 
     public QuizAdapter(Context context, List<Question> questions){
         this.context=context;
         this.questionList=questions;
+        questionHolders=new ArrayList<>();
     }
 
 
@@ -35,6 +38,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuestionHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull QuestionHolder holder, int position) {
+                    questionHolders.add(holder);
                      holder.bind(questionList.get(position));
 
     }
@@ -42,5 +46,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuestionHolder> {
     @Override
     public int getItemCount() {
         return questionList.size();
+    }
+
+
+    public List<QuestionHolder> getQuestionHolders(){
+        return questionHolders;
     }
 }

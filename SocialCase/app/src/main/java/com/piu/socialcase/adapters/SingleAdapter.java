@@ -21,6 +21,7 @@ public class SingleAdapter extends RecyclerView.Adapter<SingleAdapter.AnswersHol
     private ArrayList<Answer> answers;
 
 
+
     private int checkedPosition=-1;
 
     public SingleAdapter(Context context, ArrayList<Answer> answers){
@@ -44,7 +45,7 @@ public class SingleAdapter extends RecyclerView.Adapter<SingleAdapter.AnswersHol
 
     @Override
     public void onBindViewHolder(@NonNull AnswersHolder holder, int position) {
-        holder.bindViewHolder(answers.get(position));
+        holder.bindViewHolder(answers.get(position),position);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class SingleAdapter extends RecyclerView.Adapter<SingleAdapter.AnswersHol
 
         }
 
-        void bindViewHolder(final Answer answear){
+        void bindViewHolder(final Answer answear, final int position){
                 if(checkedPosition==-1) {
                     imageView.setVisibility(View.GONE);
                 }else{

@@ -1,0 +1,181 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+.container {
+  margin-top: 60px !important;
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 800px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form-group{
+  margin-left: 50px;
+}
+
+.input[type = text] {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.alert-danger{
+  margin-top: 4px !important;
+  font-size: 14px !important;
+  width: 78%;
+  height: 40px;
+  padding: 10px;
+  margin-left: 15px !important;
+}
+
+
+.name{
+  margin-top: 4px !important;
+  font-size: 14px !important;
+  width: 97.5% !important;
+  height: 40px !important;
+  padding: 10px !important;
+  margin-left: 0px !important;
+}
+
+.control-label{
+  font-family: "Roboto", sans-serif;
+  margin-left: 13px;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #222831;
+  width: 100%;
+  border: 0;
+  /* padding: 15px;*/
+  color: #eeeeee;
+  font-size: 16px;
+  /*-webkit-transition: all;*/
+  /*transition: all ;*/
+  cursor: pointer;
+}
+button:hover, button:active, button:focus {
+  background: #393e46;
+  color: #eeeeee;
+
+}
+
+.btn-back {
+  background-color: #008080 !important;
+  color: #eeeeee;
+  font-weight: bold;
+}
+
+.btn-back:hover {
+  background: rgba(0,80,80,.4) !important;
+  color: #eeeeee;
+  font-weight: bold;
+}
+
+
+#table, #table2 {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin-bottom: 50px !important ;
+  margin: auto;
+  margin-top: 2% !important;
+}
+
+#table td, #table2 td {
+  border: 2px solid #ddd;
+  padding: 5px;
+}
+
+
+#table tr:nth-child(even), #table2 tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#table tr:hover, #table2 tr:hover  {
+  background-color: #D1D0CE;
+}
+
+#table th, #table2 th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #1f618d;
+  color: #eeeeee;
+}
+
+.margin-top {
+  margin-top: 40px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+li {
+  float:left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+li a i {
+  margin-right: 7px;
+}
+
+li a:hover {
+  color:  #797d7f;
+}
+
+
+#accept1, #accept2, #accept3, #refuz1, #refuz2, #refuz3 {
+  width: 100%;
+  font-size: 13px;
+}
+
+
+.dropd-content {
+  display: block;
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  float: left;
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.colMica {
+  width:50%;
+}
+

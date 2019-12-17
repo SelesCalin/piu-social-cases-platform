@@ -27,10 +27,7 @@ public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {
         // Required empty public constructor
-
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
     private void setVolunteerInfo() {
         iconTextView.setText(getNameInitials(volunteer.getUsername()));
-        nameTextView.setText(Arrays.toString(volunteer.getPreferences()));
+        nameTextView.setText(volunteer.getUsername());
         emailTextView.setText(volunteer.getEmail());
         phoneTextView.setText(volunteer.getPhoneNumber());
         organisationTextView.setText(volunteer.getOrganisation());

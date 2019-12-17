@@ -38,7 +38,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initializeViews() {
         usernameEditText = findViewById(R.id.login_username_edit_text);
+        usernameEditText.setText("Calin Calin-Florin");
         passwordEditText = findViewById(R.id.login_password_edit_text);
+        passwordEditText.setText("calin");
         loginButton = findViewById(R.id.login_login_button);
 
         TextView textView=findViewById(R.id.signUp_text);

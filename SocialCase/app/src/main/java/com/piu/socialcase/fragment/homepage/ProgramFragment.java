@@ -21,11 +21,7 @@ import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.repository.DataRepositoryMock;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public class ProgramFragment extends Fragment implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.piu.socialcase.activity.adapter;
+package com.piu.socialcase.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

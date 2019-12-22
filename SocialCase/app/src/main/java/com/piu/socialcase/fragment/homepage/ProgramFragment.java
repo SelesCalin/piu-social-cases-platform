@@ -60,6 +60,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         dateTextView = view.findViewById(R.id.date);
         listView = view.findViewById(R.id.listView);
         dateList = dataRepositoryMock.getDates();
+
         dateAdapter = new ArrayAdapter<String>
                 (getActivity(),
                         android.R.layout.simple_list_item_multiple_choice,

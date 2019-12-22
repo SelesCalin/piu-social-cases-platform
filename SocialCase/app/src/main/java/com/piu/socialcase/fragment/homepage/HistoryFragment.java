@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.piu.socialcase.R;
-import com.piu.socialcase.activity.adapter.HistoryAdapter;
+
+import com.piu.socialcase.adapters.HistoryAdapter;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.service.HistoryService;
+
 
 public class HistoryFragment extends Fragment {
 

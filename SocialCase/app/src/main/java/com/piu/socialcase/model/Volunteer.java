@@ -30,8 +30,8 @@ public class Volunteer implements Serializable {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.fullName="Auto";
-        this.address="auto";
+        this.fullName="User";
+        this.address="Adresa";
         this.preferences=new String[1];
         this.birthDate="10/10/10";
         this.phoneNumber = phoneNumber;

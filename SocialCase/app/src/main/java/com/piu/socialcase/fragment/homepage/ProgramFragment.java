@@ -21,11 +21,7 @@ import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.repository.DataRepositoryMock;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 public class ProgramFragment extends Fragment implements View.OnClickListener {
 
@@ -64,6 +60,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         dateTextView = view.findViewById(R.id.date);
         listView = view.findViewById(R.id.listView);
         dateList = dataRepositoryMock.getDates();
+
         dateAdapter = new ArrayAdapter<String>
                 (getActivity(),
                         android.R.layout.simple_list_item_multiple_choice,

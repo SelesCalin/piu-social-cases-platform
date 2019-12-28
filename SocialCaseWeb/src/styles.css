@@ -1,0 +1,31 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+@import "../node_modules/@syncfusion/ej2/material.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+.e-btn.e-flat.e-primary, .e-css.e-btn.e-flat.e-primary {
+  color: black !important;
+  background-color: transparent !important;
+}
+
+.e-btn.e-flat.e-primary:hover, .e-css.e-btn.e-flat.e-primary:hover{
+  background-color: rgba(0, 0, 0, 0.0348) !important;
+}
+
+.e-alert-dialog .e-lib .e-dialog .e-dlg-modal .e-popup .e-control .e-popup-open {
+  top: 30px !important;
+}
+
+.e-alert-dialog.e-dialog.e-popup, .e-confirm-dialog.e-dialog.e-popup{
+  margin-top: 10px !important;
+  width: 400px !important;
+}
+
+.e-dlg-center-top{
+  flex-direction: initial ;
+}
+
+.e-btn, .e-css.e-btn {
+  margin-right: 15px;
+  width: 80px;
+}

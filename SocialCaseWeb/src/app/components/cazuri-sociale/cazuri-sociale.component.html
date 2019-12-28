@@ -1,0 +1,889 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      xmlns:width="http://www.w3.org/1999/xhtml" xmlns:width="http://www.w3.org/1999/xhtml">
+
+<nav  class="navbar navbar-expand-lg" style="background-color: #bdc3c7;">
+  <a  class="navbar-brand" style="color: #1f618d;" href="/home/ong">Home ONG</a>
+  <button  class="navbar-toggler"  type="button"  data-toggle="collapse"  data-target="#navbarSupportedContent"  aria-controls="navbarSupportedContent"  aria-expanded="false"  aria-label="Toggle navigation">
+    <!--    <span  class="navbar-toggler-icon"></span>-->
+    <i class="fa fa-bars" style="color: #1f618d"></i>
+  </button>
+  <div  class="collapse navbar-collapse"  id="navbarSupportedContent">
+    <ul  class="">
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/home/ong">Home <span  class="sr-only">(current)</span></a>
+      </li>
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/voluntari">Voluntari</a>
+      </li>
+      <li>
+        <a class="nav-link" (click)="showDiv()">Cazuri sociale
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropd-content" *ngIf="divId == 1" style="background-color: #bdc3c7">
+          <a (click)="setShow2();">Inregistrate</a>
+          <a (click) = "setShow();" >In asteptare</a>
+        </div>
+      </li>
+
+
+      <li  class="nav-item active">
+        <a  class="nav-link"  href="/login/ong">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div >
+  <table id="table" *ngIf="display == true">
+    <tr>
+      <th>{{'Nume'}}</th>
+      <th>{{'Prenume'}}</th>
+      <th>{{'Detalii'}}</th>
+      <th>{{''}}</th>
+    </tr>
+
+    <tr *ngIf=" sterge1 == false">
+      <td>{{'Popescu'}}</td>
+      <td>{{'Diana'}}</td>
+      <td><button id = "btn1" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(1)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica"  style="width:50%;">
+              <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge1()">Sterge din lista</button>
+      </td>
+    </tr>
+
+    <tr *ngIf=" sterge2 == false">
+      <td>{{'Bizau'}}</td>
+      <td>{{'Mihaela'}}</td>
+      <td><button id = "btn2" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(2)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica"  style="width:50%;">
+          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge2()">Sterge din lista</button>
+      </td>
+
+    </tr>
+
+    <tr *ngIf=" sterge3 == false">
+      <td>{{'Simon'}}</td>
+      <td>{{'Ion'}}</td>
+      <td><button id = "btn3" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(3)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica" style="width:50%;">
+          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge3()">Sterge din lista</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData1 == true && sterge4 == false">
+      <td>{{'Pop'}}</td>
+      <td>{{'Ana'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(4)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica" style="width:50%;">
+          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge4()">Sterge din lista</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData2 == true && sterge5 == false">
+      <td>{{'Coman'}}</td>
+      <td>{{'Andrei'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(5)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica" style="width:50%;">
+          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge5()">Sterge din lista</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData3 == true && sterge6 == false">
+      <td>{{'Popescu'}}</td>
+      <td>{{'Mihai'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(6)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td class="colMica" style="width:50%;">
+          <button style ="width: 40%;margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge6()">Sterge din lista</button>
+      </td>
+    </tr>
+
+  </table>
+
+</div>
+
+
+<div *ngIf="nmb1 == 1 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Popescu Diana" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genFCase3" type="radio"  value ="feminin" checked>
+          <label id="fCase3" for="genFCase3">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Bucegi, nr.112" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="15/03/1958" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0756537071" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase3" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase3" type="text" class="form-control" placeholder="05/05/2018" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase3" type="text" class="form-control" placeholder="Andreica Marinela" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<div *ngIf="nmb1 == 2 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Bizau Mihaela" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genMCase4" type="radio"  value ="feminin" checked>
+          <label id="mCase4" for="genMCase4">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Lunii, nr.55, bl.5, ap. 135" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="09/07/1949" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0727888018" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase4" type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;"  class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase4" type="text" class="form-control" placeholder="02/02/2018" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase4" type="text" class="form-control" placeholder="Rad George" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%;  width: 50%" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+
+
+  </div>
+</div>
+
+<div *ngIf="nmb1 == 3 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Simon Ion" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genMCase5" type="radio"  value ="masculin" checked>
+          <label id="mCase5" for="genMCase5">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Observatorului, nr.1" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="06/07/1952" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0756573200" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase5" type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase5" type="text" class="form-control" placeholder="01/04/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase5" type="text" class="form-control" placeholder="Rad George" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%;  width: 50%" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<div *ngIf="nmb1 == 4 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Pop Ana" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genFCase33" type="radio"  value ="feminin" checked>
+          <label id="fCase33" for="genFCase3">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase33" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase33" type="text" class="form-control" placeholder="10/30/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase33" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+
+<div *ngIf="nmb1 == 5 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Coman Andrei" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input type="radio"  value ="masculin" checked>
+          <label for="genMCase4">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Galaxiei, nr.1, bl.7, ap. 13" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="03/16/1945" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0727837019" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;"  class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input type="text" class="form-control" placeholder="09/21/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" type="text" class="form-control" placeholder="Ban Maria" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="nmb1 == 6 && ok1 == false && display == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Popescu Mihai" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input type="radio"  value ="masculin" checked>
+          <label for="genMCase5">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Transilvaniei, nr.100" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="07/25/1948" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0790573215" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input  type="text" class="form-control" placeholder="10/05/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" type="text" class="form-control" placeholder="Ban Maria" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack1()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="display == false">
+  <div *ngIf="show == 1">
+    <table id="table2">
+      <tr>
+        <th>{{'Nume'}}</th>
+        <th>{{'Prenume'}}</th>
+        <th>{{'Detalii'}}</th>
+        <th>{{''}}</th>
+      </tr>
+
+      <tr *ngIf=" refuz1 == false && del1 == false">
+        <td>{{'Pop'}}</td>
+        <td>{{'Ana'}}</td>
+        <td><button id = "btn12" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(1)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept1 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept1()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz1()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept1 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+      <tr *ngIf=" refuz2 == false && del2 == false">
+        <td>{{'Coman'}}</td>
+        <td>{{'Andrei'}}</td>
+        <td><button id = "btn22" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(2)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td  class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept2 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept2" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept2()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz2" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz2()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept2 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+      <tr *ngIf=" refuz3 == false && del3 == false">
+        <td>{{'Popescu'}}</td>
+        <td>{{'Mihai'}}</td>
+        <td><button id = "btn32" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(3)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept3 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept3" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept3()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz3" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz3()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept3 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+
+
+  <div *ngIf="nmb == 1 && ok == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Pop Ana" disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genFCase32" type="radio"  value ="feminin" checked>
+            <label id="fCase32" for="genFCase3">Feminin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase32" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;" class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase32" type="text" class="form-control" placeholder="10/30/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase32" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style="margin-top: 25px;margin-left: 49%; width: 50%;" type="submit" class="btn btn-primary" (click)="onBack()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+
+
+  <div *ngIf="nmb == 2 && ok == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Coman Andrei" disabled>
+          </div>
+        </div>
+
+        <div  class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genMCase42" type="radio"  value ="masculin" checked>
+            <label id="mCase42" for="genMCase4">Masculin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Galaxiei, nr.1, bl.7, ap. 13" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="03/16/1945" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="0727837019" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase42" type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;"  class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase42" type="text" class="form-control" placeholder="09/21/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase42" type="text" class="form-control" placeholder="Ban Maria" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+
+
+    </div>
+  </div>
+
+
+  <div *ngIf="nmb == 3 && ok == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Popescu Mihai" disabled>
+          </div>
+        </div>
+
+        <div  class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genMCase52" type="radio"  value ="masculin" checked>
+            <label id="mCase52" for="genMCase5">Masculin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Transilvaniei, nr.100" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="07/25/1948" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="0790573215" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase52" type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;" class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase52" type="text" class="form-control" placeholder="10/05/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase52" type="text" class="form-control" placeholder="Ban Maria" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

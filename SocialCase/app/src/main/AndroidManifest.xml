@@ -21,7 +21,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBcATV_xDRzKkW5xzvoGYdZBeSWeXK5Yd4" />

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,17 +32,7 @@ import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
 
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class MapActivity extends AppCompatActivity
         implements

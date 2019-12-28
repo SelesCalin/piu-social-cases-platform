@@ -1,19 +1,17 @@
 package com.piu.socialcase.activity;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -91,6 +89,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(getApplicationContext(),"Pending Cases",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.currentCase:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Current Case",Toast.LENGTH_SHORT).show();
                 break;
         }

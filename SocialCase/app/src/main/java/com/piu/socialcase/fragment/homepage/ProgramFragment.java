@@ -79,8 +79,10 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         String currentDateTimeString = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
         dateTextView.setText(currentDateTimeString);
         for (int i = 0; i < dateList.length; i++) {
-            if (volunteer.getAvailable().get(dateList[i])) {
-                listView.setItemChecked(i, true);
+            if (volunteer.getAvailable()!=null) {
+                if (volunteer.getAvailable().get(dateList[i])) {
+                    listView.setItemChecked(i, true);
+                }
             }
         }
     }

@@ -48,6 +48,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentCase = findViewById(R.id.currentCase);
         pendingCases.setOnClickListener(this);
         currentCase.setOnClickListener(this);
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=

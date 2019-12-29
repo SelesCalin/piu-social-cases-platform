@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -17,6 +18,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 
@@ -32,6 +35,7 @@ import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
 
+import java.util.Objects;
 
 
 public class MapActivity extends AppCompatActivity
@@ -49,6 +53,8 @@ public class MapActivity extends AppCompatActivity
      * {@link #onRequestPermissionsResult(int, String[], int[])}.
      */
     private boolean mPermissionDenied = false;
+    LatLng socialCaseLocation;
+    LatLng myLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,22 @@ public class MapActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -65,7 +87,7 @@ public class MapActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
-        LatLng socialCaseLocation = new LatLng(46.770439, 23.591423);
+        socialCaseLocation = new LatLng(46.770439, 23.591423);
         mMap.addMarker(new
                 MarkerOptions().position(socialCaseLocation).title("Social Case"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(socialCaseLocation));
@@ -74,6 +96,29 @@ public class MapActivity extends AppCompatActivity
         mMap.setOnMyLocationClickListener(this);
         enableMyLocation();
 
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(socialCaseLocation, 15.0f));
+
+    }
+
+    /**
+     * Enables the My Location layer if the fine location permission has been granted.
+     */
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission to access the location is missing.
+            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true);
+        } else if (mMap != null) {
+            // Access to the location has been granted to the app.
+            mMap.setMyLocationEnabled(true);
+            drawRoute();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void drawRoute(){
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
@@ -92,7 +137,7 @@ public class MapActivity extends AppCompatActivity
                 .getBestProvider(criteria, false));
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        LatLng myLocation = new LatLng(latitude, longitude);
+        myLocation = new LatLng(latitude, longitude);
 
         LatLng source = myLocation;
         LatLng destination = socialCaseLocation;
@@ -104,23 +149,6 @@ public class MapActivity extends AppCompatActivity
             }
         }).execute();
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(socialCaseLocation, 15.0f));
-
-    }
-
-    /**
-     * Enables the My Location layer if the fine location permission has been granted.
-     */
-    private void enableMyLocation() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission to access the location is missing.
-            PermissionUtils.requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
-                    Manifest.permission.ACCESS_FINE_LOCATION, true);
-        } else if (mMap != null) {
-            // Access to the location has been granted to the app.
-            mMap.setMyLocationEnabled(true);
-        }
     }
 
     @Override
@@ -136,6 +164,7 @@ public class MapActivity extends AppCompatActivity
         Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

@@ -41,5 +41,8 @@ public class SocialCaseService {
         return socialCaseRepository.getCurrentCaseVolunteer(volunteer);
     }
 
+    public Help getHelp(){
+        return socialCaseRepository.getHelp();
+    }
 
 }

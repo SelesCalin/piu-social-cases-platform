@@ -1,10 +1,16 @@
 package com.piu.socialcase.activity;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +22,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -27,10 +35,13 @@ import com.piu.socialcase.fragment.homepage.HistoryFragment;
 import com.piu.socialcase.fragment.homepage.ProfileFragment;
 import com.piu.socialcase.fragment.homepage.ProgramFragment;
 import com.piu.socialcase.fragment.homepage.TestsFragment;
+import com.piu.socialcase.model.Help;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.service.SocialCaseService;
 
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener  {
 
@@ -41,7 +52,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private int fragmentId;
     public Button pendingCases, currentCase;
     private SocialCaseService socialCaseService;
-
+    Notification notification;
+    private Timer timer;
+    Context context;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -49,6 +62,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setLoggedVolunteer();
         setContentView(R.layout.activity_home_page);
+        context = this;
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
@@ -60,6 +74,20 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
             this.currentCase.setVisibility(View.INVISIBLE);
         }
+        setNotification();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                        notificationManager.notify(0, notification);
+                    }
+                });
+            }
+        }, 10000, 10000);
 
     }
 
@@ -128,4 +156,33 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
         return super.dispatchTouchEvent( event );
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setNotification(){
+
+        NotificationChannel channel = new NotificationChannel("channel01", "name",
+                NotificationManager.IMPORTANCE_HIGH);   // for heads-up notifications
+        channel.setDescription("description");
+
+        // Register channel with system
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+
+        Help help = socialCaseService.getHelp();
+        Intent intent = new Intent(this, MapActivity.class);
+        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("showButtons", (Serializable) true);
+        PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        notification = new NotificationCompat.Builder(this, "channel01")
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(help.getSocialCase().getName() + " needs help!")
+                .setContentText(help.getType() + ",  "+ help.getDescription())
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)   // heads-up
+                .setContentIntent(activity)
+                .build();
+
+    }
+
 }

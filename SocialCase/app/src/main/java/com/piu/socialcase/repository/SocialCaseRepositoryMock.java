@@ -101,6 +101,15 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
     }
 
     @Override
+    public Help getHelp() {
+        for(Help help: helpList) {
+            if (help.getVolunteer()==null)
+                return help;
+        }
+        return null;
+    }
+
+    @Override
     public void setCurrentCaseVolunteer(SocialCase socialCase, Volunteer volunteer) {
         for(Help help: helpList) {
             if (help.getSocialCase().getName().equals(socialCase.getName())){

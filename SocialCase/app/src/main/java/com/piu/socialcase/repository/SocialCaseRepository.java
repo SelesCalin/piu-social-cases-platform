@@ -11,7 +11,9 @@ public interface SocialCaseRepository {
 
     Help getCurrentCaseVolunteer(Volunteer volunteer);
     Help getHelpBySocialCase(SocialCase socialCase);
+    Help getHelp();
     void setCurrentCaseVolunteer(SocialCase socialCase,Volunteer volunteer);
     List<SocialCase> getAllSocialCases();
     SocialCase getSocialCaseByName(String name);
+
 }

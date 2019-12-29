@@ -1,27 +1,27 @@
 package com.piu.socialcase.activity;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import android.Manifest;
-import android.app.ActionBar;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,13 +29,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.piu.socialcase.R;
+import com.piu.socialcase.model.Help;
 import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
-
-import java.util.Objects;
 
 
 public class MapActivity extends AppCompatActivity
@@ -55,17 +55,98 @@ public class MapActivity extends AppCompatActivity
     private boolean mPermissionDenied = false;
     LatLng socialCaseLocation;
     LatLng myLocation;
+    LocationManager locationManager;
+    Context mContext;
+    Polyline polyline;
+    Polyline polylineCurrent;
 
+    boolean buttons;
+    Help help;
+    private TextView nameSocialCase;
+    private TextView phoneSocialCase;
+    private TextView addressSocialCase;
+    private TextView descriptionSocialCase;
+    private Button acceptButton;
+    private Button rejectButton;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        initiate();
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mContext = this;
+        locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    Activity#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for Activity#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                2000,
+                10, locationListenerGPS);
     }
+
+    private void initiate(){
+        Intent intent=getIntent();
+        this.help = (Help)intent.getSerializableExtra("currentCase");
+        this.buttons = (boolean)intent.getSerializableExtra("showButtons");
+
+        nameSocialCase=findViewById(R.id.name_social_case);
+        phoneSocialCase=findViewById(R.id.phone_social_case);
+        addressSocialCase=findViewById(R.id.address_social_case);
+        descriptionSocialCase=findViewById(R.id.description_social_case);
+        acceptButton=findViewById(R.id.accept_social_case);
+        rejectButton=findViewById(R.id.reject_social_case);
+
+        if(!this.buttons){
+            acceptButton.setVisibility(View.INVISIBLE);
+            rejectButton.setVisibility(View.INVISIBLE);
+        }
+        nameSocialCase.setText(this.help.getSocialCase().getName());
+        phoneSocialCase.setText(this.help.getSocialCase().getPhoneNumber());
+        addressSocialCase.setText(this.help.getSocialCase().getAddress());
+        descriptionSocialCase.setText(this.help.getType() + ", " + this.help.getDescription());
+
+        this.socialCaseLocation = new LatLng(this.help.getSocialCase().getLatitude(),this.help.getSocialCase().getLongitude());
+    }
+
+    LocationListener locationListenerGPS=new LocationListener() {
+        @RequiresApi(api = Build.VERSION_CODES.M)
+        @Override
+        public void onLocationChanged(android.location.Location location) {
+            double latitude=location.getLatitude();
+            double longitude=location.getLongitude();
+            myLocation = new LatLng(latitude,longitude);
+            drawRoute();
+        }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -74,7 +155,6 @@ public class MapActivity extends AppCompatActivity
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -87,7 +167,6 @@ public class MapActivity extends AppCompatActivity
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
-        socialCaseLocation = new LatLng(46.770439, 23.591423);
         mMap.addMarker(new
                 MarkerOptions().position(socialCaseLocation).title("Social Case"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(socialCaseLocation));
@@ -97,7 +176,6 @@ public class MapActivity extends AppCompatActivity
         enableMyLocation();
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(socialCaseLocation, 15.0f));
-
     }
 
     /**
@@ -113,16 +191,54 @@ public class MapActivity extends AppCompatActivity
         } else if (mMap != null) {
             // Access to the location has been granted to the app.
             mMap.setMyLocationEnabled(true);
+            LocationManager locationManager = (LocationManager)
+                    getSystemService(Context.LOCATION_SERVICE);
+            Criteria criteria = new Criteria();
+
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    Activity#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for Activity#requestPermissions for more details.
+                return;
+            }
+            Location location = locationManager.getLastKnownLocation(locationManager
+                    .getBestProvider(criteria, false));
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            myLocation = new LatLng(latitude, longitude);
+
             drawRoute();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void drawRoute(){
+    private void drawRoute() {
+        LatLng source = myLocation;
+        LatLng destination = socialCaseLocation;
+        new GetPathFromLocation(source, destination, new DirectionPointListener() {
+            @Override
+            public void onPath(PolylineOptions polyLine) {
+                polylineCurrent = mMap.addPolyline(polyLine);
+            }
+        }).execute();
+
+        if (polyline!=null) polyline.remove();
+        polyline = polylineCurrent;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        // Return false so that we don't consume the event and the default behavior still occurs
+        // (the camera animates to the user's current position).
         LocationManager locationManager = (LocationManager)
                 getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
-
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    Activity#requestPermissions
@@ -131,31 +247,14 @@ public class MapActivity extends AppCompatActivity
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for Activity#requestPermissions for more details.
-            return;
+            return false;
         }
         Location location = locationManager.getLastKnownLocation(locationManager
                 .getBestProvider(criteria, false));
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         myLocation = new LatLng(latitude, longitude);
-
-        LatLng source = myLocation;
-        LatLng destination = socialCaseLocation;
-
-        new GetPathFromLocation(source, destination, new DirectionPointListener() {
-            @Override
-            public void onPath(PolylineOptions polyLine) {
-                mMap.addPolyline(polyLine);
-            }
-        }).execute();
-
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 15.0f));
         return false;
     }
 

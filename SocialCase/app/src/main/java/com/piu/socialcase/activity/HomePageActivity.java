@@ -1,13 +1,9 @@
 package com.piu.socialcase.activity;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -17,15 +13,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.piu.socialcase.R;
+import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.fragment.homepage.AskForHelpFragment;
 import com.piu.socialcase.fragment.homepage.HistoryFragment;
 import com.piu.socialcase.fragment.homepage.ProfileFragment;
 import com.piu.socialcase.fragment.homepage.ProgramFragment;
 import com.piu.socialcase.fragment.homepage.TestsFragment;
 import com.piu.socialcase.model.Volunteer;
-import com.piu.socialcase.authentication.Session;
+import com.piu.socialcase.service.SocialCaseService;
+
+import java.io.Serializable;
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener  {
 
@@ -35,7 +40,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private FragmentManager fragmentManager;
     private int fragmentId;
     public Button pendingCases, currentCase;
+    private SocialCaseService socialCaseService;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,10 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentCase = findViewById(R.id.currentCase);
         pendingCases.setOnClickListener(this);
         currentCase.setOnClickListener(this);
+        this.socialCaseService = SocialCaseService.SocialCaseService();
+        if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
+            this.currentCase.setVisibility(View.INVISIBLE);
+        }
 
     }
 
@@ -81,6 +93,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     private void setLoggedVolunteer() {
         Session session=Session.getInstance();
         loggedVolunteer=session.getLoggedInUser();
+
     }
 
     @Override
@@ -91,6 +104,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.currentCase:
                 Intent intent = new Intent(this, MapActivity.class);
+                intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
+                intent.putExtra("showButtons", (Serializable) false);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"Current Case",Toast.LENGTH_SHORT).show();
                 break;

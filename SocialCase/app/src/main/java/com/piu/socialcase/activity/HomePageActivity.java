@@ -66,12 +66,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         context = this;
         bottomNavigationView=findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
         pendingCases = findViewById(R.id.pendingCases);
         currentCase = findViewById(R.id.currentCase);
         pendingCases.setOnClickListener(this);
         currentCase.setOnClickListener(this);
-
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

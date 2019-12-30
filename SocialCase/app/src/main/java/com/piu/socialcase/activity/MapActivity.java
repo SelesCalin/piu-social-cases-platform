@@ -1,7 +1,9 @@
 package com.piu.socialcase.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -10,10 +12,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,10 +37,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.piu.socialcase.R;
+import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.model.Help;
+import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.SocialCaseService;
 import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
+
+import java.io.Serializable;
 
 
 public class MapActivity extends AppCompatActivity
@@ -43,7 +53,8 @@ public class MapActivity extends AppCompatActivity
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        View.OnClickListener {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
 
@@ -57,7 +68,7 @@ public class MapActivity extends AppCompatActivity
     LatLng myLocation;
     LocationManager locationManager;
     Context mContext;
-    Polyline polyline;
+    Polyline polylineLast;
     Polyline polylineCurrent;
 
     boolean buttons;
@@ -68,13 +79,21 @@ public class MapActivity extends AppCompatActivity
     private TextView descriptionSocialCase;
     private Button acceptButton;
     private Button rejectButton;
+    private Button dropButton;
+    private ImageView imageView;
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    private SocialCaseService socialCaseService;
+    public static final String VOLUNTEER_EXTRA = "LoggedVolunteer";
+    private Volunteer loggedVolunteer;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        setLoggedVolunteer();
         initiate();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -101,7 +120,29 @@ public class MapActivity extends AppCompatActivity
                 10, locationListenerGPS);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!this.buttons){
+            acceptButton.setVisibility(View.GONE);
+            rejectButton.setVisibility(View.GONE);
+            dropButton.setVisibility(View.VISIBLE);
+        }else{
+            acceptButton.setVisibility(View.VISIBLE);
+            rejectButton.setVisibility(View.VISIBLE);
+            dropButton.setVisibility(View.GONE);
+        }
+    }
+
+    private void setLoggedVolunteer() {
+        Session session=Session.getInstance();
+        loggedVolunteer=session.getLoggedInUser();
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initiate(){
+        this.socialCaseService = SocialCaseService.SocialCaseService();
         Intent intent=getIntent();
         this.help = (Help)intent.getSerializableExtra("currentCase");
         this.buttons = (boolean)intent.getSerializableExtra("showButtons");
@@ -110,13 +151,16 @@ public class MapActivity extends AppCompatActivity
         phoneSocialCase=findViewById(R.id.phone_social_case);
         addressSocialCase=findViewById(R.id.address_social_case);
         descriptionSocialCase=findViewById(R.id.description_social_case);
+        descriptionSocialCase.setMovementMethod(new ScrollingMovementMethod());
+        imageView = findViewById(R.id.description_social_case_icon);
         acceptButton=findViewById(R.id.accept_social_case);
         rejectButton=findViewById(R.id.reject_social_case);
+        dropButton=findViewById(R.id.drop_social_case);
+        acceptButton.setOnClickListener(this);
+        rejectButton.setOnClickListener(this);
+        dropButton.setOnClickListener(this);
+        imageView.setOnClickListener(this);
 
-        if(!this.buttons){
-            acceptButton.setVisibility(View.INVISIBLE);
-            rejectButton.setVisibility(View.INVISIBLE);
-        }
         nameSocialCase.setText(this.help.getSocialCase().getName());
         phoneSocialCase.setText(this.help.getSocialCase().getPhoneNumber());
         addressSocialCase.setText(this.help.getSocialCase().getAddress());
@@ -226,8 +270,8 @@ public class MapActivity extends AppCompatActivity
             }
         }).execute();
 
-        if (polyline!=null) polyline.remove();
-        polyline = polylineCurrent;
+        if (polylineLast!=null) polylineLast.remove();
+        polylineLast = polylineCurrent;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -299,6 +343,57 @@ public class MapActivity extends AppCompatActivity
                 .newInstance(true).show(getSupportFragmentManager(), "dialog");
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.accept_social_case:
+                if(this.socialCaseService.getCurrentSocialCase(loggedVolunteer)!=null){
+                    new AlertDialog.Builder(this)
+                            .setTitle( "Caz curent existent")
+                            .setMessage("Deja ai un caz curent asignat. Pentru a accepta alt caz trebuie sa renunti la cazul curent.")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton("Caz curent", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Intent intent = new Intent(mContext, MapActivity.class);
+                                    intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
+                                    intent.putExtra("showButtons", (Serializable) false);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(),"Current Case",Toast.LENGTH_SHORT).show();
+                                }})
+                            .setNegativeButton("Dismiss", null).show();
+                }else {
+                    this.socialCaseService.setCurrentCase(this.help, loggedVolunteer);
+                    Toast.makeText(getApplicationContext(), "Accept", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+            case R.id.reject_social_case:
+                Toast.makeText(getApplicationContext(),"Reject",Toast.LENGTH_SHORT).show();
+                finish();
+                break;
+            case R.id.drop_social_case:
+                new AlertDialog.Builder(this)
+                        .setTitle( help.getSocialCase().getName())
+                        .setMessage("Do you really want to drop it?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                Toast.makeText(getApplicationContext(),"Drop this case",Toast.LENGTH_SHORT).show();
+                                socialCaseService.deleteCurrentCase(help);
+                                finish();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
+                break;
+            case R.id.description_social_case_icon:
+                new AlertDialog.Builder(this)
+                        .setTitle( "Description" )
+                        .setMessage(this.help.getType() + ", " + this.help.getDescription())
+                        .setIcon(android.R.drawable.ic_dialog_email)
+                        .setPositiveButton(android.R.string.yes,null)
+                        .show();
+                break;
+        }
+    }
 }
 
 

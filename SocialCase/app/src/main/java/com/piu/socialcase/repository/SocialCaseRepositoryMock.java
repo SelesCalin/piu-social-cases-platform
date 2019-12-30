@@ -17,6 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
@@ -57,25 +59,51 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
     private List<Help> generateMockHelp() {
         ArrayList<Help> list = new ArrayList<>();
         Help h1 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.12.29"),
-                TypeHelp.HELP,"ajutor");
+                TypeHelp.HELP,"ajutor dfghjkl;ghjkl,;   fghjuikcfvghbjnm   fvgbhjnkghbjnkm  fghvbjnkmlhjkl ghjkltyuhijko did");
         h1.setVolunteer(volunteerRepository.findVolunteerByUsername("user"));
         Help h2 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.12.31"),
                 TypeHelp.SOS,"ajutor imediat");
-        //h2.setVolunteer(volunteerRepository.findVolunteerByUsername("admin"));
-        list.add(h1);list.add(h2);
+//        h2.setVolunteer(volunteerRepository.findVolunteerByUsername("admin"));
+        Help h3 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.11.31"),
+                TypeHelp.BATTERY,"bratara descarcata");
+        Help h4 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.10.31"),
+                TypeHelp.ASKFORHELP,"volunteer ask for help");
+        list.add(h1);
+        list.add(h2);
+        list.add(h3);
+        list.add(h4);
         return list;
     }
+
+//    private List<Help> generateMockHelpBeforeNotification() {
+//        ArrayList<Help> list = new ArrayList<>();
+//        Help h1 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.12.30"),
+//                TypeHelp.HELP,"ajutor");
+//        Help h2 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.12.31"),
+//                TypeHelp.SOS,"ajutor imediat");
+//        Help h3 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.11.31"),
+//                TypeHelp.BATTERY,"bratara descarcata");
+//        Help h4 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.10.31"),
+//                TypeHelp.ASKFORHELP,"volunteer ask for help");
+//        list.add(h1);
+//        list.add(h2);
+//        list.add(h3);
+//        list.add(h4);
+//        return list;
+//    }
 
     @Override
     public Help getCurrentCaseVolunteer(Volunteer volunteer) {
         for(Help help: helpList) {
-            if(help.getVolunteer()!=null) {
+            if(help.getVolunteer()!=null && volunteer !=null) {
                 if (help.getVolunteer().getUsername().equals(volunteer.getUsername()))
                     return help;
             }
         }
         return null;
     }
+
+
 
     @Override
     public List<SocialCase> getAllSocialCases() {
@@ -102,19 +130,45 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
     @Override
     public Help getHelp() {
+        List<Help> helpListBeforeNotification = new ArrayList<>();
         for(Help help: helpList) {
-            if (help.getVolunteer()==null)
-                return help;
+            if (help.getVolunteer()==null){
+                helpListBeforeNotification.add(help);
+            }
         }
+        Random rand = new Random();
+        int min = 0;
+        int max = helpListBeforeNotification.size()-1;
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+        if(helpListBeforeNotification.get(randomNum)!=null)
+            return helpListBeforeNotification.get(randomNum);
         return null;
     }
 
     @Override
-    public void setCurrentCaseVolunteer(SocialCase socialCase, Volunteer volunteer) {
+    public void addHelp(Help help) {
+        this.helpList.add(help);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void setCurrentCaseVolunteer(Help helpL, Volunteer volunteer) {
         for(Help help: helpList) {
-            if (help.getSocialCase().getName().equals(socialCase.getName())){
+            if (help.equals(helpL)){
                 help.setVolunteer(volunteer);
             }
         }
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void deleteCurrentCaseVolunteer(Help helpL) {
+        for(Help help: helpList) {
+            if (help.equals(helpL)){
+                help.setVolunteer(null);
+            }
+        }
+    }
+
 }

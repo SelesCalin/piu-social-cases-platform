@@ -1,7 +1,12 @@
 package com.piu.socialcase.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Help implements Serializable {
 
@@ -69,5 +74,25 @@ public class Help implements Serializable {
     public Help setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Help help = (Help) o;
+        return Objects.equals(volunteer, help.volunteer) &&
+                Objects.equals(socialCase, help.socialCase) &&
+                Objects.equals(date, help.date) &&
+                type == help.type &&
+                Objects.equals(description, help.description);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(volunteer, socialCase, date, type, description);
     }
 }

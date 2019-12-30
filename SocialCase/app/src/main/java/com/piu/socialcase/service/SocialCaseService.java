@@ -45,4 +45,16 @@ public class SocialCaseService {
         return socialCaseRepository.getHelp();
     }
 
+    public void setCurrentCase(Help help, Volunteer volunteer){
+        socialCaseRepository.setCurrentCaseVolunteer(help,volunteer);
+    }
+
+    public void deleteCurrentCase(Help help){
+        socialCaseRepository.deleteCurrentCaseVolunteer(help);
+    }
+
+    public void addHelp(Help help){
+        socialCaseRepository.addHelp(help);
+    }
+
 }

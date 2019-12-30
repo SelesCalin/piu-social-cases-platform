@@ -1,12 +1,16 @@
 package com.piu.socialcase.fragment.homepage;
 
 
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,29 +25,43 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.piu.socialcase.R;
+import com.piu.socialcase.model.Help;
+import com.piu.socialcase.model.SocialCase;
+import com.piu.socialcase.model.TypeHelp;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
+import com.piu.socialcase.service.SocialCaseService;
+
+import java.util.Date;
 
 public class AskForHelpFragment extends Fragment implements View.OnClickListener{
 
     private Volunteer volunteer=null;
+    private SocialCase socialCase;
+    private SocialCaseService socialCaseService;
 
     private TextView nameTextView;
     private TextInputLayout socialCaseTextView;
-    private TextInputLayout locationTextView;
     private TextInputLayout descriptionTextView;
     private NumberPicker numberOfPersonsNumberPicker;
     private CheckBox emergencyCheckBox;
     private Button sendButton;
 
+
     public AskForHelpFragment() {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         volunteer = Session.getInstance().getLoggedInUser();
+        this.socialCaseService = SocialCaseService.SocialCaseService();
+        Help help = this.socialCaseService.getCurrentSocialCase(volunteer);
+        if(help!=null) {
+            socialCase = help.getSocialCase();
+        }
     }
 
     @Override
@@ -59,7 +77,6 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
     private void initializeViews(View view) {
         nameTextView = view.findViewById(R.id.username_ask);
         socialCaseTextView = view.findViewById(R.id.help_for_text_input_layout_ask);
-        locationTextView = view.findViewById(R.id.location_text_input_layout_ask);
         descriptionTextView = view.findViewById(R.id.description_text_input_layout_ask);
         numberOfPersonsNumberPicker = view.findViewById(R.id.numberOfPersons_ask);
         numberOfPersonsNumberPicker.setMinValue(1);
@@ -76,6 +93,10 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
     private void setInfo() {
         nameTextView.setText(volunteer.getUsername());
         nameTextView.setEnabled(false);
+        if(socialCase!=null) {
+            socialCaseTextView.getEditText().setText(socialCase.getName());
+            socialCaseTextView.getEditText().setEnabled(false);
+        }
     }
 
     NumberPicker.OnValueChangeListener onValueChangeListener =
@@ -87,16 +108,38 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
                 }
             };
 
+
+
+    private Help newHelp(){
+        String description="";
+        if(emergencyCheckBox.isActivated()) {
+            description = "Este nevoie de  " + numberOfPersonsNumberPicker.getValue() + " persoane, fiind o URGENTA, " + descriptionTextView.getEditText().getText();
+        }
+        else
+        {
+            description = "Este nevoie de  " + numberOfPersonsNumberPicker.getValue() + " persoane, " + descriptionTextView.getEditText().getText();
+        }
+        Help help = new Help(socialCase, new Date(),
+                TypeHelp.ASKFORHELP, description);
+        return help;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.butonSend_ask:
-                Toast.makeText(getActivity().getApplicationContext(),"Asked for help",Toast.LENGTH_SHORT).show();
-                BottomNavigationView bottomNavigationView;
-                bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
-                bottomNavigationView.getMenu().findItem(R.id.home_page_button).setChecked(true);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
-                break;
+                if(socialCase!=null) {
+                    this.socialCaseService.addHelp(newHelp());
+                    Toast.makeText(getActivity().getApplicationContext(), "Asked for help", Toast.LENGTH_SHORT).show();
+                    BottomNavigationView bottomNavigationView;
+                    bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);
+                    bottomNavigationView.getMenu().findItem(R.id.home_page_button).setChecked(true);
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                    break;
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(), "Caz curent inexistent", Toast.LENGTH_SHORT).show();
+                }
         }
     }
 
@@ -110,21 +153,6 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
                         socialCaseTextView.setError("Choose a social Case");
                     }else {
                         socialCaseTextView.setError(null);
-                    }
-                    checkFieldsForEmptyValues();
-                }
-            }
-        });
-
-        locationTextView.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener(){
-
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if(!b) {
-                    if(locationTextView.getEditText().getText().length()>0 && locationTextView.getEditText().getText().length()<4) {
-                        locationTextView.setError("Enter Location");
-                    }else {
-                        locationTextView.setError(null);
                     }
                     checkFieldsForEmptyValues();
                 }
@@ -149,9 +177,8 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
 
     private void checkFieldsForEmptyValues(){
         boolean socialCaseTextViewCorrect=TextUtils.isEmpty(socialCaseTextView.getError()) && socialCaseTextView.getEditText().getText().length()>0;
-        boolean locationTextViewCorrect=TextUtils.isEmpty(locationTextView.getError()) && locationTextView.getEditText().getText().length()>0;
         boolean descriptionTextViewCorrect=TextUtils.isEmpty(descriptionTextView.getError()) && descriptionTextView.getEditText().getText().length()>0;
-        if(socialCaseTextViewCorrect && locationTextViewCorrect && descriptionTextViewCorrect ) {
+        if(socialCaseTextViewCorrect && descriptionTextViewCorrect ) {
             sendButton.setEnabled(true);
         }else {
             sendButton.setEnabled(false);

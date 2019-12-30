@@ -1,10 +1,15 @@
 package com.piu.socialcase.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Volunteer implements Serializable {
 
@@ -138,5 +143,27 @@ public class Volunteer implements Serializable {
         if(this.available.get(key)!=null)
             return this.available.get(key);
         return false;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Volunteer volunteer = (Volunteer) o;
+        return Objects.equals(username, volunteer.username) &&
+                Objects.equals(password, volunteer.password) &&
+                Objects.equals(fullName, volunteer.fullName) &&
+                Objects.equals(email, volunteer.email) &&
+                Objects.equals(phoneNumber, volunteer.phoneNumber) &&
+                Objects.equals(birthDate, volunteer.birthDate) &&
+                Objects.equals(address, volunteer.address) &&
+                Objects.equals(organisation, volunteer.organisation);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, password, fullName, email, phoneNumber, birthDate, address, organisation);
     }
 }

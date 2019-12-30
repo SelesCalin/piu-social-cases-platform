@@ -12,7 +12,9 @@ public interface SocialCaseRepository {
     Help getCurrentCaseVolunteer(Volunteer volunteer);
     Help getHelpBySocialCase(SocialCase socialCase);
     Help getHelp();
-    void setCurrentCaseVolunteer(SocialCase socialCase,Volunteer volunteer);
+    void addHelp(Help help);
+    void setCurrentCaseVolunteer(Help helpL,Volunteer volunteer);
+    void deleteCurrentCaseVolunteer(Help help);
     List<SocialCase> getAllSocialCases();
     SocialCase getSocialCaseByName(String name);
 

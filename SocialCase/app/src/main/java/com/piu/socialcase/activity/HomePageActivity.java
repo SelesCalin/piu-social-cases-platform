@@ -55,6 +55,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     Notification notification;
     private Timer timer;
     Context context;
+    Help help;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -70,25 +71,52 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         currentCase = findViewById(R.id.currentCase);
         pendingCases.setOnClickListener(this);
         currentCase.setOnClickListener(this);
-        this.socialCaseService = SocialCaseService.SocialCaseService();
-        if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
-            this.currentCase.setVisibility(View.INVISIBLE);
-        }
-        setNotification();
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                        notificationManager.notify(0, notification);
-                    }
-                });
-            }
-        }, 10000, 10000);
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getNotification();
+        if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
+            this.currentCase.setVisibility(View.GONE);
+        }else{
+            this.currentCase.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (timer != null) timer.cancel();
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.cancel(0);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void getNotification(){
+        this.socialCaseService = SocialCaseService.SocialCaseService();
+        if (timer != null) timer.cancel();
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.cancel(0);
+        help = socialCaseService.getHelp();
+        if(help!=null) {
+            setNotification();
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                            notificationManager.notify(0, notification);
+                        }
+                    });
+                }
+            }, 10000, 10000);
+        }
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=
@@ -168,7 +196,6 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
 
-        Help help = socialCaseService.getHelp();
         Intent intent = new Intent(this, MapActivity.class);
         intent.putExtra("currentCase",(Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);

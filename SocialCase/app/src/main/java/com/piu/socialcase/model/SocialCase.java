@@ -1,9 +1,14 @@
 package com.piu.socialcase.model;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class SocialCase implements Serializable {
 
@@ -75,5 +80,25 @@ public class SocialCase implements Serializable {
     public SocialCase setLongitude(Double longitude) {
         this.longitude = longitude;
         return this;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SocialCase that = (SocialCase) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(phoneNumber, that.phoneNumber) &&
+                Objects.equals(birthDate, that.birthDate) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(latitude, that.latitude) &&
+                Objects.equals(longitude, that.longitude);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, phoneNumber, birthDate, address, latitude, longitude);
     }
 }

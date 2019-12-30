@@ -12,7 +12,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="40dp"
             android:gravity="start"
             android:orientation="vertical">
@@ -30,13 +30,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/username_text_input_layout_ask"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/username_ask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:hint="@string/username"
                     android:inputType="none"
                     android:autofillHints="@string/username" />
@@ -45,7 +45,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/help_for_text_input_layout_ask"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/help_for_ask"
@@ -57,23 +58,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/location_text_input_layout_ask"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/location_ask"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/location"
-                    android:inputType="text"
-                    android:autofillHints="@string/location" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/description_text_input_layout_ask"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/description_ask"
@@ -128,6 +116,7 @@
                 android:textColor="@color/colorAccent"
                 android:textSize="17sp"
                 android:layout_marginBottom="30dp" />
+
 
     </LinearLayout>
 

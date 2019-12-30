@@ -1,7 +1,10 @@
 package com.piu.socialcase.fragment.homepage;
 
 
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.piu.socialcase.R;
+import com.piu.socialcase.activity.HomePageActivity;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
 
@@ -34,6 +38,14 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
         volunteer= Session.getInstance().getLoggedInUser();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onStart() {
+        super.onStart();
+        HomePageActivity  activity = (HomePageActivity) getActivity();
+        activity.getNotification();
     }
 
     @Override

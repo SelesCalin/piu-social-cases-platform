@@ -28,8 +28,11 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="60dp"
         android:layout_alignParentRight="true"
+        android:text="Case"
         app:icon="@drawable/account"
         />
+
+
 
     <FrameLayout
         android:id="@+id/fragment_container"

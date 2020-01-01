@@ -160,7 +160,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(getApplicationContext(),"Pending Cases",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.currentCase:
-                Intent intent = new Intent(this, MapActivity.class);
+               // Intent intent = new Intent(this, MapActivity.class);
+                Intent intent = new Intent(this, AskMoreHelpActivity.class);
+
                 intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
                 intent.putExtra("showButtons", (Serializable) false);
                 startActivity(intent);

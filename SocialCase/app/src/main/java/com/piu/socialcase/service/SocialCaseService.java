@@ -22,7 +22,7 @@ public class SocialCaseService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private SocialCaseService(){
-        this.socialCaseRepository=new SocialCaseRepositoryMock();
+        this.socialCaseRepository=SocialCaseRepositoryMock.getInstance();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

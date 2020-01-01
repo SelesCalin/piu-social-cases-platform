@@ -251,6 +251,7 @@ public class MapActivity extends AppCompatActivity
             }
             Location location = locationManager.getLastKnownLocation(locationManager
                     .getBestProvider(criteria, false));
+
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
             myLocation = new LatLng(latitude, longitude);

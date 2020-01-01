@@ -24,11 +24,18 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
     List<Help> helpList;
     List<SocialCase> socialCaseList;
-
+    private static SocialCaseRepository instance;
     private VolunteerRepository volunteerRepository;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public SocialCaseRepositoryMock(){
+    public static SocialCaseRepository getInstance(){
+        if(instance==null) {
+            instance = new SocialCaseRepositoryMock();
+        }
+        return instance;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private SocialCaseRepositoryMock(){
         this.volunteerRepository = new VolunteerRepositoryMock();
         socialCaseList = generateMockSocialCases();
         helpList = generateMockHelp();

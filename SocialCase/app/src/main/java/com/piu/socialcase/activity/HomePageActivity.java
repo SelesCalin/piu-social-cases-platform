@@ -1,6 +1,5 @@
 package com.piu.socialcase.activity;
 
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -10,7 +9,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -161,7 +159,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.currentCase:
                // Intent intent = new Intent(this, MapActivity.class);
-                Intent intent = new Intent(this, AskMoreHelpActivity.class);
+                Intent intent = new Intent(this, ProgramInAvansActivity.class);
 
                 intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
                 intent.putExtra("showButtons", (Serializable) false);

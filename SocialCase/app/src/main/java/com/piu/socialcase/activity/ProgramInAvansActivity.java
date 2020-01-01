@@ -17,13 +17,12 @@ import com.piu.socialcase.model.Help;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.repository.SocialCaseRepository;
 import com.piu.socialcase.repository.SocialCaseRepositoryMock;
-import com.piu.socialcase.service.LoginService;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class AskMoreHelpActivity extends AppCompatActivity {
+public class ProgramInAvansActivity extends AppCompatActivity {
 
     private Volunteer volunteer;
     private SocialCaseRepository socialCaseRepository;
@@ -35,7 +34,7 @@ public class AskMoreHelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ask_more_help);
+        setContentView(R.layout.activity_program_in_avans);
         this.socialCaseRepository= SocialCaseRepositoryMock.getInstance();
         Intent intent=getIntent();
        Session session=Session.getInstance();
@@ -62,7 +61,7 @@ public class AskMoreHelpActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                DatePickerDialog dialog= new  DatePickerDialog(AskMoreHelpActivity.this,datedialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog= new  DatePickerDialog(ProgramInAvansActivity.this,datedialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis());
                 dialog.show();
             }

@@ -71,7 +71,7 @@ tools:context=".fragment.homepage.AskForHelpFragment"
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/time"
+            android:id="@+id/timeProgram"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"

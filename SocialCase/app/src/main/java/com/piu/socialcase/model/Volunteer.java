@@ -22,6 +22,7 @@ public class Volunteer implements Serializable {
     private String address;
     private String organisation;
     private String[] preferences;
+    private int accepted=0;
     private Map<String,Boolean> available = new HashMap<>();
 
     public Volunteer(){}
@@ -41,6 +42,7 @@ public class Volunteer implements Serializable {
         this.birthDate="10/10/10";
         this.phoneNumber = phoneNumber;
         this.organisation = organisation;
+        this.accepted=1;
     }
 
     public Volunteer(String username, String password, String email, String phoneNumber,String fullName, String birthDate, String address, String organisation, String[] preferences) {
@@ -53,6 +55,7 @@ public class Volunteer implements Serializable {
         this.organisation = organisation;
         this.preferences=preferences;
         this.fullName=fullName;
+        this.accepted=0;
     }
 
     public String getUsername() {
@@ -143,6 +146,14 @@ public class Volunteer implements Serializable {
         if(this.available.get(key)!=null)
             return this.available.get(key);
         return false;
+    }
+
+    public int getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(int accepted) {
+        this.accepted = accepted;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

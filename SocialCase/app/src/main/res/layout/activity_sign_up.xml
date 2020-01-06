@@ -156,7 +156,28 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="ONG:"
+             android:padding="15dp"
+             android:textSize="20sp"
+             />
 
+            <Spinner
+                android:id="@+id/ong_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+
+
+        </LinearLayout>
         <Button
             android:id="@+id/butonPreferinte"
             android:layout_width="wrap_content"

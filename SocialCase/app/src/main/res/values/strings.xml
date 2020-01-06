@@ -31,6 +31,11 @@
         <item>Ajutor pentru cumparaturi</item>
     </string-array>
 
+    <string-array name="ongs">
+        <item>ONG1</item>
+        <item>ONG2</item>
+        <item>ONG3</item>
+    </string-array>
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

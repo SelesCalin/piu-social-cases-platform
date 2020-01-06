@@ -78,10 +78,12 @@ public class ProfileFragment extends Fragment {
         addressTextView.setText(volunteer.getAddress());
         birthDayTextView.setText(volunteer.getBirthDate());
         String organization=volunteer.getOrganisation();
-        if (organization == null) {
-            organisationTextView.setText("Not yet assigned");
-        } else {
+        if (volunteer.getAccepted()==0) {
+            organisationTextView.setText("Waiting for acceptance at " + organization);
+        } else if(volunteer.getAccepted()==1){
             organisationTextView.setText(organization);
+        } else if (volunteer.getAccepted() == -1) {
+            organisationTextView.setText("Denied by "+organization+". Please select another organization");
         }
 
     }

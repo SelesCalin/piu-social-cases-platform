@@ -15,9 +15,11 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -48,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextInputLayout floatingBirthdayLabel;
     LoginService loginService;
     String[] items;
+    Spinner spinnerONG;
     boolean[] arrayChecked;
 
     @Override
@@ -57,6 +60,7 @@ public class SignUpActivity extends AppCompatActivity {
         items=getResources().getStringArray(R.array.preferinte);
         arrayChecked= new boolean[items.length];
         birthdayText= (EditText) findViewById(R.id.birthday);
+        spinnerONG=(Spinner) findViewById(R.id.ong_spinner);
         floatingUsernameLabel =(TextInputLayout) findViewById(R.id.username_text_input_layout);
         floatingPasswordLabel =(TextInputLayout) findViewById(R.id.password_text_input_layout);
         floatingConfirmPasswordLabel=(TextInputLayout) findViewById(R.id.confirm_text_input_layout);
@@ -68,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         setupFloatingLabelError();
         setCalendarListener();
         setClickListeners();
+        createSpinner();
         loginService=LoginService.LoginService();
 
     }
@@ -138,12 +143,12 @@ public class SignUpActivity extends AppCompatActivity {
                 arrayList.add(items[i]);
         }
         String[] preferinte = new String[arrayList.size()];
-         preferinte=arrayList.toArray(preferinte);
-
+        preferinte=arrayList.toArray(preferinte);
+        String ong = spinnerONG.getSelectedItem().toString();
         Integer signUpResult=loginService.signUp(floatingUsernameLabel.getEditText().getText().toString(),floatingPasswordLabel.getEditText().getText().toString(),
                 floatingConfirmPasswordLabel.getEditText().getText().toString(),floatinNameLabel.getEditText().getText().toString(), floatingEmailLabel.getEditText().getText().toString(),
                 floatingPhoneLabel.getEditText().getText().toString(),floatingAddressLabel.getEditText().getText().toString(),
-                floatingBirthdayLabel.getEditText().getText().toString(),preferinte);
+                floatingBirthdayLabel.getEditText().getText().toString(),preferinte,ong);
         switch (signUpResult){
             case -1:
                 new MaterialAlertDialogBuilder(this,R.style.dialogThemeError).setTitle("Error").setMessage("Username already exists!").setPositiveButton("Ok",null).show();
@@ -175,6 +180,18 @@ public class SignUpActivity extends AppCompatActivity {
         finish();
     }
 
+    public void createSpinner(){
+        ArrayList<String> ongs= new ArrayList<>();
+        ongs.add("ONG1");
+        ongs.add("ONG2");
+        ongs.add("ONG3");
+        ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ongs);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerONG.setAdapter(arrayAdapter);
+
+
+
+    }
     private void setCalendarListener(){
 
         final DatePickerDialog.OnDateSetListener date= new DatePickerDialog.OnDateSetListener() {

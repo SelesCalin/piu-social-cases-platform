@@ -22,4 +22,8 @@ public class HistoryService {
     public List<History> getHistoryByVolunteerEmail(String email) {
         return historyRepository.getHistoryByVolunteerEmail(email);
     }
+
+    public void logActivity(History history){
+        historyRepository.logActivity(history);
+    }
 }

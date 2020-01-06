@@ -39,13 +39,17 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.piu.socialcase.R;
 import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.model.Help;
+import com.piu.socialcase.model.History;
 import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.HistoryService;
 import com.piu.socialcase.service.SocialCaseService;
 import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Random;
 
 
 public class MapActivity extends AppCompatActivity
@@ -79,10 +83,12 @@ public class MapActivity extends AppCompatActivity
     private TextView descriptionSocialCase;
     private Button acceptButton;
     private Button rejectButton;
+    private Button caseDoneButton;
     private Button dropButton;
     private ImageView imageView;
 
     private SocialCaseService socialCaseService;
+    private HistoryService historyService;
     public static final String VOLUNTEER_EXTRA = "LoggedVolunteer";
     private Volunteer loggedVolunteer;
 
@@ -126,10 +132,12 @@ public class MapActivity extends AppCompatActivity
         if(!this.buttons){
             acceptButton.setVisibility(View.GONE);
             rejectButton.setVisibility(View.GONE);
+            caseDoneButton.setVisibility(View.VISIBLE);
             dropButton.setVisibility(View.VISIBLE);
         }else{
             acceptButton.setVisibility(View.VISIBLE);
             rejectButton.setVisibility(View.VISIBLE);
+            caseDoneButton.setVisibility(View.GONE);
             dropButton.setVisibility(View.GONE);
         }
     }
@@ -143,6 +151,7 @@ public class MapActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initiate(){
         this.socialCaseService = SocialCaseService.SocialCaseService();
+        this.historyService = new HistoryService();
         Intent intent=getIntent();
         this.help = (Help)intent.getSerializableExtra("currentCase");
         this.buttons = (boolean)intent.getSerializableExtra("showButtons");
@@ -155,9 +164,11 @@ public class MapActivity extends AppCompatActivity
         imageView = findViewById(R.id.description_social_case_icon);
         acceptButton=findViewById(R.id.accept_social_case);
         rejectButton=findViewById(R.id.reject_social_case);
+        caseDoneButton=findViewById(R.id.case_done);
         dropButton=findViewById(R.id.drop_social_case);
         acceptButton.setOnClickListener(this);
         rejectButton.setOnClickListener(this);
+        caseDoneButton.setOnClickListener(this);
         dropButton.setOnClickListener(this);
         imageView.setOnClickListener(this);
 
@@ -363,9 +374,7 @@ public class MapActivity extends AppCompatActivity
                                 }})
                             .setNegativeButton("Dismiss", null).show();
                 }else {
-                    this.socialCaseService.setCurrentCase(this.help, loggedVolunteer);
-                    Toast.makeText(getApplicationContext(), "Accept", Toast.LENGTH_SHORT).show();
-                    finish();
+                    acceptCase();
                 }
                 break;
             case R.id.reject_social_case:
@@ -379,9 +388,7 @@ public class MapActivity extends AppCompatActivity
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast.makeText(getApplicationContext(),"Drop this case",Toast.LENGTH_SHORT).show();
-                                socialCaseService.deleteCurrentCase(help);
-                                finish();
+                                dropCase();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
@@ -393,6 +400,36 @@ public class MapActivity extends AppCompatActivity
                         .setPositiveButton(android.R.string.yes,null)
                         .show();
                 break;
+            case R.id.case_done:
+                completeCase();
+                break;
+        }
+    }
+
+    private void acceptCase(){
+        this.socialCaseService.setCurrentCase(this.help, loggedVolunteer);
+        this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Accepted case"));
+        Toast.makeText(getApplicationContext(), "Accept", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void dropCase(){
+        Toast.makeText(getApplicationContext(),"Drop this case",Toast.LENGTH_SHORT).show();
+        this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Dropped case"));
+        socialCaseService.deleteCurrentCase(help);
+        finish();
+    }
+
+    private void completeCase() {
+        Random random = new Random();
+        if(random.nextInt(2) % 2 == 0){
+            this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Case done"));
+            socialCaseService.currentCaseDown(loggedVolunteer);
+            Toast.makeText(getApplicationContext(),"Case done",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Unable to connect with wristband",Toast.LENGTH_SHORT).show();
         }
     }
 }

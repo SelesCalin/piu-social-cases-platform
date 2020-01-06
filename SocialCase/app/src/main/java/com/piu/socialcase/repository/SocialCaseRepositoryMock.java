@@ -48,7 +48,11 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
                 getDate("1966.05.06"),"Observator, Cluj",46.770439, 23.591423);
         SocialCase sc2 = new SocialCase("Maria Lazar", "0712348568",
                 getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
-        list.add(sc1);list.add(sc2);
+        SocialCase sc3 = new SocialCase("Bogdan Eugen", "0712348568",
+                getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
+        SocialCase sc4 = new SocialCase("Cristi Pop", "0712348568",
+                getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
+        list.add(sc1);list.add(sc2);list.add(sc3);list.add(sc4);
         return list;
     }
 
@@ -65,13 +69,13 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
     private List<Help> generateMockHelp() {
         ArrayList<Help> list = new ArrayList<>();
-        Help h1 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.12.29"),
+        Help h1 = new Help(getSocialCaseByName("Bogdan Eugen"), getDate("2019.12.29"),
                 TypeHelp.HELP,"ajutor dfghjkl;ghjkl,;   fghjuikcfvghbjnm   fvgbhjnkghbjnkm  fghvbjnkmlhjkl ghjkltyuhijko did");
         h1.setVolunteer(volunteerRepository.findVolunteerByUsername("user"));
         Help h2 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.12.31"),
                 TypeHelp.SOS,"ajutor imediat");
 //        h2.setVolunteer(volunteerRepository.findVolunteerByUsername("admin"));
-        Help h3 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.11.31"),
+        Help h3 = new Help(getSocialCaseByName("Cristi Pop"), getDate("2019.11.31"),
                 TypeHelp.BATTERY,"bratara descarcata");
         Help h4 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.10.31"),
                 TypeHelp.ASKFORHELP,"volunteer ask for help");
@@ -98,6 +102,19 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 //        list.add(h4);
 //        return list;
 //    }
+
+
+    @Override
+    public List<Help> getAllUnassignedHelp() {
+
+        List<Help> unassignedHelp = new ArrayList<>();
+        for(Help help: helpList){
+            if(help.getVolunteer() == null){
+                unassignedHelp.add(help);
+            }
+        }
+        return unassignedHelp;
+    }
 
     @Override
     public Help getCurrentCaseVolunteer(Volunteer volunteer) {
@@ -178,4 +195,16 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
         }
     }
 
+    @Override
+    public void currentCaseDone(Volunteer volunteer) {
+        for(Help help: helpList) {
+            if(help.getVolunteer() == null)
+                continue;
+
+            if (help.getVolunteer().getUsername().equals(volunteer.getUsername())){
+                helpList.remove(help);
+                return;
+            }
+        }
+    }
 }

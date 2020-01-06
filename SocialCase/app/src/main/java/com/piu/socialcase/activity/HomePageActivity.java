@@ -155,7 +155,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.pendingCases:
-                Toast.makeText(getApplicationContext(),"Pending Cases",Toast.LENGTH_SHORT).show();
+                Intent pendingCasesIntent = new Intent(this, PendingCasesActivity.class);
+                startActivity(pendingCasesIntent);
                 break;
             case R.id.currentCase:
                Intent intent = new Intent(this, MapActivity.class);

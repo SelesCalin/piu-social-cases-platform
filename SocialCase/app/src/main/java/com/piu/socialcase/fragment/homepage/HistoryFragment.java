@@ -11,14 +11,19 @@ import android.widget.ListView;
 import com.piu.socialcase.R;
 
 import com.piu.socialcase.adapters.HistoryAdapter;
+import com.piu.socialcase.model.History;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.service.HistoryService;
+
+import java.util.List;
 
 
 public class HistoryFragment extends Fragment {
 
     private Volunteer volunteer=null;
+
+    private List<History> historyList;
 
     private HistoryService historyService;
 
@@ -48,9 +53,18 @@ public class HistoryFragment extends Fragment {
     }
 
     private void initializeView(View view) {
-        historyAdapter = new HistoryAdapter(getContext(), historyService.getHistoryByVolunteerEmail(volunteer.getEmail()));
+        historyList = historyService.getHistoryByVolunteerEmail(volunteer.getEmail());
+        historyAdapter = new HistoryAdapter(getContext(),historyList);
         historyListView = view.findViewById(R.id.history_list_view);
         historyListView.setAdapter(historyAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        historyList.clear();
+        historyList.addAll(historyService.getHistoryByVolunteerEmail(volunteer.getEmail()));
+        historyAdapter.notifyDataSetChanged();
+    }
 }

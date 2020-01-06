@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface SocialCaseRepository {
 
+    List<Help> getAllUnassignedHelp();
     Help getCurrentCaseVolunteer(Volunteer volunteer);
     Help getHelpBySocialCase(SocialCase socialCase);
     Help getHelp();
@@ -17,5 +18,6 @@ public interface SocialCaseRepository {
     void deleteCurrentCaseVolunteer(Help help);
     List<SocialCase> getAllSocialCases();
     SocialCase getSocialCaseByName(String name);
+    void currentCaseDone(Volunteer volunteer);
 
 }

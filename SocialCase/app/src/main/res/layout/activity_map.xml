@@ -154,7 +154,21 @@
             android:textSize="15sp"
             android:layout_gravity="center"/>
 
-
+        <Button
+            android:id="@+id/case_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/sign_in_up_button"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Case Done"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/drop_social_case"

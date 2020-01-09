@@ -61,4 +61,19 @@ public class HelpAdapter extends ArrayAdapter<Help> {
 
         return row;
     }
+
+    @Override
+    public int getCount() {
+        return helpList.size();
+    }
+
+    @Override
+    public Help getItem(int index) {
+        return helpList.get(index);
+    }
+
+    @Override
+    public long getItemId(int index) {
+        return index;
+    }
 }

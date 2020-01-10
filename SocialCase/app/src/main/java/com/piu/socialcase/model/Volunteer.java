@@ -22,7 +22,7 @@ public class Volunteer implements Serializable {
     private String address;
     private String organisation;
     private String[] preferences;
-    private int accepted=0;
+    private int accepted=0;//0 - pending , 1-
     private Map<String,Boolean> available = new HashMap<>();
 
     public Volunteer(){}

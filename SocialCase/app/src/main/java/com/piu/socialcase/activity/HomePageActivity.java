@@ -77,7 +77,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        getNotification();
+        if(loggedVolunteer.getAccepted()==1 && socialCaseService.getCurrentSocialCase(loggedVolunteer)==null ) {
+            getNotification();
+        }
         if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
             this.currentCase.setVisibility(View.GONE);
         }else{

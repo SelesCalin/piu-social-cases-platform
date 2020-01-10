@@ -69,6 +69,9 @@ public class TestsFragment extends Fragment {
         return view;
     }
 
+
+
+
     private void init(View view){
         recyclerViewAvailableTests=view.findViewById(R.id.available_tests_view);
         availableTests=testsService.getAllAvailableTests();

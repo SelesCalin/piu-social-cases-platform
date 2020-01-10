@@ -69,7 +69,6 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void setClickListeners() {
-
     startButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -150,5 +149,26 @@ public class QuizActivity extends AppCompatActivity {
         Intent intent= new Intent(this,HomePageActivity.class);
         startActivity(intent);
         finish();
+    }
+
+
+    @Override
+    public void onBackPressed(){
+        MaterialAlertDialogBuilder dialogInterface= new MaterialAlertDialogBuilder(context,R.style.dialogThemeError).setTitle("Are you sure you want to cancel?").setMessage("Test result will not be saved!");
+        dialogInterface.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                goToHomePage();
+            }
+        });
+
+        dialogInterface.setNegativeButton("Stay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        dialogInterface.show();
     }
 }

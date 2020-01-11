@@ -461,6 +461,11 @@ public class MapActivity extends AppCompatActivity
 
     private void programInAdvance(){
 
+         Intent intent = new Intent(this, ProgramInAvansActivity.class);
+         intent.putExtra("currentCase",(Serializable) help);
+         startActivity(intent);
+         finish();
+
     }
 
     private void displayLoadingDialog(){

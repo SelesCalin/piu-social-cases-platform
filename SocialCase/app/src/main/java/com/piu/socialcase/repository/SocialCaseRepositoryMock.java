@@ -207,4 +207,17 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
             }
         }
     }
+
+    @Override
+    public void confirmPresence(Volunteer volunteer) {
+        for(Help help: helpList) {
+            if(help.getVolunteer() == null)
+                continue;
+
+            if (help.getVolunteer().getUsername().equals(volunteer.getUsername())){
+                help.setPresenceConfirmed(true);
+                return;
+            }
+        }
+    }
 }

@@ -61,7 +61,11 @@ public class SocialCaseService {
         socialCaseRepository.addHelp(help);
     }
 
-    public void currentCaseDown(Volunteer volunteer){
+    public void currentCaseDone(Volunteer volunteer){
         socialCaseRepository.currentCaseDone(volunteer);
+    }
+
+    public void confirmPresence(Volunteer volunteer) {
+        socialCaseRepository.confirmPresence(volunteer);
     }
 }

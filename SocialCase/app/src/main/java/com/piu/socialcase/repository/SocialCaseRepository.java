@@ -19,5 +19,5 @@ public interface SocialCaseRepository {
     List<SocialCase> getAllSocialCases();
     SocialCase getSocialCaseByName(String name);
     void currentCaseDone(Volunteer volunteer);
-
+    void confirmPresence(Volunteer volunteer);
 }

@@ -15,6 +15,7 @@ public class Help implements Serializable {
     private Date date;
     private TypeHelp type;
     private String description;
+    private boolean presenceConfirmed;
 
     public Help(Volunteer volunteer, SocialCase socialCase, Date date, TypeHelp type, String description) {
         this.volunteer = volunteer;
@@ -22,6 +23,7 @@ public class Help implements Serializable {
         this.date = date;
         this.type = type;
         this.description = description;
+        this.presenceConfirmed = false;
     }
 
     public Help(SocialCase socialCase, Date date, TypeHelp type, String description) {
@@ -29,6 +31,7 @@ public class Help implements Serializable {
         this.date = date;
         this.type = type;
         this.description = description;
+        this.presenceConfirmed = false;
     }
 
     public Volunteer getVolunteer() {
@@ -76,6 +79,13 @@ public class Help implements Serializable {
         return this;
     }
 
+    public boolean isPresenceConfirmed() {
+        return presenceConfirmed;
+    }
+
+    public void setPresenceConfirmed(boolean presenceConfirmed) {
+        this.presenceConfirmed = presenceConfirmed;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override

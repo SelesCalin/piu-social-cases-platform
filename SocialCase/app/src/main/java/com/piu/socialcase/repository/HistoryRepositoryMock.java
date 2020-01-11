@@ -44,6 +44,10 @@ public class HistoryRepositoryMock implements HistoryRepository {
         History h5 = new History("calin@gmail.com", "Daniel Dan", new Date(), "Assigned case");
         History h6 = new History("calin@gmail.com", "John Brunch", new Date(), "Low Battery");
 
-        return Arrays.asList(h1, h2, h3, h4, h5, h6);
+        return new ArrayList<>(Arrays.asList(h1, h2, h3, h4, h5, h6));
+    }
+
+    public void logActivity(History history){
+        this.historyList.add(0, history);
     }
 }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface HistoryRepository {
 
     List<History> getHistoryByVolunteerEmail(String email);
+    void logActivity(History history);
 }

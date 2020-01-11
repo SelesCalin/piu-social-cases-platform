@@ -33,6 +33,10 @@ public class SocialCaseService {
         return instance;
     }
 
+    public List<Help> getUnassignedHelp(){
+        return socialCaseRepository.getAllUnassignedHelp();
+    }
+
     public List<SocialCase> getAllSocialCases(){
         return socialCaseRepository.getAllSocialCases();
     }
@@ -57,4 +61,11 @@ public class SocialCaseService {
         socialCaseRepository.addHelp(help);
     }
 
+    public void currentCaseDone(Volunteer volunteer){
+        socialCaseRepository.currentCaseDone(volunteer);
+    }
+
+    public void confirmPresence(Volunteer volunteer) {
+        socialCaseRepository.confirmPresence(volunteer);
+    }
 }

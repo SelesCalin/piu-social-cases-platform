@@ -2,6 +2,7 @@ package com.piu.socialcase.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,13 +41,17 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.piu.socialcase.R;
 import com.piu.socialcase.authentication.Session;
 import com.piu.socialcase.model.Help;
+import com.piu.socialcase.model.History;
 import com.piu.socialcase.model.Volunteer;
+import com.piu.socialcase.service.HistoryService;
 import com.piu.socialcase.service.SocialCaseService;
 import com.piu.socialcase.utils.DirectionPointListener;
 import com.piu.socialcase.utils.GetPathFromLocation;
 import com.piu.socialcase.utils.PermissionUtils;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Random;
 
 
 public class MapActivity extends AppCompatActivity
@@ -79,10 +85,14 @@ public class MapActivity extends AppCompatActivity
     private TextView descriptionSocialCase;
     private Button acceptButton;
     private Button rejectButton;
+    private Button confirmPresence;
+    private Button programInAdvance;
+    private Button caseDoneButton;
     private Button dropButton;
     private ImageView imageView;
 
     private SocialCaseService socialCaseService;
+    private HistoryService historyService;
     public static final String VOLUNTEER_EXTRA = "LoggedVolunteer";
     private Volunteer loggedVolunteer;
 
@@ -123,13 +133,29 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-        if(!this.buttons){
+        if(help.isPresenceConfirmed()){
             acceptButton.setVisibility(View.GONE);
             rejectButton.setVisibility(View.GONE);
+            confirmPresence.setVisibility(View.GONE);
+            dropButton.setVisibility(View.GONE);
+            caseDoneButton.setVisibility(View.VISIBLE);
+            programInAdvance.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if(!this.buttons){
+            caseDoneButton.setVisibility(View.GONE);
+            programInAdvance.setVisibility(View.GONE);
+            acceptButton.setVisibility(View.GONE);
+            rejectButton.setVisibility(View.GONE);
+            confirmPresence.setVisibility(View.VISIBLE);
             dropButton.setVisibility(View.VISIBLE);
         }else{
+            confirmPresence.setVisibility(View.GONE);
+            programInAdvance.setVisibility(View.GONE);
             acceptButton.setVisibility(View.VISIBLE);
             rejectButton.setVisibility(View.VISIBLE);
+            caseDoneButton.setVisibility(View.GONE);
             dropButton.setVisibility(View.GONE);
         }
     }
@@ -143,6 +169,7 @@ public class MapActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void initiate(){
         this.socialCaseService = SocialCaseService.SocialCaseService();
+        this.historyService = new HistoryService();
         Intent intent=getIntent();
         this.help = (Help)intent.getSerializableExtra("currentCase");
         this.buttons = (boolean)intent.getSerializableExtra("showButtons");
@@ -155,10 +182,16 @@ public class MapActivity extends AppCompatActivity
         imageView = findViewById(R.id.description_social_case_icon);
         acceptButton=findViewById(R.id.accept_social_case);
         rejectButton=findViewById(R.id.reject_social_case);
+        caseDoneButton=findViewById(R.id.case_done);
+        confirmPresence=findViewById(R.id.confirm_presence_social_case);
+        programInAdvance=findViewById(R.id.program_in_advance_social_case);
         dropButton=findViewById(R.id.drop_social_case);
         acceptButton.setOnClickListener(this);
         rejectButton.setOnClickListener(this);
+        caseDoneButton.setOnClickListener(this);
         dropButton.setOnClickListener(this);
+        confirmPresence.setOnClickListener(this);
+        programInAdvance.setOnClickListener(this);
         imageView.setOnClickListener(this);
 
         nameSocialCase.setText(this.help.getSocialCase().getName());
@@ -363,9 +396,7 @@ public class MapActivity extends AppCompatActivity
                                 }})
                             .setNegativeButton("Dismiss", null).show();
                 }else {
-                    this.socialCaseService.setCurrentCase(this.help, loggedVolunteer);
-                    Toast.makeText(getApplicationContext(), "Accept", Toast.LENGTH_SHORT).show();
-                    finish();
+                    acceptCase();
                 }
                 break;
             case R.id.reject_social_case:
@@ -379,9 +410,7 @@ public class MapActivity extends AppCompatActivity
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast.makeText(getApplicationContext(),"Drop this case",Toast.LENGTH_SHORT).show();
-                                socialCaseService.deleteCurrentCase(help);
-                                finish();
+                                dropCase();
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
                 break;
@@ -393,7 +422,69 @@ public class MapActivity extends AppCompatActivity
                         .setPositiveButton(android.R.string.yes,null)
                         .show();
                 break;
+            case R.id.case_done:
+                completeCase();
+                break;
+            case R.id.confirm_presence_social_case:
+                confirmPresence();
+                break;
+            case R.id.program_in_advance_social_case:
+                programInAdvance();
+                break;
         }
+    }
+
+    private void acceptCase(){
+        this.socialCaseService.setCurrentCase(this.help, loggedVolunteer);
+        this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Accepted case"));
+        Toast.makeText(getApplicationContext(), "Accept", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    private void dropCase(){
+        Toast.makeText(getApplicationContext(),"Drop this case",Toast.LENGTH_SHORT).show();
+        this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Dropped case"));
+        socialCaseService.deleteCurrentCase(help);
+        finish();
+    }
+
+    private void completeCase() {
+        Toast.makeText(getApplicationContext(),"Case done",Toast.LENGTH_SHORT).show();
+        this.historyService.logActivity(new History(loggedVolunteer.getEmail(), this.help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Case done"));
+        socialCaseService.currentCaseDone(loggedVolunteer);
+        finish();
+    }
+
+    private void confirmPresence(){
+        displayLoadingDialog();
+    }
+
+    private void programInAdvance(){
+
+    }
+
+    private void displayLoadingDialog(){
+        final ProgressDialog dialog = ProgressDialog.show(this, "", "Detecting bracelet",
+                true);
+        dialog.show();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                dialog.dismiss();
+                Random random = new Random();
+                if(random.nextInt(2) % 2 == 0){
+                    historyService.logActivity(new History(loggedVolunteer.getEmail(), help.getSocialCase().getName(), Calendar.getInstance().getTime(), "Presence confirmed"));
+                    socialCaseService.confirmPresence(loggedVolunteer);
+                    Toast.makeText(getApplicationContext(),"Presence confirmed",Toast.LENGTH_SHORT).show();
+                    help.setPresenceConfirmed(true);
+                    onStart();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Unable to connect with wristband",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, 2000); // 3000 milliseconds delay
     }
 }
 

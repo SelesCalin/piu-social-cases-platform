@@ -23,6 +23,7 @@ import java.util.Random;
 public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
     List<Help> helpList;
+    List<Help> helpListWaiting;
     List<SocialCase> socialCaseList;
     private static SocialCaseRepository instance;
     private VolunteerRepository volunteerRepository;
@@ -39,6 +40,7 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
         this.volunteerRepository = new VolunteerRepositoryMock();
         socialCaseList = generateMockSocialCases();
         helpList = generateMockHelp();
+        helpListWaiting = new ArrayList<>();
     }
 
     private List<SocialCase> generateMockSocialCases() {
@@ -47,13 +49,13 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
         SocialCase sc1 = new SocialCase("Stanescu Andrei", "0756573200",
                 getDate("1952.07.06"),"Str. Observatorului, nr. 1",46.770439, 23.591423);
         SocialCase sc2 = new SocialCase("Botis Andreea", "0727888018",
-                getDate("1949.07.09"),"Str. Lunii, nr.55, bl.5, ap.135 ",46.753855, 23.579275);
+                getDate("1949.07.09"),"Str. Lunii, nr.55, bl.5, ap.135 ",46.752424, 23.583804);
         SocialCase sc3 = new SocialCase("Simon Ion", "0756573200",
-                getDate("1952.07.06"),"Observatorului, nr. 1",46.753855, 23.579275);
+                getDate("1952.07.06"),"Observatorului, nr. 1",46.755006, 23.594583);
         SocialCase sc4 = new SocialCase("Grad Amalia", "0756537071",
-                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.753855, 23.579275);
+                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.782400, 23.601476);
         SocialCase sc5 = new SocialCase("Popescu Diana", "0756537071",
-                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.753855, 23.579275);
+                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.767146, 23.611593);
         list.add(sc1);list.add(sc2);list.add(sc3);list.add(sc4);list.add(sc5);
         return list;
     }
@@ -80,13 +82,19 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
         Help h3 = new Help(getSocialCaseByName("Grad Amalia"), getDate("2020.11.31"),
                 TypeHelp.BATTERY,"bratara descarcata");
         Help h4 = new Help(getSocialCaseByName("Botis Andreea"), getDate("2020.10.31"),
+                TypeHelp.SOS,"ajutor imediat");
+
+        Help h6 = new Help(getSocialCaseByName("Botis Andreea"), getDate("2020.10.31"),
                 TypeHelp.ASKFORHELP,"voluntarul are nevoie de ajutor");
+
         Help h5 = new Help(getSocialCaseByName("Popescu Diana"), getDate("2020.01.14"),
                 TypeHelp.MEDICATION,"\n"+"Marti:  08:00-10:00 -> Nurofen" + "\n\t\t\t\t\t\t" + "18:00-20:00 -> Vitamina D, Picaturi in ochi");
+        list.add(h4);
+        list.add(h5user);
         list.add(h1);
         list.add(h2);
         list.add(h3);
-        list.add(h4);
+
         list.add(h5);
         return list;
     }
@@ -188,6 +196,19 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
     @Override
     public void addHelp(Help help) {
         this.helpList.add(help);
+    }
+
+    @Override
+    public void addHelpAsk(Help help) {
+        this.helpListWaiting.add(help);
+    }
+
+
+    @Override
+    public void addHelpWaiting() {
+        for(Help help: helpListWaiting) {
+            this.helpList.add(help);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

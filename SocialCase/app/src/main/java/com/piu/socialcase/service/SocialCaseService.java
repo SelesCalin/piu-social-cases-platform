@@ -61,11 +61,39 @@ public class SocialCaseService {
         socialCaseRepository.addHelp(help);
     }
 
+    public void addHelpAsk(Help help){
+        socialCaseRepository.addHelpAsk(help);
+    }
+
+    public void addHelpWaiting(){
+        socialCaseRepository.addHelpWaiting();
+    }
+
     public void currentCaseDone(Volunteer volunteer){
         socialCaseRepository.currentCaseDone(volunteer);
     }
 
     public void confirmPresence(Volunteer volunteer) {
         socialCaseRepository.confirmPresence(volunteer);
+    }
+
+    public Help getHelpNotification(){
+        return socialCaseRepository.getHelpByName("Simon Ion");
+    }
+
+    public Help getSOSNotification(){
+        return socialCaseRepository.getHelpByName("Stanescu Andrei");
+    }
+
+    public Help getBatteryNotification(){
+        return socialCaseRepository.getHelpByName("Grad Amalia");
+    }
+
+    public Help getAskForHelpNotification(){
+        return socialCaseRepository.getHelpByName("Botis Andreea");
+    }
+
+    public Help getMedicationNotification(){
+        return socialCaseRepository.getHelpByName("Popescu Diana");
     }
 }

@@ -9,14 +9,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.piu.socialcase.R;
 import com.piu.socialcase.activity.HomePageActivity;
+import com.piu.socialcase.model.TypeHelp;
 import com.piu.socialcase.model.Volunteer;
 import com.piu.socialcase.authentication.Session;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     public static final String VOLUNTEER_PARAM = "volunteer";
 
@@ -28,6 +30,12 @@ public class ProfileFragment extends Fragment {
     private TextView organisationTextView;
     private TextView fullNameTextView;
     private TextView addressTextView;
+
+    private Button helpNotification;
+    private Button sosNotification;
+    private Button batteryNotification;
+    private Button askForHelpNotification;
+    private Button medicationNotification;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -44,8 +52,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        HomePageActivity  activity = (HomePageActivity) getActivity();
-        activity.getNotification();
+//        HomePageActivity  activity = (HomePageActivity) getActivity();
+//        activity.getNotification();
     }
 
     @Override
@@ -66,7 +74,20 @@ public class ProfileFragment extends Fragment {
         birthDayTextView=view.findViewById(R.id.birthday_profile_text);
         organisationTextView=view.findViewById(R.id.profile_organization_text);
 
-       setVolunteerInfo();
+        setVolunteerInfo();
+
+        helpNotification = view.findViewById(R.id.buttonHelp);
+        sosNotification = view.findViewById(R.id.buttonSOS);
+        batteryNotification = view.findViewById(R.id.buttonBattery);
+        askForHelpNotification = view.findViewById(R.id.buttonAskForHelp);
+        medicationNotification = view.findViewById(R.id.buttonMedicamentation);
+
+        helpNotification.setOnClickListener(this);
+        sosNotification.setOnClickListener(this);
+        batteryNotification.setOnClickListener(this);
+        askForHelpNotification.setOnClickListener(this);
+        medicationNotification.setOnClickListener(this);
+
     }
 
     private void setVolunteerInfo() {
@@ -97,5 +118,29 @@ public class ProfileFragment extends Fragment {
             nameInitialsBuilder.append(name.charAt(0));
 
         return nameInitialsBuilder.toString();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onClick(View v) {
+        HomePageActivity  activity = (HomePageActivity) getActivity();
+        switch (v.getId()) {
+            case R.id.buttonHelp:
+                activity.sendNotification(TypeHelp.HELP);
+                break;
+            case R.id.buttonSOS:
+                activity.sendNotification(TypeHelp.SOS);
+                break;
+            case R.id.buttonBattery:
+                activity.sendNotification(TypeHelp.BATTERY);
+                break;
+            case R.id.buttonAskForHelp:
+                activity.sendNotification(TypeHelp.ASKFORHELP);
+                break;
+            case R.id.buttonMedicamentation:
+                activity.sendNotification(TypeHelp.MEDICATION);
+                break;
+        }
+
     }
 }

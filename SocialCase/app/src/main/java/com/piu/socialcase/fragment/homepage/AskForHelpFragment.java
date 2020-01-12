@@ -129,7 +129,7 @@ public class AskForHelpFragment extends Fragment implements View.OnClickListener
         switch (v.getId()){
             case R.id.butonSend_ask:
                 if(socialCase!=null) {
-                    this.socialCaseService.addHelp(newHelp());
+                    this.socialCaseService.addHelpAsk(newHelp());
                     Toast.makeText(getActivity().getApplicationContext(), "Asked for help", Toast.LENGTH_SHORT).show();
                     BottomNavigationView bottomNavigationView;
                     bottomNavigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottom_navigation);

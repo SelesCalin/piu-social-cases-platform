@@ -25,12 +25,87 @@
                 android:background="@drawable/gradientprofile"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@null"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonHelp"
+
+                        android:background="@null"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        />
+
+                    <Button
+                        android:id="@+id/buttonAskForHelp"
+
+                        android:background="@null"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@null"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonSOS"
+                        android:text="SOS"
+                        android:background="@null"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        />
+
+                    <Button
+                        android:id="@+id/buttonBattery"
+                        android:text="Battery"
+                        android:background="@null"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        />
+
+                    <Button
+                        android:id="@+id/buttonMedicamentation"
+                        android:text="Medication"
+                        android:background="@null"
+                        android:layout_marginTop="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.3"
+                        />
+
+                </LinearLayout>
+
+
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="140dp"
+                    android:layout_marginTop="-1dp"
                     android:src="@drawable/user_profile"
                     app:civ_border_color="#FFFFFFFF"
                     app:civ_border_width="2dp" />
@@ -55,7 +130,7 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                    </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="360dp"

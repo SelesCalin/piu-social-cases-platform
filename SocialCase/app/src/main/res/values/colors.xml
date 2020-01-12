@@ -5,9 +5,13 @@
     <color name="colorAccent">#00C251</color>
     <color name="colorError">#910101</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorAsk">#72D1FC</color>
+    <color name="colorMed">#72D1FC</color>
 
     <color name="gradientStart">#373b44</color>
     <color name="gradientEnd">#4286f4</color>
     <color name="color_21B6A8">#21B6A8</color>
+
+
 
 </resources>

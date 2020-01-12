@@ -14,6 +14,8 @@ public interface SocialCaseRepository {
     Help getHelpBySocialCase(SocialCase socialCase);
     Help getHelp();
     void addHelp(Help help);
+    void addHelpAsk(Help help);
+    public void addHelpWaiting();
     void setCurrentCaseVolunteer(Help helpL,Volunteer volunteer);
     void deleteCurrentCaseVolunteer(Help help);
     List<SocialCase> getAllSocialCases();

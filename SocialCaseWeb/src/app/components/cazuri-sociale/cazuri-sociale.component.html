@@ -10,18 +10,29 @@
   <div  class="collapse navbar-collapse"  id="navbarSupportedContent">
     <ul  class="">
       <li  class="nav-item active">
-        <a  class="nav-link"  href="/home/ong">Home <span  class="sr-only">(current)</span></a>
+        <a  *ngIf="ongId.id == 1" class="nav-link"  href="/home/ong">Home <span  class="sr-only">(current)</span></a>
+        <a  *ngIf="ongId.id == 2" class="nav-link"  href="/home/ong2">Home <span  class="sr-only">(current)</span></a>
       </li>
       <li  class="nav-item active">
-        <a  class="nav-link"  href="/voluntari">Voluntari</a>
+        <a  *ngIf="ongId.id == 1" class="nav-link"  href="/voluntari">Voluntari</a>
+        <a  *ngIf="ongId.id == 2"  class="nav-link"  href="/voluntari2">Voluntari</a>
       </li>
-      <li>
+      <li *ngIf="ongId.id == 1" >
         <a class="nav-link" (click)="showDiv()">Cazuri sociale
           <i class="fa fa-caret-down"></i>
         </a>
         <div class="dropd-content" *ngIf="divId == 1" style="background-color: #bdc3c7">
-          <a (click)="setShow2();">Inregistrate</a>
-          <a (click) = "setShow();" >In asteptare</a>
+          <a (click) = "setShow2();">Inregistrate</a>
+          <a  (click) = "setShow();" >In asteptare</a>
+        </div>
+      </li>
+      <li *ngIf="ongId.id == 2">
+        <a class="nav-link" (click)="showDiv2()">Cazuri sociale
+          <i class="fa fa-caret-down"></i>
+        </a>
+        <div class="dropd-content" *ngIf="divId2 == 1" style="background-color: #bdc3c7">
+          <a  *ngIf="ongId.id == 2" (click)="setShoww2();">Inregistrate</a>
+          <a  *ngIf="ongId.id == 2" (click) = "setShoww();" >In asteptare</a>
         </div>
       </li>
 
@@ -33,23 +44,29 @@
   </div>
 </nav>
 
-<div >
+<div *ngIf="ok1 == 1">
   <table id="table" *ngIf="display == true">
     <tr>
       <th>{{'Nume'}}</th>
       <th>{{'Prenume'}}</th>
       <th>{{'Detalii'}}</th>
+      <th>{{'Plan Medicamentatie'}}</th>
       <th>{{''}}</th>
     </tr>
 
     <tr *ngIf=" sterge1 == false">
       <td>{{'Popescu'}}</td>
       <td>{{'Diana'}}</td>
-      <td><button id = "btn1" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(1)">
+      <td style="width: 25%;"><button id = "btn1" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(1)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica"  style="width:50%;">
-              <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge1()">Sterge din lista</button>
+      <td style="width: 25%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(1)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+        <!--        <i class="fa fa-file-medical" style="margin-right:15px; font-size:20px;"></i> Plan</button>-->
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge1()">
+        <!--              <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge1()"><i class="fa fa-trash-alt"></i></button>-->
       </td>
     </tr>
 
@@ -59,8 +76,11 @@
       <td><button id = "btn2" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(2)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica"  style="width:50%;">
-          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge2()">Sterge din lista</button>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(2)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge2()">
       </td>
 
     </tr>
@@ -71,8 +91,11 @@
       <td><button id = "btn3" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(3)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica" style="width:50%;">
-          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge3()">Sterge din lista</button>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(3)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge3()">
       </td>
     </tr>
 
@@ -82,8 +105,11 @@
       <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(4)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica" style="width:50%;">
-          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge4()">Sterge din lista</button>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(4)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge4()">
       </td>
     </tr>
 
@@ -93,8 +119,11 @@
       <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(5)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica" style="width:50%;">
-          <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge5()">Sterge din lista</button>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(5)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge5()">
       </td>
     </tr>
 
@@ -104,17 +133,25 @@
       <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails1(6)">
         <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
       </td>
-      <td class="colMica" style="width:50%;">
-          <button style ="width: 40%;margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge6()">Sterge din lista</button>
+      <td style="width: 20%;"><button  style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan(6)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
       </td>
+      <td class="colMica">
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge6()">
+     </td>
     </tr>
 
   </table>
 
 </div>
 
+<!--<app-formular (messageEvent)="receiveMessage($event)" ></app-formular>-->
 
-<div *ngIf="nmb1 == 1 && ok1 == false && display == true">
+<!--<button (click)="sendMessage()">Send Message</button>-->
+<!--<span> {{message}}</span>-->
+<!--<button (click)="newMessage()">New Message</button>-->
+
+<div *ngIf="nmb1 == 1 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -191,7 +228,7 @@
 </div>
 
 
-<div *ngIf="nmb1 == 2 && ok1 == false && display == true">
+<div *ngIf="nmb1 == 2 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -269,7 +306,7 @@
   </div>
 </div>
 
-<div *ngIf="nmb1 == 3 && ok1 == false && display == true">
+<div *ngIf="nmb1 == 3 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -346,7 +383,7 @@
 </div>
 
 
-<div *ngIf="nmb1 == 4 && ok1 == false && display == true">
+<div *ngIf="nmb1 == 4 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -423,8 +460,7 @@
 </div>
 
 
-
-<div *ngIf="nmb1 == 5 && ok1 == false && display == true">
+<div *ngIf="nmb1 == 5 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -500,7 +536,7 @@
   </div>
 </div>
 
-<div *ngIf="nmb1 == 6 && ok1 == false && display == true">
+<div *ngIf="nmb1 == 6 && ok1 == 0 && display == true">
   <div class="container">
     <form class="form-horizontal">
 
@@ -576,8 +612,8 @@
   </div>
 </div>
 
-<div *ngIf="display == false">
-  <div *ngIf="show == 1">
+<div *ngIf="display == false ">
+  <div *ngIf="show == 1 && ok == true && ok1 == 0">
     <table id="table2">
       <tr>
         <th>{{'Nume'}}</th>
@@ -648,6 +684,7 @@
           <label *ngIf=" accept3 == false" style="padding-left: 30%;"> Caz acceptat! </label>
         </td>
       </tr>
+
 
     </table>
   </div>
@@ -729,8 +766,6 @@
     </div>
   </div>
 
-
-
   <div *ngIf="nmb == 2 && ok == false">
     <div class="container">
       <form class="form-horizontal">
@@ -809,7 +844,6 @@
     </div>
   </div>
 
-
   <div *ngIf="nmb == 3 && ok == false">
     <div class="container">
       <form class="form-horizontal">
@@ -887,3 +921,1968 @@
   </div>
 
 </div>
+
+<div *ngIf = "nmb1 == 1 && ok1 == 2">
+    <div class="row fixed">
+      <label class="nameLabel">Popescu Diana</label>
+      <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+
+    </div>
+
+
+  <div>
+  <table class="table" >
+  <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+  <tr *ngFor="let row of backendData1; index as i;"  class="hover-highlight">
+    <td class="clock" >{{row.v0}}</td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v1}}</span>
+      <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v2}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v3}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v4}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v5}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v6}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <span *ngIf="enableEditIndex1 != i">{{row.v7}}</span>
+      <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit1 && enableEditIndex1 == i"/>
+    </td>
+    <td>
+      <button *ngIf="enableEdit1 && enableEditIndex1 == i" id="saveBtn" class="btn page-primary-action-btn" (click)="save1()" type="submit" >Save</button>
+      <a class="table-row-action edit-action" *ngIf="i != enableEditIndex1 || enableEditIndex1 == null" (click)="enableEditMethod1($event, i)">
+        <img style ="width:8%;"src="assets/edit-29.png">
+      </a>
+    </td>
+  </tr>
+  </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb1 == 2 && ok1 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Bizau Mihaela</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData2; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex2 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit2 && enableEditIndex2 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit2 && enableEditIndex2 == i" id="saveBtn2" class="btn page-primary-action-btn" (click)="save2()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex2 || enableEditIndex2 == null" (click)="enableEditMethod2($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb1 == 3 && ok1 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Simon Ion</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData3; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex3 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit3 && enableEditIndex3 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit3 && enableEditIndex3 == i" id="saveBtn3" class="btn page-primary-action-btn" (click)="save3()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex3 || enableEditIndex3 == null" (click)="enableEditMethod3($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb1 == 4 && ok1 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Pop Ana</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData4; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit4 && enableEditIndex4 == i" id="saveBtn4" class="btn page-primary-action-btn" (click)="save4()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex4 || enableEditIndex4 == null" (click)="enableEditMethod4($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb1 == 5 && ok1 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Coman Andrei</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+
+      <tr *ngFor="let row of backendData5; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex5 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit5 && enableEditIndex5 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit5 && enableEditIndex5 == i" id="saveBtn5" class="btn page-primary-action-btn" (click)="save5()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex5 || enableEditIndex5 == null" (click)="enableEditMethod5($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb1 == 6 && ok1 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Popescu Mihai</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack1()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+
+      <tr *ngFor="let row of backendData6; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex6 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit6 && enableEditIndex6 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit6 && enableEditIndex6 == i" id="saveBtn6" class="btn page-primary-action-btn" (click)="save6()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex6 || enableEditIndex6 == null" (click)="enableEditMethod6($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+
+<!--///////////////////////////////////////////////////-->
+<!--///////////////////////////////////////////////////-->
+<!--///////////////////////////////////////////////////-->
+
+
+<!--<nav  class="navbar navbar-expand-lg" style="background-color: #bdc3c7;">-->
+<!--  <a  class="navbar-brand" style="color: #1f618d;" href="/home/ong">Home ONG</a>-->
+<!--  <button  class="navbar-toggler"  type="button"  data-toggle="collapse"  data-target="#navbarSupportedContent"  aria-controls="navbarSupportedContent"  aria-expanded="false"  aria-label="Toggle navigation">-->
+<!--    &lt;!&ndash;    <span  class="navbar-toggler-icon"></span>&ndash;&gt;-->
+<!--    <i class="fa fa-bars" style="color: #1f618d"></i>-->
+<!--  </button>-->
+<!--  <div  class="collapse navbar-collapse"  id="navbarSupportedContent">-->
+<!--    <ul  class="">-->
+<!--      <li  class="nav-item active">-->
+<!--        <a  class="nav-link"  href="/home/ong2">Home <span  class="sr-only">(current)</span></a>-->
+<!--      </li>-->
+<!--      <li  class="nav-item active">-->
+<!--        <a  class="nav-link"  href="/voluntari2">Voluntari</a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a class="nav-link" (click)="showDiv2()">Cazuri sociale-->
+<!--          <i class="fa fa-caret-down"></i>-->
+<!--        </a>-->
+<!--        <div class="dropd-content" *ngIf="divId2 == 1" style="background-color: #bdc3c7">-->
+<!--          <a (click)="setShoww2();">Inregistrate</a>-->
+<!--          <a (click) = "setShoww();" >In asteptare</a>-->
+<!--        </div>-->
+<!--      </li>-->
+
+
+<!--      <li  class="nav-item active">-->
+<!--        <a  class="nav-link"  href="/login/ong">Logout</a>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<div *ngIf="ok12 == 1">
+  <table id="table" *ngIf="display2 == true">
+    <tr>
+      <th>{{'Nume'}}</th>
+      <th>{{'Prenume'}}</th>
+      <th>{{'Detalii'}}</th>
+      <th>{{'Plan Medicamentatie'}}</th>
+      <th>{{''}}</th>
+    </tr>
+
+    <tr *ngIf=" sterge12 == false">
+      <td>{{'Grad'}}</td>
+      <td>{{'Amalia'}}</td>
+      <td style="width: 25%;"><button id = "btn1" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(1)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 25%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(1)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+        <!--        <i class="fa fa-file-medical" style="margin-right:15px; font-size:20px;"></i> Plan</button>-->
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge12()">
+        <!--              <button style ="width: 40%; margin-left: 29%;" type="submit" class="btn btn-primary" (click)="onSterge1()"><i class="fa fa-trash-alt"></i></button>-->
+      </td>
+    </tr>
+
+    <tr *ngIf=" sterge22 == false">
+      <td>{{'Botis'}}</td>
+      <td>{{'Andreea'}}</td>
+      <td><button id = "btn2" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(2)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(2)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge22()">
+      </td>
+
+    </tr>
+
+    <tr *ngIf=" sterge32 == false">
+      <td>{{'Stanescu'}}</td>
+      <td>{{'Andrei'}}</td>
+      <td><button id = "btn3" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(3)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(3)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge32()">
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData12 == true && sterge42 == false">
+      <td>{{'Coman'}}</td>
+      <td>{{'Karla'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(4)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(4)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge42()">
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData22 == true && sterge52 == false">
+      <td>{{'Petrescu'}}</td>
+      <td>{{'Andrei'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(5)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(5)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica" >
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge52()">
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData32 == true && sterge62 == false">
+      <td>{{'Popescu'}}</td>
+      <td>{{'Mihai'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(6)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button  style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(6)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica">
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge62()">
+      </td>
+    </tr>
+
+    <tr *ngIf="fillData42 == true && sterge72 == false && refuzat1 == true">
+      <td>{{'Pop'}}</td>
+      <td>{{'Ana'}}</td>
+      <td><button style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails12(7)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+      <td style="width: 20%;"><button  style ="width: 50%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openPlan2(7)">
+        <img src="assets/treatment-plan.png" height="30px" width="30px;" style="margin-right:15px;">Plan</button>
+      </td>
+      <td class="colMica">
+        <img src="assets/recycle-bin-400x400.png" height="40px" width="40px" style="margin-left: 40%;" (click)="onSterge72()">
+      </td>
+    </tr>
+
+  </table>
+
+</div>
+
+
+<div *ngIf="nmb12 == 1 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Grad Amalia" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genFCase3" type="radio"  value ="feminin" checked>
+          <label id="fCase3" for="genFCase3">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Bucegi, nr.112" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="15/03/1958" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0756537071" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase3" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase3" type="text" class="form-control" placeholder="05/05/2018" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase3" type="text" class="form-control" placeholder="Andreica Marinela" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="nmb12 == 2 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Botis Andreea" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genMCase4" type="radio"  value ="feminin" checked>
+          <label id="mCase4" for="genMCase4">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Lunii, nr.55, bl.5, ap. 135" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="09/07/1949" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0727888018" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase4" type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;"  class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase4" type="text" class="form-control" placeholder="02/02/2018" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase4" type="text" class="form-control" placeholder="Rad George" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%;  width: 50%" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+
+
+  </div>
+</div>
+
+<div *ngIf="nmb12 == 3 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Stanescu Andrei" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genMCase5" type="radio"  value ="masculin" checked>
+          <label id="mCase5" for="genMCase5">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Observatorului, nr.1" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="06/07/1952" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0756573200" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase5" type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase5" type="text" class="form-control" placeholder="01/04/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase5" type="text" class="form-control" placeholder="Rad George" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%;  width: 50%" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+
+<div *ngIf="nmb12 == 4 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Coman Karla" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genFCase33" type="radio"  value ="feminin" checked>
+          <label id="fCase33" for="genFCase3">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase33" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase33" type="text" class="form-control" placeholder="10/30/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase33" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="nmb12 == 5 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Petrescu Andrei" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input type="radio"  value ="masculin" checked>
+          <label for="genMCase4">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Galaxiei, nr.1, bl.7, ap. 13" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="03/16/1945" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0727837019" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;"  class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input type="text" class="form-control" placeholder="09/21/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" type="text" class="form-control" placeholder="Ban Maria" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="nmb12 == 6 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Popescu Mihai" disabled>
+        </div>
+      </div>
+
+      <div  class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input type="radio"  value ="masculin" checked>
+          <label for="genMCase5">Masculin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Transilvaniei, nr.100" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="07/25/1948" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="0790573215" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input  type="text" class="form-control" placeholder="10/05/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" type="text" class="form-control" placeholder="Ban Maria" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div *ngIf="nmb12 == 7 && ok12 == 0 && display2 == true">
+  <div class="container">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label" >Nume si Prenume :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="nume" placeholder="Pop Ana" disabled>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div style= "margin-left: 2%;" class="gen">
+          <input id ="genFCase33" type="radio"  value ="feminin" checked>
+          <label id="fCase33" for="genFCase3">Feminin</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Adresa :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Data nasterii :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Telefon :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Cetatenie :</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" >Motivul inscrierii :</label>
+        <div class="col-sm-10">
+          <input id="motivCase33" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+        </div>
+      </div>
+
+      <div style= "margin-left: 9%;" class="form-group">
+        <div class="row">
+          <div class="col-sm-4">
+            <label class="control-label" >Data Inscrierii :</label>
+            <input id="dataInscrieriiCase33" type="text" class="form-control" placeholder="10/30/2019" disabled>
+          </div>
+          <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+            <label class="control-label" >Inscriere efectuata de :</label>
+            <input style="width: 65% !important;" id="efectuareCase33" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack12()">Ascunde</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="display2 == false ">
+  <div *ngIf="show2 == 1 && ok2 == true && ok12 == 0">
+    <table id="table2">
+      <tr>
+        <th>{{'Nume'}}</th>
+        <th>{{'Prenume'}}</th>
+        <th>{{'Detalii'}}</th>
+        <th>{{''}}</th>
+      </tr>
+
+      <tr *ngIf=" refuz12 == false && del12 == false">
+        <td>{{'Coman'}}</td>
+        <td>{{'Karla'}}</td>
+        <td><button id = "btn12" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails2(1)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept12 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept12()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz12()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept12 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+      <tr *ngIf=" refuz22 == false && del22 == false">
+        <td>{{'Petrescu'}}</td>
+        <td>{{'Andrei'}}</td>
+        <td><button id = "btn22" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails2(2)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td  class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept22 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept2" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept22()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz2" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz22()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept22 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+      <tr *ngIf=" refuz32 == false && del32 == false">
+        <td>{{'Lazar'}}</td>
+        <td>{{'Bogdan'}}</td>
+        <td><button id = "btn32" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails2(3)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept32 == true" class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div class="col-sm-4">
+                <button id ="accept3" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept32()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz3" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz32()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept32 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+      <tr *ngIf="refuzat1 == false && refuz42 == false && del42 == false" >
+        <td>{{'Pop'}}</td>
+        <td>{{'Ana'}}</td>
+        <td><button id = "btn12" style ="width: 60%; margin-left: 20%;" type="button" class="btn btn-xs btn-default" (click)="openDetails2(4)">
+          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+        </td>
+        <td class="lastCol" style="padding-left: 5%; padding-top: 2%; padding-bottom: 0;">
+          <div *ngIf=" accept42 == true " class="form-group">
+            <div style= "padding: 0;" class="row">
+              <div  class="col-sm-4">
+                <button id ="accept1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onAccept42()">Accept</button>
+              </div>
+              <div class="col-sm-4">
+                <button id ="refuz1" style ="width: 100%;" type="submit" class="btn btn-primary" (click)="onRefuz42()">Refuz</button>
+              </div>
+            </div>
+          </div>
+          <label *ngIf=" accept42 == false" style="padding-left: 30%;"> Caz acceptat! </label>
+        </td>
+      </tr>
+
+
+
+
+    </table>
+  </div>
+
+  <div *ngIf="nmb2 == 1 && ok2 == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Coman Karla" disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genFCase32" type="radio"  value ="feminin" checked>
+            <label id="fCase32" for="genFCase3">Feminin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase32" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;" class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase32" type="text" class="form-control" placeholder="10/30/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase32" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style="margin-top: 25px;margin-left: 49%; width: 50%;" type="submit" class="btn btn-primary" (click)="onBack2()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div *ngIf="nmb2 == 2 && ok2 == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Petrescu Andrei" disabled>
+          </div>
+        </div>
+
+        <div  class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genMCase42" type="radio"  value ="masculin" checked>
+            <label id="mCase42" for="genMCase4">Masculin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Galaxiei, nr.1, bl.7, ap. 13" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="03/16/1945" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="0727837019" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase42" type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;"  class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase42" type="text" class="form-control" placeholder="09/21/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase42" type="text" class="form-control" placeholder="Ban Maria" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack2()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+
+
+    </div>
+  </div>
+
+  <div *ngIf="nmb2 == 3 && ok2 == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Lazar Bogdan" disabled>
+          </div>
+        </div>
+
+        <div  class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genMCase52" type="radio"  value ="masculin" checked>
+            <label id="mCase52" for="genMCase5">Masculin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Transilvaniei, nr.100" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="07/25/1948" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="0790573215" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase52" type="text" class="form-control" placeholder="Motivul inscrierii este unul dus la extrem." name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;" class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase52" type="text" class="form-control" placeholder="10/05/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase52" type="text" class="form-control" placeholder="Baidoc Amalia" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack2()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+    <div *ngIf="nmb2 == 4 && ok2 == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Pop Ana" disabled>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genFCase33" type="radio"  value ="feminin" checked>
+            <label id="fCase33" for="genFCase3">Feminin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Mehedinti, nr.12A" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="10/03/1950" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="07875370021" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase33" type="text" class="form-control" placeholder="Motivul inscrierii este unul divers" name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;" class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase33" type="text" class="form-control" placeholder="10/30/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase33" type="text" class="form-control" placeholder="Vasi Luminita" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style="margin-top: 25px;margin-left: 49%; width: 50%" type="submit" class="btn btn-primary" (click)="onBack2()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="nmb2 == 5 && ok2 == false">
+    <div class="container">
+      <form class="form-horizontal">
+
+        <div class="form-group">
+          <label class="control-label" >Nume si Prenume :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="nume" placeholder="Coman Andrei" disabled>
+          </div>
+        </div>
+
+        <div  class="form-group">
+          <div style= "margin-left: 2%;" class="gen">
+            <input id ="genMCase42" type="radio"  value ="masculin" checked>
+            <label id="mCase42" for="genMCase4">Masculin</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Adresa :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Str. Galaxiei, nr.1, bl.7, ap. 13" name="adresa" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Data nasterii :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="03/16/1945" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Telefon :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  placeholder="0727837019" name="telefon" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Cetatenie :</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="romana" name="cetatenie" disabled >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" >Motivul inscrierii :</label>
+          <div class="col-sm-10">
+            <input id="motivCase42" type="text" class="form-control" placeholder="Motivul inscrierii este unul neintemeiat." name="motiv" disabled >
+          </div>
+        </div>
+
+        <div style= "margin-left: 9%;"  class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <label class="control-label" >Data Inscrierii :</label>
+              <input id="dataInscrieriiCase42" type="text" class="form-control" placeholder="09/21/2019" disabled>
+            </div>
+            <div class="col-sm-8" style="margin: 0px;padding: 0px;">
+              <label class="control-label" >Inscriere efectuata de :</label>
+              <input style="width: 65% !important;" id="efectuareCase42" type="text" class="form-control" placeholder="Ban Maria" disabled>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button style=" width: 50%; margin-top: 25px;margin-left: 49%;" type="submit" class="btn btn-primary" (click)="onBack2()">Ascunde</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf = "nmb12 == 1 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Grad Amalia</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData12; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit12 && enableEditIndex12== i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex12 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit12 && enableEditIndex12 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit12 && enableEditIndex12 == i" id="saveBtn" class="btn page-primary-action-btn" (click)="save12()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex12 || enableEditIndex12 == null" (click)="enableEditMethod12($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 2 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Botis Andreea</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData22; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex22 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit22 && enableEditIndex22 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit22 && enableEditIndex22 == i" id="saveBtn2" class="btn page-primary-action-btn" (click)="save22()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex22 || enableEditIndex22 == null" (click)="enableEditMethod22($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 3 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Stanescu Andrei</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData32; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex32 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit32 && enableEditIndex32 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit32 && enableEditIndex32 == i" id="saveBtn3" class="btn page-primary-action-btn" (click)="save32()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex32 || enableEditIndex32 == null" (click)="enableEditMethod32($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 4 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Coman Karla</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData42; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex42 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit42 && enableEditIndex42 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit42 && enableEditIndex42 == i" id="saveBtn4" class="btn page-primary-action-btn" (click)="save42()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex42 || enableEditIndex42 == null" (click)="enableEditMethod42($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 5 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Petrescu Andrei</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+
+      <tr *ngFor="let row of backendData52; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex52 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit52 && enableEditIndex52 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit52 && enableEditIndex52 == i" id="saveBtn5" class="btn page-primary-action-btn" (click)="save52()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex52 || enableEditIndex52 == null" (click)="enableEditMethod52($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 6 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Lazar Bogdan</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+
+      <tr *ngFor="let row of backendData62; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex62 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit62 && enableEditIndex62 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit62 && enableEditIndex62 == i" id="saveBtn6" class="btn page-primary-action-btn" (click)="save62()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex62 || enableEditIndex62 == null" (click)="enableEditMethod62($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<div *ngIf = "nmb12 == 7 && ok12 == 2">
+  <div class="row fixed">
+    <label class="nameLabel">Pop Ana</label>
+    <button class="back-btn"><img src="assets/512px-Circle_arrow_left_font_awesome.svg.png" height="40px" width="40px" style="margin-right: 20px;" (click)="onBack12()">Back</button>
+
+  </div>
+
+  <div>
+    <table class="table" >
+      <tr>
+        <th style="background-color: white; border: none;"></th>
+        <th>{{'Luni'}}</th>
+        <th>{{'Marti'}}</th>
+        <th>{{'Miercuri'}}</th>
+        <th>{{'Joi'}}</th>
+        <th>{{'Vineri'}}</th>
+        <th>{{'Sambata'}}</th>
+        <th>{{'Duminica'}}</th>
+      </tr>
+      <tr *ngFor="let row of backendData4; index as i;"  class="hover-highlight">
+        <td class="clock" >{{row.v0}}</td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v1}}</span>
+          <input style="border:none;" type="text" [(ngModel)]="row.v1" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v2}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v2" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v3}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v3" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v4}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v4" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v5}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v5" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v6}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v6" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <span *ngIf="enableEditIndex4 != i">{{row.v7}}</span>
+          <input  style="border:none;" type="text" [(ngModel)]="row.v7" *ngIf="enableEdit4 && enableEditIndex4 == i"/>
+        </td>
+        <td>
+          <button *ngIf="enableEdit4 && enableEditIndex4 == i" id="saveBtn4" class="btn page-primary-action-btn" (click)="save4()" type="submit" >Save</button>
+          <a class="table-row-action edit-action" *ngIf="i != enableEditIndex4 || enableEditIndex4 == null" (click)="enableEditMethod4($event, i)">
+            <img style ="width:8%;"src="assets/edit-29.png">
+          </a>
+        </td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+
+
+

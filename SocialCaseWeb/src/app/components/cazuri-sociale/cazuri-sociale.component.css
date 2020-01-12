@@ -66,10 +66,10 @@ button {
   /*transition: all ;*/
   cursor: pointer;
 }
+
 button:hover, button:active, button:focus {
   background: #393e46;
   color: #eeeeee;
-
 }
 
 .btn-back {
@@ -88,7 +88,7 @@ button:hover, button:active, button:focus {
 #table, #table2 {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 60%;
+  width: 70%;
   margin-bottom: 50px !important ;
   margin: auto;
   margin-top: 2% !important;
@@ -176,6 +176,83 @@ li a:hover {
 }
 
 .colMica {
-  width:50%;
+  width:20%;
 }
 
+.clock {
+  background-color: #a9cce3;
+  color: #2e4053 ;
+  font-weight: bold;
+  border-radius: 14px;
+  border: none !important;
+}
+
+.nameLabel {
+
+  margin-top: 3%;
+  padding: 10px 50px 10px 50px;
+  border: solid;
+  border-radius: 14px;
+}
+
+.back-btn {
+  /*margin-left: 5%;*/
+  margin-right: 30%;
+  margin-top: 3%;
+  width: 10%;
+  background-color: white !important;
+  color: #b3b3b3 !important;
+  font-size: 18px;
+}
+
+.back-btn:hover ,.back-btn:active, .back-btn:focus {
+  color: black;
+  font-weight: bold;
+}
+
+.table, .table2 {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-bottom: 50px !important ;
+  margin: auto;
+  margin-top: 5% !important;
+}
+
+.table td, .table2 td {
+  /*border: 2px solid #ddd;*/
+  border-radius: 10px !important;
+  padding: 5px;
+  text-align: center;
+}
+
+
+.table tr:nth-child(even), .table2 tr:nth-child(even) {
+  background-color: white;
+}
+
+.table tr:hover, .table2 tr:hover  {
+  /*background-color: #D1D0CE;*/
+}
+
+.table th, .table2 th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: lightgray;
+  color: black;
+  width: 10%;
+  border: none !important;
+  /*border: 2px solid lightgray;*/
+  border-radius: 15px;
+}
+
+.fixed{
+  position: fixed;
+  /* left: 0; */
+  top: 4%;
+  width: 100%;
+  left: 80%;
+  overflow: hidden;
+
+}

@@ -21,6 +21,9 @@ ul {
 li {
   float:left;
 }
+#imggg{
+  width: inherit;
+}
 
 li a {
   display: block;

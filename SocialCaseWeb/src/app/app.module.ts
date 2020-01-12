@@ -16,6 +16,9 @@ import {VolunteersComponent} from './components/volunteers/volunteers.component'
 import { CazuriSocialeComponent } from './components/cazuri-sociale/cazuri-sociale.component';
 import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import {NgSelectModule} from '@ng-select/ng-select';
+import { HomeOng2Component } from './components/home-ong2/home-ong2.component';
+import {VolunteersOng2Component} from './components/volunteers-ong2/volunteers-ong2.component';
+
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import {NgSelectModule} from '@ng-select/ng-select';
     LoginOngComponent,
     HomeOngComponent,
     VolunteersComponent,
-    CazuriSocialeComponent
+    VolunteersOng2Component,
+    CazuriSocialeComponent,
+    HomeOng2Component
   ],
   imports: [
     MatButtonModule,

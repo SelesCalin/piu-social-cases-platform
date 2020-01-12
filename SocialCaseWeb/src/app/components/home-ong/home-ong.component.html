@@ -16,12 +16,12 @@
         <a  class="nav-link"  href="/voluntari">Voluntari</a>
       </li>
       <li>
-        <a class="nav-link"  href="/cazuri" (click)="showDiv(1)">Cazuri sociale
+        <a class="nav-link"  href="/cazuri/{{ong.id}}" (click)="showDiv(1)">Cazuri sociale
           <i class="fa fa-caret-down"></i>
         </a>
         <div class="dropd-content" *ngIf="divId == 1" style="background-color: #bdc3c7">
-          <a href="/cazuri" style="color: white;">Inregistrate</a>
-          <a href="/cazuri" (click) = "setShow();" style="color: white;" >In asteptare</a>
+          <a href="/cazuri/{{ong.id}}" style="color: white;">Inregistrate</a>
+          <a href="/cazuri/{{ong.id}}" (click) = "setShow();" style="color: white;" >In asteptare</a>
         </div>
       </li>
 
@@ -34,9 +34,10 @@
 </nav>
 
 <div class="container back-container" style="max-width: 1600px; max-height: 700px;">
+  <h1>Asociatia Zambet</h1>
   <div class="row">
     <div class="col-md-6 col-lg-6 col-sm-12">
-      <img src="assets/volunteer-agencyimg.jpg" style="margin: auto">
+      <img id="imggg" src="assets/volunteer-agencyimg.jpg" style="margin: auto">
     </div>
 
     <div class="col-md-6 col-lg-6 ">

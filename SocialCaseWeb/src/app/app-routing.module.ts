@@ -7,6 +7,8 @@ import {LoginOngComponent} from './components/login-ong/login-ong.component';
 import {HomeOngComponent} from './components/home-ong/home-ong.component';
 import {VolunteersComponent} from './components/volunteers/volunteers.component';
 import {CazuriSocialeComponent} from './components/cazuri-sociale/cazuri-sociale.component';
+import {HomeOng2Component} from './components/home-ong2/home-ong2.component';
+import {VolunteersOng2Component} from './components/volunteers-ong2/volunteers-ong2.component';
 
 
 
@@ -16,8 +18,10 @@ const routes: Routes = [
   {path: 'formular/:id', component: FormularComponent},
   {path: 'login/ong', component: LoginOngComponent},
   {path: 'home/ong', component: HomeOngComponent},
+   {path: 'home/ong2', component: HomeOng2Component},
   {path: 'voluntari', component: VolunteersComponent},
-  {path: 'cazuri', component: CazuriSocialeComponent},
+  {path: 'voluntari2', component: VolunteersOng2Component},
+  {path: 'cazuri/:id', component: CazuriSocialeComponent},
   {path: '**', component: HomeComponent}
 ];
 

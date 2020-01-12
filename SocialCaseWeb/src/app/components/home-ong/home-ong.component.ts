@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormularInterface} from '../formular/formular.component';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home-ong',
@@ -10,11 +12,13 @@ export class HomeOngComponent implements OnInit {
   display: boolean;
   divId: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,  private ong: FormularInterface) { }
 
   ngOnInit() {
+    // this.ong.id = this.route.snapshot.paramMap.get('id');
     this.display = true;
     this.divId = 0;
+    this.ong.id = '1';
   }
 
   setShow() {

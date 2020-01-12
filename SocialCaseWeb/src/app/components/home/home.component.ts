@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
 
   login(e): void {
       e.preventDefault();
-      if (this.username === 'admin@gmail.com' && this.password === 'admin') {
+      if (this.username === 'mariana@gmail.com' && this.password === 'admin') {
         this.router.navigate(['formular', 1]);
-      } else if (this.username === 'user@gmail.com' && this.password === 'user1') {
+      } else if (this.username === 'amalia@gmail.com' && this.password === 'user1') {
         this.router.navigate(['formular', 2]);
       } else {
           DialogUtility.alert({

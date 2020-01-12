@@ -182,9 +182,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void createSpinner(){
         ArrayList<String> ongs= new ArrayList<>();
-        ongs.add("ONG1");
-        ongs.add("ONG2");
-        ongs.add("ONG3");
+        ongs.add("Asociatia Zambet");
+        ongs.add("Asociatia Inimii");
         ArrayAdapter<String> arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,ongs);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerONG.setAdapter(arrayAdapter);

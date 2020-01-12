@@ -44,15 +44,17 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
     private List<SocialCase> generateMockSocialCases() {
 
         ArrayList<SocialCase> list = new ArrayList<>();
-        SocialCase sc1 = new SocialCase("Andrei Munten", "0712345678",
-                getDate("1966.05.06"),"Observator, Cluj",46.770439, 23.591423);
-        SocialCase sc2 = new SocialCase("Maria Lazar", "0712348568",
-                getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
-        SocialCase sc3 = new SocialCase("Bogdan Eugen", "0712348568",
-                getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
-        SocialCase sc4 = new SocialCase("Cristi Pop", "0712348568",
-                getDate("1958.01.15"),"Observator, Cluj",46.753855, 23.579275);
-        list.add(sc1);list.add(sc2);list.add(sc3);list.add(sc4);
+        SocialCase sc1 = new SocialCase("Stanescu Andrei", "0756573200",
+                getDate("1952.07.06"),"Str. Observatorului, nr. 1",46.770439, 23.591423);
+        SocialCase sc2 = new SocialCase("Botis Andreea", "0727888018",
+                getDate("1949.07.09"),"Str. Lunii, nr.55, bl.5, ap.135 ",46.753855, 23.579275);
+        SocialCase sc3 = new SocialCase("Simon Ion", "0756573200",
+                getDate("1952.07.06"),"Observatorului, nr. 1",46.753855, 23.579275);
+        SocialCase sc4 = new SocialCase("Grad Amalia", "0756537071",
+                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.753855, 23.579275);
+        SocialCase sc5 = new SocialCase("Popescu Diana", "0756537071",
+                getDate("1958.03.15"),"Str. Bucegi, nr. 112",46.753855, 23.579275);
+        list.add(sc1);list.add(sc2);list.add(sc3);list.add(sc4);list.add(sc5);
         return list;
     }
 
@@ -69,21 +71,35 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 
     private List<Help> generateMockHelp() {
         ArrayList<Help> list = new ArrayList<>();
-        Help h1 = new Help(getSocialCaseByName("Bogdan Eugen"), getDate("2019.12.29"),
-                TypeHelp.HELP,"ajutor dfghjkl;ghjkl,;   fghjuikcfvghbjnm   fvgbhjnkghbjnkm  fghvbjnkmlhjkl ghjkltyuhijko did");
+        Help h1 = new Help(getSocialCaseByName("Simon Ion"), getDate("2020.12.31"),
+                TypeHelp.HELP,"ajutor");
         h1.setVolunteer(volunteerRepository.findVolunteerByUsername("user"));
-        Help h2 = new Help(getSocialCaseByName("Andrei Munten"), getDate("2019.12.31"),
+        Help h2 = new Help(getSocialCaseByName("Stanescu Andrei"), getDate("2020.12.31"),
                 TypeHelp.SOS,"ajutor imediat");
 //        h2.setVolunteer(volunteerRepository.findVolunteerByUsername("admin"));
-        Help h3 = new Help(getSocialCaseByName("Cristi Pop"), getDate("2019.11.31"),
+        Help h3 = new Help(getSocialCaseByName("Grad Amalia"), getDate("2020.11.31"),
                 TypeHelp.BATTERY,"bratara descarcata");
-        Help h4 = new Help(getSocialCaseByName("Maria Lazar"), getDate("2019.10.31"),
-                TypeHelp.ASKFORHELP,"volunteer ask for help");
+        Help h4 = new Help(getSocialCaseByName("Botis Andreea"), getDate("2020.10.31"),
+                TypeHelp.ASKFORHELP,"voluntarul are nevoie de ajutor");
+        Help h5 = new Help(getSocialCaseByName("Popescu Diana"), getDate("2020.01.14"),
+                TypeHelp.MEDICATION,"\n"+"Marti:  08:00-10:00 -> Nurofen" + "\n\t\t\t\t\t\t" + "18:00-20:00 -> Vitamina D, Picaturi in ochi");
         list.add(h1);
         list.add(h2);
         list.add(h3);
         list.add(h4);
+        list.add(h5);
         return list;
+    }
+
+    public Help getHelpByName(String name){
+        Help returnHelp =null;
+        for(Help h : helpList) {
+            if (h.getSocialCase().getName().equals(name)) {
+                returnHelp= h;
+            }
+        }
+
+        return returnHelp;
     }
 
 //    private List<Help> generateMockHelpBeforeNotification() {

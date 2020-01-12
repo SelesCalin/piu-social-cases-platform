@@ -55,7 +55,7 @@ public class Volunteer implements Serializable {
         this.organisation = organisation;
         this.preferences=preferences;
         this.fullName=fullName;
-        this.accepted=0;
+        this.accepted=1;
     }
 
     public String getUsername() {

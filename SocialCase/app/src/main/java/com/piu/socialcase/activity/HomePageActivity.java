@@ -77,9 +77,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        if(loggedVolunteer.getAccepted()==1 && socialCaseService.getCurrentSocialCase(loggedVolunteer)==null ) {
-            getNotification();
-        }
+//
         if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
             this.currentCase.setVisibility(View.GONE);
         }else{
@@ -98,25 +96,27 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getNotification(){
         this.socialCaseService = SocialCaseService.SocialCaseService();
-        if (timer != null) timer.cancel();
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        notificationManager.cancel(0);
-        help = socialCaseService.getHelp();
-        if(help!=null) {
-            setNotification();
-            timer = new Timer();
-            timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                            notificationManager.notify(0, notification);
-                        }
-                    });
-                }
-            }, 10000, 10000);
+        if(loggedVolunteer.getAccepted()==1 && socialCaseService.getCurrentSocialCase(loggedVolunteer)==null ) {
+            if (timer != null) timer.cancel();
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+            notificationManager.cancel(0);
+            help = socialCaseService.getHelp();
+            if (help != null) {
+                setNotification();
+                timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                                notificationManager.notify(0, notification);
+                            }
+                        });
+                    }
+                }, 10000, 10000);
+            }
         }
     }
 

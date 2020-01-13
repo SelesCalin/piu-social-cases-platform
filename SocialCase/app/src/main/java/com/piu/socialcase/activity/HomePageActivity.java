@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -54,7 +55,7 @@ import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomePageActivity extends AppCompatActivity implements View.OnClickListener  {
+public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String VOLUNTEER_EXTRA = "LoggedVolunteer";
     private Volunteer loggedVolunteer;
@@ -75,20 +76,20 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         setLoggedVolunteer();
         setContentView(R.layout.activity_home_page);
         context = this;
-        bottomNavigationView=findViewById(R.id.bottom_navigation);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
         pendingCases = findViewById(R.id.pendingCases);
         currentCase = findViewById(R.id.currentCase);
         pendingCases.setOnClickListener(this);
         currentCase.setOnClickListener(this);
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
         }
         this.socialCaseService = SocialCaseService.SocialCaseService();
 
-        if(loggedVolunteer.getUsername().equals("claudia")){
+        if (loggedVolunteer.getUsername().equals("claudia")) {
             socialCaseService.isAskForHelp(true);
-        }else{
+        } else {
             socialCaseService.isAskForHelp(false);
         }
     }
@@ -97,9 +98,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        if(socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
+        if (socialCaseService.getCurrentSocialCase(loggedVolunteer) == null) {
             this.currentCase.setVisibility(View.GONE);
-        }else{
+        } else {
             this.currentCase.setVisibility(View.VISIBLE);
         }
     }
@@ -140,11 +141,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 //        }
 //    }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener=
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment=null;
+                    Fragment selectedFragment = null;
                     switch (item.getItemId()) {
                         case R.id.home_page_button:
                             selectedFragment = new ProfileFragment();
@@ -159,50 +160,51 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                             selectedFragment = new HistoryFragment();
                             break;
                         case R.id.more_help_button:
-                            if (socialCaseService.getCurrentSocialCase(loggedVolunteer)==null){
+                            if (socialCaseService.getCurrentSocialCase(loggedVolunteer) == null) {
                                 new AlertDialog.Builder(context)
-                                        .setTitle( "Caz curent inexistent")
+                                        .setTitle("Caz curent inexistent")
                                         .setMessage("Pentru a cere ajutor trebuie sa ai asignat un caz curent!")
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
                                                 bottomNavigationView.getMenu().findItem(R.id.home_page_button).setChecked(true);
-                                            }})
+                                            }
+                                        })
                                         .show();
 
 
                                 return true;
-                            }else{
+                            } else {
                                 selectedFragment = new AskForHelpFragment();
                             }
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
                     return true;
                 }
             };
 
     private void setLoggedVolunteer() {
-        Session session=Session.getInstance();
-        loggedVolunteer=session.getLoggedInUser();
+        Session session = Session.getInstance();
+        loggedVolunteer = session.getLoggedInUser();
 
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.pendingCases:
                 Intent pendingCasesIntent = new Intent(this, PendingCasesActivity.class);
                 startActivity(pendingCasesIntent);
                 break;
             case R.id.currentCase:
-               Intent intent = new Intent(this, MapActivity.class);
-               // Intent intent = new Intent(this, ProgramInAvansActivity.class); test for programare in avans
+                Intent intent = new Intent(this, MapActivity.class);
+                // Intent intent = new Intent(this, ProgramInAvansActivity.class); test for programare in avans
 
-                intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
+                intent.putExtra("currentCase", (Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
                 intent.putExtra("showButtons", (Serializable) false);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"Current Case",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Current Case", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -211,17 +213,17 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if ( v instanceof EditText) {
+            if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
 //    @RequiresApi(api = Build.VERSION_CODES.O)
@@ -253,7 +255,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void sendNotification(TypeHelp typeHelp){
+    public void sendNotification(TypeHelp typeHelp) {
         setNotificationStart();
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         switch (typeHelp) {
@@ -288,18 +290,18 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         notificationManager.createNotificationChannel(channel);
     }
 
-    public Notification getHelpNotification(){
+    public Notification getHelpNotification() {
 
         Help help = socialCaseService.getHelpNotification();
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("currentCase", (Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return new NotificationCompat.Builder(this, "channel01")
                 .setSmallIcon(android.R.drawable.ic_dialog_map)
-                .setColor(ContextCompat.getColor(context,R.color.colorPrimary))
+                .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setLargeIcon(
                         getBitmapFromVectorDrawable(context, android.R.drawable.ic_dialog_map)
                 )
@@ -312,20 +314,20 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 .build();
     }
 
-    public Notification getSOSNotification(){
+    public Notification getSOSNotification() {
 
         Help help = socialCaseService.getSOSNotification();
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("currentCase", (Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return new NotificationCompat.Builder(this, "channel01")
                 .setSmallIcon(android.R.drawable.ic_dialog_alert)
-                .setColor(ContextCompat.getColor(context,R.color.colorError))
+                .setColor(ContextCompat.getColor(context, R.color.colorError))
                 .setLargeIcon(
-                    getBitmapFromVectorDrawable(context, android.R.drawable.ic_dialog_alert)
+                        getBitmapFromVectorDrawable(context, android.R.drawable.ic_dialog_alert)
                 )
                 .setColorized(true)
                 .setContentTitle(help.getSocialCase().getName())
@@ -337,19 +339,18 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
-
-    public Notification getBatteryNotification(){
+    public Notification getBatteryNotification() {
 
         Help help = socialCaseService.getBatteryNotification();
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("currentCase", (Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return new NotificationCompat.Builder(this, "channel01")
                 .setSmallIcon(android.R.drawable.ic_lock_idle_low_battery)
-                .setColor(ContextCompat.getColor(context,R.color.colorAccent))
+                .setColor(ContextCompat.getColor(context, R.color.colorAccent))
                 .setLargeIcon(
                         getBitmapFromVectorDrawable(context, android.R.drawable.ic_lock_idle_low_battery)
                 )
@@ -362,19 +363,19 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 .build();
     }
 
-    public Notification getAskForHelpNotification(){
+    public Notification getAskForHelpNotification() {
 
         Help help = socialCaseService.getAskForHelpNotification();
         socialCaseService.addHelpWaiting();
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("currentCase", (Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return new NotificationCompat.Builder(this, "channel01")
                 .setSmallIcon(android.R.drawable.sym_action_call)
-                .setColor(ContextCompat.getColor(context,R.color.colorAsk))
+                .setColor(ContextCompat.getColor(context, R.color.colorAsk))
                 .setLargeIcon(
                         getBitmapFromVectorDrawable(context, android.R.drawable.sym_action_call)
                 )
@@ -387,18 +388,18 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                 .build();
     }
 
-    public Notification getMedicationNotification(){
+    public Notification getMedicationNotification() {
 
         Help help = socialCaseService.getMedicationNotification();
 
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("currentCase",(Serializable) help);
+        intent.putExtra("currentCase", (Serializable) help);
         intent.putExtra("showButtons", (Serializable) true);
         PendingIntent activity = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
         return new NotificationCompat.Builder(this, "channel01")
                 .setSmallIcon(android.R.drawable.ic_popup_reminder)
-                .setColor(ContextCompat.getColor(context,R.color.colorWhite))
+                .setColor(ContextCompat.getColor(context, R.color.colorWhite))
                 .setLargeIcon(
                         getBitmapFromVectorDrawable(context, android.R.drawable.ic_popup_reminder)
                 )
@@ -425,5 +426,47 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+//	Inflate the	menu;	this	adds	items	to	the	action	bar	if	it	is	present.
+        getMenuInflater().inflate(R.menu.options_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+//	Handle	action	bar	item	clicks	here.	The	action	bar	will
+//	automatically	handle	clicks	on	the	Home/Up	button,	so	long
+//	as	you	specify	a	parent	activity	in	AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.logout) {
+            AlertDialog.Builder myDialog = new AlertDialog.Builder(this);
+            myDialog
+                    .setTitle("Log Out")
+                    .setMessage("Do you wish to proceed?")
+                    .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            goToLogin();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ;
+                        }
+                    })
+                    .show();
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void goToLogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

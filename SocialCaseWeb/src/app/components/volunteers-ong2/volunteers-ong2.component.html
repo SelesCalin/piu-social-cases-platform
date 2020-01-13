@@ -3,17 +3,18 @@
 
 <nav  class="navbar navbar-expand-lg" style="background-color: #bdc3c7;">
   <a  class="navbar-brand" style="color: #1f618d;" href="/home/ong">Home ONG</a>
+
   <button  class="navbar-toggler"  type="button"  data-toggle="collapse"  data-target="#navbarSupportedContent"  aria-controls="navbarSupportedContent"  aria-expanded="false"  aria-label="Toggle navigation">
-<!--    <span  class="navbar-toggler-icon"></span>-->
+    <!--    <span  class="navbar-toggler-icon"></span>-->
     <i class="fa fa-bars" style="color: #1f618d"></i>
   </button>
   <div  class="collapse navbar-collapse"  id="navbarSupportedContent">
     <ul  class="navbar-nav mr-auto">
       <li  class="nav-item active">
-        <a  class="nav-link"  href="/home/ong">Home <span  class="sr-only">(current)</span></a>
+        <a  class="nav-link"  href="/home/ong2">Home <span  class="sr-only">(current)</span></a>
       </li>
       <li  class="nav-item active">
-        <a  class="nav-link"  href="/voluntari">Voluntari</a>
+        <a  class="nav-link"  href="/voluntari2">Voluntari</a>
       </li>
       <li>
         <a class="nav-link"  href="/cazuri/{{ong.id}}" (click)="showDiv(1)">Cazuri sociale
@@ -26,102 +27,86 @@
 
       </li>
       <li  class="nav-item active">
-        <a  class="nav-link"  href="/login/ong">Logout</a>
+        <a  class="nav-link"  href="/login/ong2">Logout</a>
       </li>
     </ul>
   </div>
 </nav>
 
 <div class="content" *ngIf="ok == true">
-    <table id="table">
-      <tr>
-        <th>{{'Nume'}}</th>
-        <th>{{'Prenume'}}</th>
-        <th>{{'Detalii'}}</th>
-      </tr>
+  <table id="table">
+    <tr>
+      <th>{{'Nume'}}</th>
+      <th>{{'Prenume'}}</th>
+      <th>{{'Detalii'}}</th>
+    </tr>
 
-      <tr>
-        <td>{{'Trif'}}</td>
-        <td>{{'Vlad'}}</td>
-        <td><button id="btn1" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(1)">
-          <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Pavel'}}</td>
+      <td>{{'Rares'}}</td>
+      <td><button id="btn1" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(1)">
+        <i class="fa fa-info-circle" style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Paun'}}</td>
-        <td>{{'Petru'}}</td>
-        <td ><button id="btn2" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(2)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Cristea'}}</td>
+      <td>{{'Luminita'}}</td>
+      <td ><button id="btn2" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(2)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Heredea'}}</td>
-        <td>{{'Diana'}}</td>
-        <td ><button id="btn3" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(3)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Pasca'}}</td>
+      <td>{{'Cosmin'}}</td>
+      <td ><button id="btn3" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(3)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Gal'}}</td>
-        <td>{{'Ioana'}}</td>
-        <td ><button id="btn4" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(4)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Vaida'}}</td>
+      <td>{{'Alexandra'}}</td>
+      <td ><button id="btn4" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(4)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Marginean'}}</td>
-        <td>{{'Bogdan'}}</td>
-        <td ><button id="btn5" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(5)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Rotar'}}</td>
+      <td>{{'Alin'}}</td>
+      <td ><button id="btn5" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(5)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Man'}}</td>
-        <td>{{'Larisa'}}</td>
-        <td ><button id="btn6" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(6)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
+    <tr>
+      <td>{{'Cipleu'}}</td>
+      <td>{{'Denis'}}</td>
+      <td ><button id="btn6" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(6)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
 
-      <tr>
-        <td>{{'Ardelean'}}</td>
-        <td>{{'Matei'}}</td>
-        <td ><button id="btn7"style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(7)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
-
-      <tr>
-        <td>{{'Dan'}}</td>
-        <td>{{'Camelia'}}</td>
-        <td ><button id="btn8" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(8)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
-
-      <tr>
-        <td>{{'Stan'}}</td>
-        <td>{{'Andrei'}}</td>
-        <td ><button id="btn9"style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(9)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
-
-      <tr>
-        <td>{{'Maier'}}</td>
-        <td>{{'Raul'}}</td>
-        <td ><button id="btn10" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(10)">
-          <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
-        </td>
-      </tr>
-
-    </table>
+    <tr>
+      <td>{{'Morar'}}</td>
+      <td>{{'Claudia'}}</td>
+      <td ><button id="btn7" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(7)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
+    <tr *ngIf="voluntar == 1 ">
+      <td>{{'Seles'}}</td>
+      <td>{{'Calin'}}</td>
+      <td ><button id="btn7" style ="width: 40%; height: 70%; margin-left: 30%;" type="button" class="btn btn-xs btn-default" (click)="openDetails(8)">
+        <i class="fa fa-info-circle"  style="margin-right:15px; font-size:20px;"></i> Detalii</button>
+      </td>
+    </tr>
+  </table>
 </div>
+
+<button style="color: transparent; background-color: transparent;" (click)="showCalin()">PRESS ME PLS</button>
 
 <div *ngIf="nmb == 1 && ok == false">
   <div class="container">
@@ -130,7 +115,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Trif Vlad" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Pavel Rares" disabled>
         </div>
       </div>
 
@@ -152,7 +137,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="trif.vlad@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="pavel.rares@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -181,7 +166,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Paun Petru" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Cristea Luminita" disabled>
         </div>
       </div>
 
@@ -203,7 +188,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="paun.petru@yahoo.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="luminita_cristea@yahoo.com" name="email" disabled >
         </div>
       </div>
 
@@ -232,7 +217,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Heredea Diana" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Pasca Cosmin" disabled>
         </div>
       </div>
 
@@ -254,7 +239,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="diana.hr@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="pasca08cosmin@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -283,7 +268,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Gal Ioana" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Vaida Alexandra" disabled>
         </div>
       </div>
 
@@ -305,7 +290,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="galioana@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="vaida.alexandra@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -334,7 +319,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Marginean Bogdan" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Rotar Alin" disabled>
         </div>
       </div>
 
@@ -356,7 +341,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="marginean_bogdan@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="rotaralin05@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -385,7 +370,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Man Larisa" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Cipleu Denis" disabled>
         </div>
       </div>
 
@@ -407,7 +392,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="larisa.man@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="denis.cipleu@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -436,7 +421,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Ardelean Matei" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Morar Claudia" disabled>
         </div>
       </div>
 
@@ -458,7 +443,7 @@
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="ardelean.matei@gmail.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="morar_claudia@gmail.com" name="email" disabled >
         </div>
       </div>
 
@@ -480,6 +465,7 @@
   </div>
 </div>
 
+
 <div *ngIf="nmb == 8 && ok == false">
   <div class="container">
     <form class="form-horizontal">
@@ -487,7 +473,7 @@
       <div class="form-group">
         <label class="control-label" >Nume si Prenume :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Dan Camelia" disabled>
+          <input type="text" class="form-control" name="nume" placeholder="Seles Calin" disabled>
         </div>
       </div>
 
@@ -495,28 +481,28 @@
       <div class="form-group">
         <label class="control-label" >Adresa :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="Str. Bucuresti, nr. 29, bl. 8, ap. 10" name="adresa" disabled >
+          <input type="text" class="form-control" placeholder="Str. Alexandru Vlahuta, nr.5" name="adresa" disabled >
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label" >Data nasterii :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="03/19/1988" disabled >
+          <input type="text" class="form-control" placeholder="01/01/1997" disabled >
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label" >Email :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="dancamelia@yahoo.com" name="email" disabled >
+          <input type="text" class="form-control"  placeholder="selescalin@gmail.com" name="email" disabled >
         </div>
       </div>
 
       <div class="form-group">
         <label class="control-label" >Telefon :</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="0761028396" name="telefon" disabled >
+          <input type="text" class="form-control"  placeholder="0756497078" name="telefon" disabled >
         </div>
       </div>
 
@@ -531,104 +517,4 @@
   </div>
 </div>
 
-<div *ngIf="nmb == 9 && ok == false">
-  <div class="container">
-    <form class="form-horizontal">
 
-      <div class="form-group">
-        <label class="control-label" >Nume si Prenume :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Stan Andrei" disabled>
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <label class="control-label" >Adresa :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="Str. Primaverii, nr. 3, bl. 7, sc. 3, ap. 40" name="adresa" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Data nasterii :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="11/14/1990" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Email :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="stan_andrei@yahoo.com" name="email" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Telefon :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="0739201855" name="telefon" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button style="margin-top: 25px;margin-left: 49%;" type="submit" class="btn-back" (click)="onBack()">Inapoi la lista</button>
-        </div>
-      </div>
-    </form>
-
-
-  </div>
-</div>
-
-<div *ngIf="nmb == 10 && ok == false">
-  <div class="container">
-    <form class="form-horizontal">
-
-      <div class="form-group">
-        <label class="control-label" >Nume si Prenume :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="nume" placeholder="Maier Raul" disabled>
-        </div>
-      </div>
-
-
-      <div class="form-group">
-        <label class="control-label" >Adresa :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="Str. Republicii, nr. 107" name="adresa" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Data nasterii :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" placeholder="06/28/1992" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Email :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="maier.raul@gmail.com" name="email" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="control-label" >Telefon :</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control"  placeholder="0744398911" name="telefon" disabled >
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-          <button style="margin-top: 25px;margin-left: 49%;" type="submit" class="btn-back" (click)="onBack()">Inapoi la lista</button>
-        </div>
-      </div>
-    </form>
-
-
-  </div>
-</div>

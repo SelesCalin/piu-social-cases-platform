@@ -3,16 +3,18 @@ import {ActivatedRoute} from '@angular/router';
 import {FormularInterface} from '../formular/formular.component';
 
 @Component({
-  selector: 'app-volunteers',
-  templateUrl: './volunteers.component.html',
-  styleUrls: ['./volunteers.component.css']
+  selector: 'app-volunteers-ong2',
+  templateUrl: './volunteers-ong2.component.html',
+  styleUrls: ['./volunteers-ong2.component.css']
 })
-export class VolunteersComponent implements OnInit {
+export class VolunteersOng2Component implements OnInit {
+
 
   nmb: number;
   ok: boolean;
   divId: number;
   display: boolean;
+  voluntar: number;
 
   constructor(private route: ActivatedRoute, private ong: FormularInterface) { }
 
@@ -20,7 +22,8 @@ export class VolunteersComponent implements OnInit {
     this.ok = true;
     this.divId = 0;
     this.display = true;
-    this.ong.id = '1';
+    this.ong.id = '2';
+    this.voluntar = 5;
   }
 
   openDetails(nr: number) {
@@ -39,5 +42,10 @@ export class VolunteersComponent implements OnInit {
   showDiv(id) {
     this.divId = id;
   }
+
+  showCalin() {
+    this.voluntar = 1;
+  }
+
 
 }

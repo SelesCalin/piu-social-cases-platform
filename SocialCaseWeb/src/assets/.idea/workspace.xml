@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="070818af-88f0-469f-a5aa-f5440533c396" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/data.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/295128.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/512px-Circle_arrow_left_font_awesome.svg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Logo-RO-FULL-RGB-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edit-29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ong.JPG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/recycle-bin-400x400.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/treatment-plan.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/volunteer-agencyimg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../styles.css" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1VpnCgp8DsWkEf2kDemTrCC6dtV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="070818af-88f0-469f-a5aa-f5440533c396" name="Default Changelist" comment="" />
+      <created>1577958777997</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577958777997</updated>
+      <workItem from="1577958779174" duration="16000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -3,33 +3,21 @@ import {ActivatedRoute} from '@angular/router';
 import {FormularInterface} from '../formular/formular.component';
 
 @Component({
-  selector: 'app-volunteers',
-  templateUrl: './volunteers.component.html',
-  styleUrls: ['./volunteers.component.css']
+  selector: 'app-home-ong2',
+  templateUrl: './home-ong2.component.html',
+  styleUrls: ['./home-ong2.component.css']
 })
-export class VolunteersComponent implements OnInit {
+export class HomeOng2Component implements OnInit {
 
-  nmb: number;
-  ok: boolean;
-  divId: number;
   display: boolean;
+  divId: number;
 
   constructor(private route: ActivatedRoute, private ong: FormularInterface) { }
 
   ngOnInit() {
-    this.ok = true;
-    this.divId = 0;
     this.display = true;
-    this.ong.id = '1';
-  }
-
-  openDetails(nr: number) {
-    this.ok = false;
-    this.nmb = nr;
-  }
-
-  onBack() {
-    this.ok = true;
+    this.divId = 0;
+    this.ong.id = '2';
   }
 
   setShow() {
@@ -39,5 +27,6 @@ export class VolunteersComponent implements OnInit {
   showDiv(id) {
     this.divId = id;
   }
-
 }
+
+

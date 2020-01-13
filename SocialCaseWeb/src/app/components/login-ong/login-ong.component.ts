@@ -23,6 +23,8 @@ export class LoginOngComponent implements OnInit {
     e.preventDefault();
     if (this.email === 'ong@gmail.com' && this.password === 'ongpass') {
       this.router.navigate(['home/ong']);
+    } else if (this.email === 'ong2@gmail.com' && this.password === 'ongpass2') {
+      this.router.navigate(['home/ong2']);
     } else {
       DialogUtility.alert({
         title: 'Eroare: Credentiale invalide!',

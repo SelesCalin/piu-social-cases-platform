@@ -37,7 +37,7 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private SocialCaseRepositoryMock(){
-        this.volunteerRepository = new VolunteerRepositoryMock();
+        this.volunteerRepository = VolunteerRepositoryMock.getInstance();
         socialCaseList = generateMockSocialCases();
         helpList = generateMockHelp();
         helpListWaiting = new ArrayList<>();
@@ -81,27 +81,44 @@ public class SocialCaseRepositoryMock implements SocialCaseRepository {
 //        h2.setVolunteer(volunteerRepository.findVolunteerByUsername("admin"));
         Help h3 = new Help(getSocialCaseByName("Grad Amalia"), getDate("2020.11.31"),
                 TypeHelp.BATTERY,"bratara descarcata");
+        Help h5 = new Help(getSocialCaseByName("Popescu Diana"), getDate("2020.01.14"),
+                TypeHelp.MEDICATION,"\n"+"Marti:  08:00-10:00 -> Nurofen" + "\n\t\t\t\t\t\t" + "18:00-20:00 -> Vitamina D, Picaturi in ochi");
+
+
+        list.add(h1);
+        list.add(h2);
+        list.add(h3);
+        list.add(h5);
+        return list;
+    }
+
+    public void isAskForHelp(Boolean b){
         Help h4 = new Help(getSocialCaseByName("Botis Andreea"), getDate("2020.10.31"),
                 TypeHelp.SOS,"ajutor imediat");
 
         Help h6 = new Help(getSocialCaseByName("Botis Andreea"), getDate("2020.10.31"),
-                TypeHelp.ASKFORHELP,"voluntarul are nevoie de ajutor");
-
-        Help h5 = new Help(getSocialCaseByName("Popescu Diana"), getDate("2020.01.14"),
-                TypeHelp.MEDICATION,"\n"+"Marti:  08:00-10:00 -> Nurofen" + "\n\t\t\t\t\t\t" + "18:00-20:00 -> Vitamina D, Picaturi in ochi");
-        list.add(h4);
-        list.add(h5user);
-        list.add(h1);
-        list.add(h2);
-        list.add(h3);
-
-        list.add(h5);
-        return list;
+                TypeHelp.ASKFORHELP,"Am nevoie de ajutor.");
+        if(b) {
+            helpListWaiting.add(h6);
+        }else{
+            helpList.add(h4);
+        }
     }
 
     public Help getHelpByName(String name){
         Help returnHelp =null;
         for(Help h : helpList) {
+            if (h.getSocialCase().getName().equals(name)) {
+                returnHelp= h;
+            }
+        }
+
+        return returnHelp;
+    }
+
+    public Help getHelpByNameWaiting(String name){
+        Help returnHelp =null;
+        for(Help h : helpListWaiting) {
             if (h.getSocialCase().getName().equals(name)) {
                 returnHelp= h;
             }

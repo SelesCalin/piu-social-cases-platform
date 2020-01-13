@@ -23,4 +23,6 @@ public interface SocialCaseRepository {
     void currentCaseDone(Volunteer volunteer);
     void confirmPresence(Volunteer volunteer);
     Help getHelpByName(String name);
+    Help getHelpByNameWaiting(String name);
+    void isAskForHelp(Boolean b);
 }

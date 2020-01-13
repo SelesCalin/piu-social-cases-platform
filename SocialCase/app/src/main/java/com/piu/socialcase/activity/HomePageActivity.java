@@ -85,6 +85,12 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
         }
         this.socialCaseService = SocialCaseService.SocialCaseService();
+
+        if(loggedVolunteer.getUsername().equals("claudia")){
+            socialCaseService.isAskForHelp(true);
+        }else{
+            socialCaseService.isAskForHelp(false);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -158,15 +164,13 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
                                         .setTitle( "Caz curent inexistent")
                                         .setMessage("Pentru a cere ajutor trebuie sa ai asignat un caz curent!")
                                         .setIcon(android.R.drawable.ic_dialog_alert)
-//                                        .setPositiveButton("Caz curent", new DialogInterface.OnClickListener() {
-//                                            public void onClick(DialogInterface dialog, int whichButton) {
-//                                                Intent intent = new Intent(mContext, MapActivity.class);
-//                                                intent.putExtra("currentCase",(Serializable) socialCaseService.getCurrentSocialCase(loggedVolunteer));
-//                                                intent.putExtra("showButtons", (Serializable) false);
-//                                                startActivity(intent);
-//                                                Toast.makeText(getApplicationContext(),"Current Case",Toast.LENGTH_SHORT).show();
-//                                            }})
-                                        .setPositiveButton("OK", null).show();
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int whichButton) {
+                                                bottomNavigationView.getMenu().findItem(R.id.home_page_button).setChecked(true);
+                                            }})
+                                        .show();
+
+
                                 return true;
                             }else{
                                 selectedFragment = new AskForHelpFragment();

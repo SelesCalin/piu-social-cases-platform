@@ -93,6 +93,8 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                 while (i < sparseBooleanArray.size()) {
                     if (sparseBooleanArray.valueAt(i)) {
                         volunteer.getAvailable().put(dateList[sparseBooleanArray.keyAt(i)],true);
+                    }else{
+                        volunteer.getAvailable().put(dateList[sparseBooleanArray.keyAt(i)],false);
                     }
                     i++ ;
                 }

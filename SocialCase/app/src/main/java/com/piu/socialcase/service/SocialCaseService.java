@@ -90,10 +90,14 @@ public class SocialCaseService {
     }
 
     public Help getAskForHelpNotification(){
-        return socialCaseRepository.getHelpByName("Botis Andreea");
+        return socialCaseRepository.getHelpByNameWaiting("Botis Andreea");
     }
 
     public Help getMedicationNotification(){
         return socialCaseRepository.getHelpByName("Popescu Diana");
+    }
+
+    public void isAskForHelp(Boolean b){
+        socialCaseRepository.isAskForHelp(b);
     }
 }

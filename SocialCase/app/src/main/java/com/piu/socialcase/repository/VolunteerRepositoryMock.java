@@ -1,5 +1,9 @@
 package com.piu.socialcase.repository;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.piu.socialcase.model.Volunteer;
 
 import java.util.ArrayList;
@@ -10,6 +14,15 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
 
     private List<Volunteer> volunteers;
     private DataRepositoryMock dataRepository;
+    private static VolunteerRepository instance;
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static VolunteerRepository getInstance(){
+        if(instance==null) {
+            instance = new VolunteerRepositoryMock();
+        }
+        return instance;
+    }
 
     public VolunteerRepositoryMock(){
         dataRepository = new DataRepositoryMock();
@@ -18,6 +31,11 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
 
     private List<Volunteer> generateVolunteers(){
         ArrayList<Volunteer> list = new ArrayList<>();
+        //sa nu o stergeti pe Morar Claudia
+        Volunteer v4 = new Volunteer("claudia", "claudia", "morar_claudia@gmail.com", "0753280019", "Asociatia inimii");
+        v4.setAvailable(dataRepository.getAvailableTime());
+        list.add(v4);
+
         Volunteer v1 = new Volunteer("Calin Calin-Florin", "calin", "calin@gmail.com", "0712345678",
                 "ONG");
         v1.setAvailable(dataRepository.getAvailableTime());
@@ -28,6 +46,7 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
         list.add(v1);
         list.add(v2);
         list.add(v3);
+
         return list;
     }
 

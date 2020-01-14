@@ -68,7 +68,6 @@
 
                     <Button
                         android:id="@+id/buttonSOS"
-                        android:text="SOS"
                         android:background="@null"
                         android:layout_marginTop="0dp"
                         android:layout_width="0dp"
@@ -78,7 +77,6 @@
 
                     <Button
                         android:id="@+id/buttonBattery"
-                        android:text="Battery"
                         android:background="@null"
                         android:layout_marginTop="0dp"
                         android:layout_width="0dp"
@@ -88,7 +86,6 @@
 
                     <Button
                         android:id="@+id/buttonMedicamentation"
-                        android:text="Medication"
                         android:background="@null"
                         android:layout_marginTop="0dp"
                         android:layout_width="0dp"

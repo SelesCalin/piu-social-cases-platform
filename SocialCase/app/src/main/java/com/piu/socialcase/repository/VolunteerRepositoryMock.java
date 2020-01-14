@@ -32,7 +32,7 @@ public class VolunteerRepositoryMock implements  VolunteerRepository {
     private List<Volunteer> generateVolunteers(){
         ArrayList<Volunteer> list = new ArrayList<>();
         //sa nu o stergeti pe Morar Claudia
-        Volunteer v4 = new Volunteer("claudia", "claudia", "morar_claudia@gmail.com", "0753280019", "Asociatia inimii");
+        Volunteer v4 = new Volunteer("claudia", "claudia", "morar_claudia@gmail.com", "0753280019", "Asociatia zambet");
         v4.setAvailable(dataRepository.getAvailableTime());
         list.add(v4);
 
